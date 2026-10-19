@@ -1,0 +1,930 @@
+/* ==========================================================================
+   About page (src/pages/about.js)
+   Each section has its own layout and its own looping highlight, all in the
+   brand palette (01-tokens.css):
+     header      the compact photo header (06-hero.css) over the event hall photo;
+                 a shine runs over "Brand Image"
+     who we are  quiet on purpose (an editorial block, .about-who-we-are): only the
+                 shapes behind the photos drift a few pixels
+     strengths   a light runs round each card; a shine crosses the orange heading words
+                 (as on the Gallery header)
+     mission     Strategy, Creativity and Technology light up in turn, each with its word
+                 in the mission underlined in orange
+     pillars     a temple: light rises through each pillar in turn and its top glows
+   The loops run only while their section is on screen (data-live / .is-live, main.js)
+   and never with "reduce motion": everything is then shown still.
+   ========================================================================== */
+
+@property --ab-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* ---------------------------------------------------------------- Header */
+/* the hall photo as a wide strip: the audience and the lit stage screens */
+.page-hero--about .page-hero__backdrop img {
+  object-position: 50% 45%;
+}
+
+/* ---------------------------------------------------------------- Who we are */
+/* Editorial two-column block: the office photos (48%) beside the quote, the welcome text and three
+   feature cards (52%); on phones and tablets the heading, then the photos, then the text. A warm off
+   white background with a faint blue circle, an orange curve and a dotted grid. Motion stays quiet:
+   the blue and orange shapes behind the photos drift a few pixels; photos and cards lift on hover. */
+.about-who-we-are {
+  --aw-cream: #FFF7F4;
+  position: relative;
+  overflow: hidden;
+  overflow: clip;                            /* clip, not hidden: keeps the photos sticky (computers) */
+  background: var(--aw-cream);
+}
+
+.about-who-we-are.section {
+  padding-block: var(--section-y);
+}
+
+.about-who-we-are__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-areas: "head" "visual" "body";
+  gap: clamp(28px, 5vw, 44px);
+  /* the same width and side space as .container, so the photos and text line up with the logo in
+     the header and with every other section */
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@media (min-width: 1024px) {
+  .about-who-we-are__inner {
+    grid-template-columns: minmax(0, 48fr) minmax(0, 52fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "visual head" "visual body";
+    column-gap: clamp(48px, 5vw, 80px);
+    row-gap: 0;
+  }
+}
+
+.about-content--head { grid-area: head; }
+.about-content--body { grid-area: body; }
+
+/* ---- the photos */
+.about-visual {
+  grid-area: visual;
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  margin-inline: auto;
+  padding: 7% 7% 13% 5%;
+}
+
+/* Computers: the photos sit beside the heading and stay in view while the text is read */
+@media (min-width: 1024px) {
+  .about-visual {
+    position: sticky;
+    top: calc(var(--header-h) + 28px);
+    align-self: start;
+    max-width: none;
+  }
+}
+
+.about-visual__main,
+.about-visual__second {
+  margin: 0;
+  overflow: hidden;
+  border: 8px solid var(--white);
+  background: var(--white);
+  transition: translate .6s var(--ease-out), box-shadow .6s var(--ease);
+}
+
+.about-visual__main img,
+.about-visual__second img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-visual__main {
+  position: relative;
+  z-index: 2;
+  aspect-ratio: 3 / 2;
+  border-radius: 26px;
+  box-shadow: 0 2px 6px rgba(var(--deep-blue-rgb), .06), 0 34px 60px -28px rgba(var(--deep-blue-rgb), .55);
+}
+
+.about-visual__second {
+  position: absolute;
+  z-index: 3;
+  right: 2%;
+  bottom: 0;
+  width: 33%;                                /* about 38% of the main photo */
+  aspect-ratio: 261 / 180;
+  border-width: 6px;
+  border-radius: 20px;
+  box-shadow: 0 24px 40px -18px rgba(var(--deep-blue-rgb), .6);
+}
+
+.about-visual__main:hover {
+  translate: 0 -5px;
+  box-shadow: 0 2px 6px rgba(var(--deep-blue-rgb), .06), 0 42px 64px -28px rgba(var(--deep-blue-rgb), .6);
+}
+
+.about-visual__second:hover {
+  translate: 0 -5px;
+}
+
+/* "12+ Years of Experience": deep blue, an orange ring, a white edge */
+.about-experience-badge {
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  bottom: 9%;
+  display: grid;
+  place-content: center;
+  width: clamp(100px, 23%, 142px);
+  aspect-ratio: 1;
+  border: 6px solid var(--white);
+  border-radius: 50%;
+  background: var(--deep-blue);
+  color: var(--white);
+  text-align: center;
+  box-shadow: inset 0 0 0 5px var(--deep-blue), inset 0 0 0 8px var(--brand-orange), 0 20px 36px -16px rgba(var(--deep-blue-rgb), .65);
+}
+
+.about-experience-badge__value {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 1.1rem + 1.4vw, 2.35rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+
+.about-experience-badge__label {
+  margin-top: 5px;
+  font-size: clamp(.52rem, .48rem + .16vw, .62rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* ---- the text */
+.about-eyebrow {
+  gap: 12px;
+  margin-bottom: 18px;
+  font-size: .8125rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+}
+
+/* the same size as this quote on the home page (.about__title) */
+.about-headline {
+  margin: 0;
+  color: var(--charcoal);
+  font-size: clamp(1.75rem, .95rem + 2.1vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.14;
+  letter-spacing: -.03em;
+  text-wrap: balance;
+}
+
+@media (min-width: 1024px) {
+  .about-headline {
+    font-size: clamp(1.75rem, 2.6vw, 2.5rem);
+  }
+}
+
+/* “marketing in orange, “and” in the heading colour, innovation” in blue (no underline) */
+.about-headline__em {
+  color: var(--brand-blue);
+}
+
+.about-headline__hl {
+  color: var(--brand-orange);
+}
+
+@media (min-width: 1024px) {
+  .about-content--body {
+    padding-top: clamp(22px, 2.2vw, 30px);
+  }
+}
+
+.about-welcome {
+  margin: 0;
+  color: var(--deep-blue);
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 1.08rem + .6vw, 1.55rem);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.about-text {
+  max-width: 680px;
+  margin-top: 14px;
+  color: rgba(var(--charcoal-rgb), .84);
+  font-size: clamp(.9375rem, .86rem + .35vw, 1.09375rem);
+  line-height: 1.78;
+}
+
+/* ---- the feature cards */
+.about-features {
+  display: grid;
+  gap: 14px;
+  max-width: 700px;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Three side by side, the icon above the title. Phones: one below the other, the icon beside the
+   title. Narrow computers (two columns of the section, 1024-1279px): two, then the third across. */
+@media (min-width: 560px) {
+  .about-features {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .about-features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.about-feature-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--light-grey);
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: 0 1px 2px rgba(var(--deep-blue-rgb), .04), 0 14px 28px -22px rgba(var(--deep-blue-rgb), .55);
+  transition: translate .35s var(--ease-out), box-shadow .35s var(--ease), border-color .35s var(--ease);
+}
+
+@media (min-width: 560px) {
+  .about-feature-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 16px 20px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .about-feature-card:last-child {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    padding-block: 16px;
+  }
+}
+
+.about-feature-card:hover {
+  border-color: rgba(var(--brand-blue-rgb), .3);
+  box-shadow: 0 2px 4px rgba(var(--deep-blue-rgb), .05), 0 20px 34px -20px rgba(var(--deep-blue-rgb), .55);
+  translate: 0 -3px;
+}
+
+.about-feature-card__icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 50%;
+}
+
+.about-feature-card__icon .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.about-feature-card--orange .about-feature-card__icon {
+  background: rgba(var(--brand-orange-rgb), .16);
+  color: var(--deep-orange);
+}
+
+.about-feature-card--blue .about-feature-card__icon {
+  background: rgba(var(--brand-blue-rgb), .1);
+  color: var(--brand-blue);
+}
+
+.about-feature-card--dark .about-feature-card__icon {
+  background: rgba(var(--deep-blue-rgb), .1);
+  color: var(--charcoal);
+}
+
+.about-feature-card__title {
+  display: block;
+  color: var(--charcoal);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  text-wrap: balance;
+}
+
+.about-feature-card__text {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-secondary);
+  font-size: .8125rem;
+  line-height: 1.4;
+}
+
+/* ---- call / email */
+/* "Call To Ask Any Query": the label on its own line, then the phone and the email, one under the
+   other on phones (their icons in line) and side by side from 640px, so it lines up at every width */
+.about-contact {
+  display: grid;
+  justify-content: start;
+  justify-items: start;
+  align-items: center;
+  gap: 10px 28px;
+  margin: 26px 0 0;
+  font-size: .95rem;
+}
+
+@media (min-width: 640px) {
+  .about-contact {
+    grid-template-columns: auto auto;
+  }
+}
+
+.about-contact__label {
+  grid-column: 1 / -1;
+  color: var(--brand-blue);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.about-contact a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--charcoal);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .25s var(--ease);
+}
+
+.about-contact a:hover {
+  color: var(--brand-blue);
+}
+
+.about-contact .icon {
+  width: 17px;
+  height: 17px;
+  color: var(--deep-orange);
+}
+
+/* Phones */
+@media (max-width: 639px) {
+
+  .about-visual {
+    padding: 8% 6% 15% 4%;
+  }
+
+  .about-visual__main {
+    border-width: 6px;
+    border-radius: 20px;
+  }
+
+  .about-visual__second {
+    width: 35%;
+    border-width: 4px;
+    border-radius: 14px;
+  }
+
+  .about-experience-badge {
+    border-width: 4px;
+    box-shadow: inset 0 0 0 4px var(--deep-blue), inset 0 0 0 6px var(--brand-orange), 0 16px 28px -14px rgba(var(--deep-blue-rgb), .65);
+  }
+
+}
+
+/* ---------------------------------------------------------------- Core strengths */
+.ab-strengths {
+  overflow: hidden;
+}
+
+.ab-strengths .section-head .lead {
+  max-width: 62ch;
+}
+
+/* The four heading words each in a colour of the palette, blue and orange in turn (--hl); like
+   "Gallery" in the Gallery header, a white shine crosses them (motion block below) */
+.ab-strengths__hl {
+  --hl: var(--brand-orange);
+  color: var(--hl);
+}
+
+.ab-strengths__hl--blue { --hl: var(--brand-blue); }
+.ab-strengths__hl--orange { --hl: var(--brand-orange); }
+.ab-strengths__hl--navy { --hl: var(--navy-bar); }
+.ab-strengths__hl--deep-orange { --hl: var(--deep-orange); }
+
+.ab-strengths__grid {
+  display: grid;
+  gap: 24px;
+}
+
+@media (min-width: 1024px) {
+  .ab-strengths__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+/* Compact cards, in line with the other cards on the site */
+.ab-power {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(20px, 2vw, 26px) clamp(20px, 2vw, 24px) clamp(22px, 2.2vw, 26px);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow .5s var(--ease);
+}
+
+/* the three cards always stay level (the same title and text size and position in each); under the
+   pointer only the shadow deepens */
+.ab-power:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* A short orange and blue light on the card's edge, running round it (motion block below) */
+.ab-power::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: 1;
+  padding: 3px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--ab-angle), transparent 0deg 200deg, rgba(var(--brand-orange-rgb), .35) 240deg, var(--brand-orange) 300deg, var(--brand-blue) 345deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.ab-power__num {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  z-index: -1;
+  color: transparent;
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 2.1rem + 1.2vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1;
+  -webkit-text-stroke: 1.25px rgba(var(--brand-blue-rgb), .2);
+}
+
+.ab-power h3 {
+  margin-top: 16px;
+  font-size: clamp(1.125rem, 1.05rem + .3vw, 1.3125rem);
+}
+
+.ab-power p {
+  margin-top: 8px;
+  color: var(--text-secondary);
+  font-size: .90625rem;
+  line-height: 1.6;
+}
+
+.ab-power .icon-diamond {
+  --size: 52px;
+  color: var(--charcoal);
+}
+
+/* ---------------------------------------------------------------- Mission */
+/* "Our Mission", centred on the deep navy of the navigation bar: the heading, the mission in full
+   under an orange quote mark (its key phrases in orange), then Strategy, Creativity and Technology in
+   a row. The three light up in turn and, as each does, its word in the mission is underlined in
+   orange (the loop is in the motion block below); with reduced motion everything is shown still. */
+.ab-mission {
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(55% 75% at 8% 10%, rgba(var(--brand-blue-rgb), .42), rgba(var(--brand-blue-rgb), 0) 70%),
+    radial-gradient(45% 65% at 92% 100%, rgba(var(--brand-orange-rgb), .14), rgba(var(--brand-orange-rgb), 0) 70%),
+    linear-gradient(135deg, var(--navy-bar), var(--navy-bar-dark));
+}
+
+.ab-mission__inner {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.ab-mission .section-head {
+  margin-bottom: clamp(14px, 1.8vw, 22px);
+}
+
+.ab-mission .eyebrow {
+  color: var(--white);
+}
+
+.ab-mission__title {
+  color: var(--white);
+  font-size: var(--fs-h2);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.03em;
+}
+
+.ab-mission__hl {
+  color: var(--brand-orange);
+}
+
+/* the mission */
+.ab-mission__statement {
+  max-width: 960px;
+  margin: 0;
+}
+
+.ab-mission__mark {
+  display: block;
+  width: clamp(24px, 2.2vw, 32px);
+  height: auto;
+  margin: 0 auto clamp(10px, 1.2vw, 14px);
+  fill: var(--brand-orange);
+}
+
+.ab-mission blockquote {
+  margin: 0;
+}
+
+.ab-mission blockquote p {
+  margin: 0;
+  color: rgba(255, 255, 255, .92);
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, .92rem + .3vw, 1.1875rem);
+  font-weight: 500;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.ab-mission__key {
+  color: var(--brand-orange);
+  font-weight: 600;
+}
+
+/* strategy, creativity, technology: underlined in orange while their icon below is lit */
+.ab-mission__word {
+  padding-bottom: 2px;
+  background: linear-gradient(var(--brand-orange), var(--brand-orange)) left 100% / 0 2px no-repeat;
+}
+
+/* Strategy, Creativity, Technology: a row of three, thin lines between them */
+.ab-focus {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(100%, 680px);
+  margin: clamp(22px, 2.6vw, 30px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ab-focus__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px 0;                        /* room for the lit icon's lift and ring */
+}
+
+.ab-focus__item + .ab-focus__item {
+  border-left: 1px solid rgba(255, 255, 255, .14);
+}
+
+.ab-focus__icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(255, 255, 255, .24);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .06);
+  color: var(--brand-orange);
+}
+
+.ab-focus__icon .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.ab-focus__label {
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: clamp(.9375rem, .9rem + .15vw, 1rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+@media (max-width: 479px) {
+  .ab-focus__icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .ab-focus__label {
+    font-size: .875rem;
+  }
+}
+
+/* ---------------------------------------------------------------- Pillars: three feed one */
+/* Why Brand Image: the text on the left; on the right the three pillars as cards whose dashed orange
+   lines flow into one "Successful Projects" card with the logo mark (the dashes run on and the cards
+   light up in turn — The loops below). Phones: the cards, then the result card under them. */
+.ab-pillars {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ab-pillars__hl {
+  color: var(--brand-orange);
+}
+
+.ab-pillars__grid {
+  display: grid;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .ab-pillars__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(56px, 6vw, 96px);
+  }
+}
+
+/* cards | lines | result; the lines are drawn for three 80px cards 16px apart */
+.ab-flow {
+  --item-h: 80px;
+  --item-gap: 16px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(52px, 6vw, 80px) minmax(0, .78fr);
+  align-items: center;
+}
+
+.ab-flow__list {
+  display: grid;
+  gap: var(--item-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ab-flow__item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: var(--item-h);
+  padding: 0 16px 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.ab-flow__icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  flex: none;
+  border-radius: 14px;
+  background: rgba(var(--brand-orange-rgb), .16);
+  color: var(--deep-orange);
+}
+
+.ab-flow__icon .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.ab-flow__text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ab-flow__title {
+  color: var(--charcoal);
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.ab-flow__lines {
+  width: 100%;
+  height: calc(var(--item-h) * 3 + var(--item-gap) * 2);
+  overflow: visible;
+  fill: none;
+  stroke: rgba(var(--brand-blue-rgb), .2);
+  stroke-width: 2;
+}
+
+.ab-flow__lines path {
+  vector-effect: non-scaling-stroke;
+}
+
+.ab-flow__lines .ab-flow__run {
+  stroke: var(--brand-orange);
+  stroke-dasharray: 5 9;
+  stroke-linecap: round;
+}
+
+/* the result: deep navy with the logo mark on white */
+.ab-flow__result {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  padding: 28px 16px 24px;
+  border-radius: 20px;
+  background: linear-gradient(160deg, #063B67, #041F3A);
+  text-align: center;
+  box-shadow: 0 24px 48px -24px rgba(4, 31, 58, .7);
+}
+
+.ab-flow__mark {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 0 0 4px var(--brand-orange);
+}
+
+.ab-flow__mark img {
+  width: 46px;
+  height: 46px;
+}
+
+.ab-flow__label {
+  margin: 0;
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.ab-flow__label::after {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 3px;
+  margin: 10px auto 0;
+  border-radius: 3px;
+  background: var(--brand-orange);
+}
+
+/* Phones: the cards, then a short dashed line down to the result */
+@media (max-width: 639px) {
+  .ab-flow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ab-flow__lines {
+    display: none;
+  }
+
+  .ab-flow__result {
+    margin-top: 40px;
+  }
+
+  .ab-flow__result::before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    width: 2px;
+    height: 40px;
+    background: repeating-linear-gradient(var(--brand-orange) 0 5px, transparent 5px 12px);
+  }
+}
+
+/* ---------------------------------------------------------------- The loops */
+@media (prefers-reduced-motion: no-preference) {
+  /* Header: a shine runs over "Brand Image" */
+  .js .page-hero--about .hl .w__i {
+    background: linear-gradient(100deg, var(--brand-orange) 0 40%, var(--white) 50%, var(--brand-orange) 60% 100%) 100% 0 / 300% 100% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: word-up 1s var(--ease-out) calc(.15s + var(--i, 0) * .06s) backwards, ab-text-shine 5s ease-in-out calc(1.6s + var(--i, 0) * .18s) infinite;
+  }
+
+  /* Strengths: as on the Gallery header, a white shine crosses the coloured words every 6 seconds
+     (after the heading has come in), passing from word to word */
+  .js .ab-strengths [data-reveal].is-visible .ab-strengths__hl .w__i {
+    background: linear-gradient(100deg, var(--hl) 0 40%, rgba(255, 255, 255, .95) 50%, var(--hl) 60% 100%) 100% 0 / 300% 100% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation:
+      word-up .9s var(--ease-out) calc(.08s + var(--i, 0) * .055s) backwards,
+      live-shine 6s ease-in-out calc(1.4s + var(--i, 0) * .18s) infinite;
+  }
+  .ab-power::before { animation: ab-angle 6s linear infinite; animation-delay: calc(var(--k) * -2s); }
+  .ab-power .icon-diamond::before { animation: ab-flip 6s var(--ease) infinite; animation-delay: calc(var(--k) * 2s); }
+
+  /* Mission: Strategy, Creativity and Technology light up in turn (a 6 s round, 2 s each); as each
+     does, its word in the mission is underlined in orange */
+  .ab-focus__icon { animation: ab-focus-icon 6s var(--ease) calc(1s + var(--k) * 2s) infinite; }
+  .ab-mission__word { animation: ab-focus-word 6s var(--ease) calc(1s + var(--k) * 2s) infinite; }
+
+  /* Pillars: the dashes run into "Successful Projects"; the cards light up in turn */
+  .ab-flow__lines .ab-flow__run { animation: ab-flow-run 1.1s linear infinite; }
+  .ab-flow__item { animation: ab-flow-item 6s ease-in-out infinite; animation-delay: calc(var(--k) * 2s); }
+  .ab-flow__icon { animation: ab-flow-icon 6s ease-in-out infinite; }
+  .ab-flow__item:nth-child(2) .ab-flow__icon { animation-delay: 2s; }
+  .ab-flow__item:nth-child(3) .ab-flow__icon { animation-delay: 4s; }
+  .ab-flow__mark { animation: ab-flow-arrive 2s ease-in-out infinite; }
+
+  /* Off screen: every loop of the section waits */
+  .js [data-live]:not(.is-live),
+  .js [data-live]:not(.is-live)::before,
+  .js [data-live]:not(.is-live)::after,
+  .js [data-live]:not(.is-live) *,
+  .js [data-live]:not(.is-live) *::before,
+  .js [data-live]:not(.is-live) *::after {
+    animation-play-state: paused !important;
+  }
+}
+
+/* one item from its own start: lit for about a third of the round, then back */
+@keyframes ab-focus-icon {
+  5%, 30% {
+    border-color: var(--brand-orange);
+    background-color: var(--brand-orange);
+    box-shadow: 0 0 0 6px rgba(var(--brand-orange-rgb), .18), 0 12px 28px -10px rgba(var(--brand-orange-rgb), .8);
+    color: var(--navy-bar);
+    transform: translateY(-3px);
+  }
+  38%, 100% {
+    border-color: rgba(255, 255, 255, .24);
+    background-color: rgba(255, 255, 255, .06);
+    box-shadow: 0 0 0 0 rgba(var(--brand-orange-rgb), 0);
+    color: var(--brand-orange);
+    transform: none;
+  }
+}
+
+@keyframes ab-focus-word {
+  5%, 30% { color: var(--brand-orange); background-size: 100% 2px; }
+  38%, 100% { color: rgba(255, 255, 255, .92); background-size: 0 2px; }
+}
+
+@keyframes ab-flow-run {
+  to { stroke-dashoffset: -14; }
+}
+
+@keyframes ab-flow-item {
+  8%, 26% {
+    border-color: rgba(var(--brand-orange-rgb), .6);
+    box-shadow: 0 16px 30px -18px rgba(var(--brand-orange-rgb), .6);
+    transform: translateX(4px);
+  }
+}
+
+@keyframes ab-flow-icon {
+  8%, 26% { background: var(--brand-orange); color: var(--charcoal); }
+}
+
+@keyframes ab-flow-arrive {
+  0%, 100% { box-shadow: 0 0 0 4px var(--brand-orange); }
+  50% { box-shadow: 0 0 0 4px var(--brand-orange), 0 0 0 12px rgba(var(--brand-orange-rgb), .18), 0 0 28px rgba(var(--brand-orange-rgb), .45); }
+}
+
+@keyframes ab-text-shine {
+  0% { background-position: 100% 0; }
+  40%, 100% { background-position: 0 0; }
+}
+
+@keyframes ab-angle {
+  to { --ab-angle: 360deg; }
+}
+
+@keyframes ab-flip {
+  0%, 62% { transform: rotate(45deg); background-color: var(--brand-orange); }
+  76%, 90% { transform: rotate(135deg); background-color: var(--brand-blue); }
+  100% { transform: rotate(135deg); background-color: var(--brand-orange); }
+}
+
+

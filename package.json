@@ -1,0 +1,21 @@
+{
+  "name": "brand-image-website",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Brand Image Media Pvt Ltd — redesigned static website (Printing | Branding | Advertising, Nashik)",
+  "scripts": {
+    "build": "node src/build.js",
+    "preview": "node src/serve.js 3000 --open",
+    "images": "python src/tools/optimize_images.py"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}

@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- The Brand Image office building behind the Contact page header: contact-building.png in the project folder
+     (931 x 1690: the building with the real logo on its lit sign and the seven services on its wall), shown at its
+     own size. Rendered to WebP by src/tools/render_artwork.js (job "contact"). -->
+<style>
+  html, body { margin: 0; background: #000; }
+  #art { position: relative; width: 931px; height: 1690px; overflow: hidden; }
+  #art img { position: absolute; inset: 0; width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+<div id="art"><img src="../../contact-building.png" alt=""></div>
+<script>
+window.__ready = Promise.all([...document.images].map((i) => i.decode()));
+</script>
+</body>
+</html>

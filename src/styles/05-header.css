@@ -1,0 +1,798 @@
+/* ==========================================================================
+   Sticky header, navigation, mobile drawer, mobile CTA bar
+   ========================================================================== */
+
+/* ------------------------------------------------------------ Header */
+/* A deep navy bar with a darker curved sweep behind the logo: the logo for dark backgrounds, white
+   links with an orange line under the current one (and the one the pointer is on), Outdoor Media as
+   a thin outlined button and an orange "Get in Touch". The header always stays at the top of the
+   window, scrolling up or down; once the page is scrolled it gets a soft shadow (main.js:
+   is-scrolled). Its colours are set once here. */
+.site-header {
+  --nav-navy: var(--navy-bar);               /* #062F55, shared with the footer (01-tokens.css) */
+  --nav-navy-light: var(--navy-bar-light);   /* #063B67 */
+  --nav-dark: var(--navy-bar-dark);          /* #041F3A */
+  --nav-darkest: #061B2E;
+  --nav-blue-rgb: 11, 79, 130;              /* #0B4F82 */
+  --nav-orange: #FF8A00;
+  --nav-orange-light: #FF9700;
+  --nav-orange-rgb: 255, 138, 0;
+  --nav-text: #F7F9FC;
+  --nav-x: max(150px, calc(50% - 520px));   /* the middle of the curved sweep: behind the logo */
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  isolation: isolate;
+  background: var(--nav-navy);
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+  color: var(--nav-text);
+  transition: box-shadow .3s var(--ease);
+  view-transition-name: site-header;
+}
+
+/* the darker sweep behind the logo with a faint blue curve along its edge, and a lighter navy
+   towards the right */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 430px 170px at var(--nav-x) 15%, var(--nav-dark) 0 61%, rgba(4, 31, 58, 0) 62.5%),
+    radial-gradient(ellipse 470px 190px at var(--nav-x) 15%, rgba(var(--nav-blue-rgb), 0) 0 60%, rgba(var(--nav-blue-rgb), .5) 61.5%, rgba(var(--nav-blue-rgb), 0) 63.5%),
+    linear-gradient(90deg, var(--nav-navy) 30%, var(--nav-navy-light));
+  pointer-events: none;
+}
+
+.site-header.is-scrolled {
+  box-shadow: 0 12px 28px -18px rgba(4, 31, 58, .85);
+}
+
+.site-header__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  height: var(--header-h);
+}
+
+.brand-logo {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+}
+
+.brand-logo img {
+  width: auto;
+  height: 44px;
+}
+
+@media (max-width: 359.98px) {
+  .brand-logo img {
+    height: 36px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .brand-logo img {
+    height: 54px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .brand-logo img {
+    height: 58px;
+  }
+}
+
+/* Small desktops: slightly smaller logo and gaps so the navigation fits comfortably */
+@media (min-width: 1024px) and (max-width: 1199.98px) {
+  .site-header__inner {
+    gap: 16px;
+  }
+}
+
+/* Desktop navigation */
+.main-nav {
+  display: none;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-call,
+.nav-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  transition: background-color .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+}
+
+.header-call {
+  background: var(--nav-orange);
+  color: var(--nav-darkest);
+}
+
+.header-call:hover {
+  background: var(--nav-orange-light);
+  color: var(--nav-darkest);
+}
+
+.header-call .icon,
+.nav-toggle .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.nav-toggle {
+  border: 1px solid rgba(255, 255, 255, .4);
+  background: transparent;
+  color: var(--white);
+}
+
+.nav-toggle:hover {
+  border-color: var(--nav-orange);
+  color: var(--nav-orange-light);
+}
+
+@media (min-width: 1024px) {
+  /* computers: the logo on the left and the links in the middle of the bar (three columns: the
+     empty third one balances the logo's, so the links are centred in the window) */
+  .site-header__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  }
+
+  .brand-logo {
+    justify-self: start;
+  }
+
+  .main-nav {
+    display: block;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .main-nav__list {
+    display: flex;
+    align-items: center;
+    gap: clamp(4px, 1vw, 14px);
+    list-style: none;
+  }
+
+  .main-nav__item {
+    position: relative;
+  }
+
+  /* the Services menu opens against the header (centred under the links), not against its own
+     link, so it never runs past the window */
+  .main-nav__item--menu {
+    position: static;
+  }
+
+  .main-nav__link,
+  .main-nav__toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    padding: 10px 8px;
+    border: 0;
+    border-radius: var(--radius-xs);
+    background: none;
+    color: var(--nav-text);
+    font-family: var(--font-heading);
+    font-size: .96875rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color .25s var(--ease);
+  }
+
+  .main-nav__link::after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    bottom: 3px;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--nav-orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s var(--ease);
+  }
+
+  .main-nav__link:hover,
+  .main-nav__toggle:hover,
+  .main-nav__toggle[aria-expanded="true"] {
+    color: var(--nav-orange-light);
+  }
+
+  .main-nav__link:hover::after,
+  .main-nav__link[aria-current="page"]::after,
+  .main-nav__item.is-current > .main-nav__link::after {
+    transform: scaleX(1);
+  }
+
+  /* the current page: white, a little bolder, with the orange line */
+  .main-nav__link[aria-current="page"],
+  .main-nav__item.is-current > .main-nav__link {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .main-nav__link[aria-current="page"]:hover,
+  .main-nav__item.is-current > .main-nav__link:hover {
+    color: var(--nav-orange-light);
+  }
+
+  /* With JavaScript, one orange line glides under the link the pointer (or keyboard) is on and
+     returns to the current page's link (main.js: initNavIndicator) */
+  .main-nav {
+    position: relative;
+  }
+
+  .main-nav__indicator {
+    display: none;
+  }
+
+  .main-nav.has-indicator .main-nav__indicator {
+    position: absolute;
+    left: 0;
+    bottom: 3px;
+    display: block;
+    width: var(--ind-w, 0);
+    height: 3px;
+    border-radius: 3px;
+    background: var(--nav-orange);
+    opacity: var(--ind-o, 0);
+    transform: translateX(var(--ind-x, 0));
+    transition: transform .45s var(--ease-out), width .45s var(--ease-out), opacity .25s var(--ease);
+    pointer-events: none;
+  }
+
+  .main-nav.has-indicator .main-nav__link::after {
+    display: none;
+  }
+
+  /* Services: link + disclosure button */
+  .main-nav__item--menu {
+    display: flex;
+    align-items: center;
+  }
+
+  .main-nav__item--menu .main-nav__link {
+    padding-right: 2px;
+  }
+
+  .main-nav__item--menu .main-nav__link::after {
+    right: 2px;
+  }
+
+  .main-nav__toggle {
+    width: 28px;
+    padding: 0;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .main-nav__toggle .icon {
+    width: 16px;
+    height: 16px;
+    transition: transform .3s var(--ease);
+  }
+
+  .main-nav__toggle[aria-expanded="true"] .icon {
+    transform: rotate(180deg);
+  }
+
+  /* computers: only the logo and the links (the call and menu buttons are for phones and tablets) */
+  .header-actions {
+    display: none;
+  }
+}
+
+@media (min-width: 1320px) {
+  .main-nav__list {
+    gap: clamp(12px, 1.5vw, 28px);
+  }
+
+  .main-nav__link,
+  .main-nav__toggle {
+    font-size: 1rem;
+  }
+
+  .main-nav__link {
+    padding: 10px 10px;
+  }
+
+  .main-nav__link::after {
+    left: 10px;
+    right: 10px;
+  }
+
+}
+
+/* Services menu: a light cream panel as wide as the header, just under the navy bar, as tall as its
+   content. On the left, on a slightly deeper cream, the "All Services" card in white; on the right the
+   services in three groups under small uppercase headings, and "Know more" (orange underline) under
+   the last group. */
+.mega {
+  --mega-cream: #FFFAF2;
+  --mega-side: #FCEFD8;
+  position: absolute;
+  top: calc(100% + 14px);                    /* just under the navy bar */
+  left: 50%;                                 /* centred under the links, which are centred in the window */
+  z-index: 70;
+  display: grid;
+  grid-template-columns: minmax(250px, 26%) minmax(0, 1fr);
+  width: min(var(--container), 100vw - 2 * var(--gutter));   /* as wide as the logo-to-edge row */
+  border-radius: 24px;
+  background: var(--mega-cream);
+  box-shadow: 0 34px 70px -28px rgba(2, 12, 24, .6), 0 2px 6px rgba(2, 12, 24, .12);
+  color: var(--charcoal);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 10px);
+  transition: opacity .25s var(--ease), transform .25s var(--ease), visibility 0s linear .25s;
+}
+
+.mega::before {
+  /* hover bridge, from the links down to the panel */
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -34px;
+  height: 34px;
+}
+
+.mega.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+  transition: opacity .25s var(--ease), transform .25s var(--ease), visibility 0s;
+}
+
+/* the left column: the "All Services" card */
+.mega__side {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 24px 0 0 24px;
+  background: var(--mega-side);
+}
+
+.mega__feature {
+  display: grid;
+  gap: 6px;
+  padding: 20px;
+  border-radius: 16px;
+  color: var(--charcoal);
+  text-decoration: none;
+  transition: background-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+
+.mega__feature {
+  background: var(--white);
+  box-shadow: 0 12px 26px -18px rgba(var(--charcoal-rgb), .45);
+}
+
+.mega__feature-icon {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--brand-blue);
+}
+
+.mega__feature-icon .icon {
+  width: 28px;
+  height: 28px;
+}
+
+.mega__feature-title {
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.mega__feature-title {
+  color: var(--brand-blue);
+}
+
+.mega__feature-text {
+  color: var(--text-secondary);
+  font-size: .875rem;
+  line-height: 1.55;
+}
+
+/* the right side: the services in groups */
+.mega__main {
+  padding: 40px clamp(28px, 3.2vw, 52px) 36px;
+}
+
+.mega__groups {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px clamp(20px, 3vw, 48px);
+}
+
+.mega__heading {
+  margin: 0 0 12px;
+  color: var(--charcoal);
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.mega__group ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mega__link {
+  color: rgba(var(--charcoal-rgb), .86);
+  font-size: 1rem;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: color .2s var(--ease);
+}
+
+.mega__link:hover,
+.mega__link:focus-visible,
+.mega__link[aria-current="page"] {
+  color: var(--brand-blue);
+}
+
+/* the service whose page is open */
+.mega__link[aria-current="page"] {
+  font-weight: 600;
+}
+
+.mega__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  padding-bottom: 3px;
+  border-bottom: 2px solid var(--brand-orange);
+  color: var(--brand-blue);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.mega__more .icon {
+  width: 16px;
+  height: 16px;
+  transition: transform .25s var(--ease);
+}
+
+.mega__more:hover .icon,
+.mega__more:focus-visible .icon {
+  transform: translateX(3px);
+}
+
+/* ------------------------------------------------------------ Mobile drawer */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  visibility: hidden;
+  transition: visibility 0s linear .35s;
+}
+
+.mobile-nav.is-open {
+  visibility: visible;
+  transition: visibility 0s;
+}
+
+.mobile-nav__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(var(--charcoal-rgb), .6);
+  opacity: 0;
+  transition: opacity .35s var(--ease);
+}
+
+.mobile-nav.is-open .mobile-nav__backdrop {
+  opacity: 1;
+}
+
+.mobile-nav__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  width: min(420px, 90vw);
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
+  transform: translateX(100%);
+  transition: transform .38s var(--ease-out);
+}
+
+.mobile-nav.is-open .mobile-nav__panel {
+  transform: none;
+}
+
+.mobile-nav__head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px 12px 20px;
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
+}
+
+.mobile-nav__head img {
+  height: 40px;
+  width: auto;
+}
+
+.mobile-nav__close {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--dark-blue);
+}
+
+.mobile-nav__close .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.mobile-nav__body {
+  flex: 1;
+  padding: 8px 20px 24px;
+}
+
+.mobile-nav__list {
+  list-style: none;
+}
+
+.mobile-nav__list > li {
+  border-bottom: 1px solid var(--line);
+}
+
+.mobile-nav__link,
+.mobile-nav__acc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 56px;
+  padding: 10px 2px;
+  border: 0;
+  background: none;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: left;
+  text-decoration: none;
+}
+
+.mobile-nav__link[aria-current="page"] {
+  color: var(--primary-blue);
+}
+
+.mobile-nav__link[aria-current="page"]::after {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 1px;
+  background: var(--primary-orange);
+  transform: rotate(45deg);
+}
+
+.mobile-nav__row {
+  display: flex;
+  align-items: center;
+}
+
+.mobile-nav__row .mobile-nav__link {
+  flex: 1;
+}
+
+.mobile-nav__acc {
+  width: 48px;
+  min-height: 48px;
+  justify-content: center;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  background: var(--soft-blue);
+}
+
+.mobile-nav__acc .icon {
+  width: 20px;
+  height: 20px;
+  transition: transform .3s var(--ease);
+}
+
+.mobile-nav__acc[aria-expanded="true"] .icon {
+  transform: rotate(180deg);
+}
+
+.mobile-nav__sub {
+  display: grid;
+  gap: 2px;
+  padding: 0 0 14px;
+  list-style: none;
+}
+
+.mobile-nav__sub a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.mobile-nav__sub a:hover,
+.mobile-nav__sub a[aria-current="page"] {
+  background: var(--soft-blue);
+  color: var(--dark-blue);
+}
+
+.mobile-nav__sub .icon {
+  width: 20px;
+  height: 20px;
+  color: var(--primary-blue);
+}
+
+.mobile-nav__foot {
+  display: grid;
+  gap: 10px;
+  padding: 20px;
+  border-top: 1px solid var(--line);
+  background: var(--page-bg);
+}
+
+.mobile-nav__foot .btn {
+  width: 100%;
+}
+
+.mobile-nav__meta {
+  margin: 6px 0 0;
+  font-size: .875rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+body.nav-open {
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------ Mobile CTA bar */
+.mobile-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 55;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, .97);
+  box-shadow: 0 -10px 30px -16px rgba(var(--deep-blue-rgb), .45);
+  transition: transform .35s var(--ease), visibility 0s;
+}
+
+.mobile-cta .btn {
+  min-height: 48px;
+  padding: 10px 12px;
+  font-size: .95rem;
+}
+
+.mobile-cta .btn--whatsapp {
+  --btn-bg: var(--primary-blue);
+  --btn-fg: var(--white);
+  --btn-bd: var(--primary-blue);
+  --btn-sweep: var(--dark-blue);
+  --btn-bd-hover: var(--dark-blue);
+  --btn-fg-hover: var(--white);
+}
+
+/* Out of the way (slid below the screen, and out of reach of taps and the keyboard) while a form field
+   is in use and while the footer is on screen (main.js): the footer has the same ways to call and
+   WhatsApp, so the bar never sits on top of it */
+.mobile-cta.is-hidden,
+.mobile-cta.is-at-footer {
+  transform: translateY(110%);
+  visibility: hidden;
+  transition: transform .35s var(--ease), visibility 0s linear .35s;
+}
+
+/* without JavaScript the bar stays, so the footer keeps room for it at its foot */
+@media (max-width: 767px) {
+  html:not(.js) body.has-mobile-cta .site-footer {
+    padding-bottom: calc(70px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-cta {
+    display: none;
+  }
+}
+
+/* Back to top */
+.to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 50;
+  display: none;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 10px;
+  background: var(--brand-blue);
+  color: var(--white);
+  box-shadow: 0 12px 26px -12px rgba(var(--charcoal-rgb), .6);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .3s var(--ease), transform .3s var(--ease), background-color .3s var(--ease);
+  pointer-events: none;
+}
+
+.to-top .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.to-top:hover {
+  border-color: var(--primary-orange);
+  background: var(--primary-orange);
+  color: var(--dark-blue);
+}
+
+.to-top.is-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+@media (min-width: 768px) {
+  .to-top {
+    display: grid;
+  }
+}

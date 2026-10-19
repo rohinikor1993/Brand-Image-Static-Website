@@ -1,0 +1,48 @@
+HOME PAGE SLIDER - AI IMAGE PROMPTS (Brand Image Media Pvt Ltd)
+=================================================================
+
+How to use
+----------
+1. Paste each prompt into your AI image tool (Gemini, ChatGPT, etc.), one image per prompt.
+2. Choose the widest size it offers: 21:9 is best. If it only makes 16:9 or 3:2, that is fine;
+   the slider trims a little from the top and bottom.
+3. Save each image in this folder ("Slider images") with exactly these names:
+      printing.png   shop-branding.png   outdoor.png   transit.png
+      wall-painting.png   events.png   promotional.png
+   (.jpg or .webp are fine too; keep the same names.)
+4. Tell Claude the images are ready. The website adds the text itself (service name, title,
+   description, buttons) in the same place on every slide, so the images must NOT contain text.
+
+Tips
+- If an image comes out with words or logos on it, ask the tool: "remove all text and logos".
+- If the left side is too busy, ask: "make the left 45% a calm, empty deep-blue background".
+- Generate all 7 in the same chat so the colours and lighting stay consistent.
+
+
+1) printing.png
+---------------
+Ultra-wide cinematic website banner, 21:9, photorealistic, premium advertising-agency look. Left 45% of the frame: a calm, deep royal-blue background (navy to royal blue) with soft light streaks and gentle bokeh, almost empty (white website text will be placed there). Right 55%: a modern large-format print studio in India, where a wide-format printer is producing a vibrant, colourful flex banner, with rolls of vinyl and finished posters around it, sharp and detailed, warm golden light with vivid colours and orange highlights. The scene blends smoothly into the blue on the left. No text, letters, numbers, logos or watermarks anywhere; all prints and screens show only abstract colourful graphics. Highest resolution.
+
+2) shop-branding.png
+--------------------
+Ultra-wide cinematic website banner, 21:9, photorealistic, premium advertising-agency look. Left 45% of the frame: a calm, deep royal-blue background (navy to royal blue) with soft light streaks and gentle bokeh, almost empty (white website text will be placed there). Right 55%: a stylish modern shop front at dusk on a busy Indian market street, with a glowing illuminated signboard, branded glass facade, window graphics and bright in-store displays, sharp and detailed, warm golden light with vivid colours and orange highlights. The scene blends smoothly into the blue on the left. No text, letters, numbers, logos or watermarks anywhere; all signs and boards show only abstract colourful graphics. Highest resolution.
+
+3) outdoor.png
+--------------
+Ultra-wide cinematic website banner, 21:9, photorealistic, premium advertising-agency look. Left 45% of the frame: a calm, deep royal-blue background (navy to royal blue) with soft light streaks and gentle bokeh, almost empty (white website text will be placed there). Right 55%: large roadside hoarding billboards on tall poles beside a busy Indian city highway at sunset, with glowing car light trails below, sharp and detailed, warm golden light with vivid colours and orange highlights. The scene blends smoothly into the blue on the left. No text, letters, numbers, logos or watermarks anywhere; all billboards show only abstract colourful graphics. Highest resolution.
+
+4) transit.png
+--------------
+Ultra-wide cinematic website banner, 21:9, photorealistic, premium advertising-agency look. Left 45% of the frame: a calm, deep royal-blue background (navy to royal blue) with soft light streaks and gentle bokeh, almost empty (white website text will be placed there). Right 55%: city buses, auto-rickshaws and delivery vans wrapped in colourful full-body advertising, moving through a busy Indian street with light trails, sharp and detailed, warm golden light with vivid colours and orange highlights. The scene blends smoothly into the blue on the left. No text, letters, numbers, logos or watermarks anywhere; all vehicle wraps show only abstract colourful graphics. Highest resolution.
+
+5) wall-painting.png
+--------------------
+Ultra-wide cinematic website banner, 21:9, photorealistic, premium advertising-agency look. Left 45% of the frame: a calm, deep royal-blue background (navy to royal blue) with soft light streaks and gentle bokeh, almost empty (white website text will be placed there). Right 55%: a huge, vibrant hand-painted advertising mural on the side wall of a building in an Indian town, with an artist on a scaffold adding the final brush strokes, sharp and detailed, warm golden light with vivid colours and orange highlights. The scene blends smoothly into the blue on the left. No text, letters, numbers, logos or watermarks anywhere; the mural and signs show only abstract colourful graphics. Highest resolution.
+
+6) events.png
+-------------
+Ultra-wide cinematic website banner, 21:9, photorealistic, premium advertising-agency look. Left 45% of the frame: a calm, deep royal-blue background (navy to royal blue) with soft light streaks and gentle bokeh, almost empty (white website text will be placed there). Right 55%: a brand launch event with a grand stage, dramatic spotlights, a large LED screen, falling confetti and an excited crowd in silhouette, sharp and detailed, warm golden light with vivid colours and orange highlights. The scene blends smoothly into the blue on the left. No text, letters, numbers, logos or watermarks anywhere; the LED screen and banners show only abstract colourful graphics. Highest resolution.
+
+7) promotional.png
+------------------
+Ultra-wide cinematic website banner, 21:9, photorealistic, premium advertising-agency look. Left 45% of the frame: a calm, deep royal-blue background (navy to royal blue) with soft light streaks and gentle bokeh, almost empty (white website text will be placed there). Right 55%: branded promotional products elegantly arranged on a sleek display: a roll-up standee, tote bags, festive hanging danglers, brochures, caps, mugs and a table-top standee, sharp and detailed, warm golden light with vivid colours and orange highlights. The scene blends smoothly into the blue on the left. No text, letters, numbers, logos or watermarks anywhere; all products show only abstract colourful graphics. Highest resolution.

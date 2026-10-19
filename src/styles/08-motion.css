@@ -1,0 +1,663 @@
+/* ==========================================================================
+   Motion: scroll reveal, page transitions, reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Scroll reveal: an element waits hidden until it scrolls into view (main.js adds
+     .is-visible), then plays a short entrance. These are animations, not transitions, so the
+     element keeps its own transitions and hover effects (such as the card lift) afterwards. */
+  .js [data-reveal]:not(.is-visible) {
+    opacity: 0;
+  }
+
+  .js [data-reveal].is-visible {
+    animation: reveal-up .75s var(--ease) var(--reveal-delay, 0s) backwards;
+  }
+
+  .js [data-reveal="left"].is-visible {
+    animation-name: reveal-left;
+  }
+
+  .js [data-reveal="right"].is-visible {
+    animation-name: reveal-right;
+  }
+
+  .js [data-reveal="fade"].is-visible {
+    animation-name: reveal-fade;
+  }
+
+  /* Phones: slide up instead of sideways, so nothing sits past the screen edge */
+  @media (max-width: 767px) {
+    .js [data-reveal="left"].is-visible,
+    .js [data-reveal="right"].is-visible {
+      animation-name: reveal-up;
+    }
+  }
+
+  /* Headings: each word rises into place from behind an invisible line, one after another
+     (the words are split in the HTML, see splitTitle in helpers.js) */
+  .js .w {
+    clip-path: inset(-.5em -.3em -.16em -.3em);
+  }
+
+  .js .w__i {
+    display: inline-block;
+  }
+
+  .js [data-reveal]:not(.is-visible) .w__i {
+    transform: translateY(120%);
+  }
+
+  .js [data-reveal].is-visible .w__i {
+    animation: word-up .9s var(--ease-out) calc(var(--reveal-delay, 0s) + .08s + var(--i, 0) * .055s) backwards;
+  }
+
+  /* Section heads: the block fades in, the eyebrow slides in with its diamond spinning, the
+     words rise, then the lead and the button follow */
+  .js .section-head[data-reveal].is-visible {
+    animation-name: reveal-fade;
+    animation-duration: .45s;
+  }
+
+  .js [data-reveal].is-visible .eyebrow {
+    animation: eyebrow-in .7s var(--ease-out) var(--reveal-delay, 0s) backwards;
+  }
+
+  .js [data-reveal].is-visible .eyebrow::before {
+    animation: diamond-pop .8s cubic-bezier(.34, 1.56, .64, 1) calc(var(--reveal-delay, 0s) + .1s) backwards;
+  }
+
+  .js .section-head[data-reveal].is-visible .lead {
+    animation: reveal-up .8s var(--ease-out) calc(var(--reveal-delay, 0s) + .35s) backwards;
+  }
+
+  .js .section-head--split[data-reveal].is-visible > div:last-child {
+    animation: reveal-up .8s var(--ease-out) calc(var(--reveal-delay, 0s) + .45s) backwards;
+  }
+
+  /* Section headings: the orange marker is drawn under the word once the words are in */
+  .js [data-reveal] .hl::after {
+    transform-origin: left center;
+  }
+
+  .js [data-reveal]:not(.is-visible) .hl::after {
+    transform: scaleX(0);
+  }
+
+  .js [data-reveal].is-visible .hl::after {
+    animation: marker-draw .7s cubic-bezier(.65, 0, .35, 1) calc(var(--reveal-delay, 0s) + .85s) backwards;
+  }
+
+  /* Photos: framed pictures and card pictures settle from a slight zoom as they come in */
+  .js [data-reveal].is-visible .frame {
+    animation: wipe-up 1.1s cubic-bezier(.7, 0, .3, 1) calc(var(--reveal-delay, 0s) + .1s) backwards;
+  }
+
+  .js [data-reveal].is-visible .frame img,
+  .js .card:not(.service-card)[data-reveal].is-visible .card__media img {
+    animation: img-settle 1.4s var(--ease-out) var(--reveal-delay, 0s) backwards;
+  }
+
+  /* Large photos drift a little slower than the page while scrolling (browsers that support
+     scroll-driven animations; the picture is enlarged slightly so its edges never show) */
+  @supports (animation-timeline: view()) {
+    .why-tile__img img {
+      scale: 1.1;
+      animation: parallax-y linear both;
+      animation-timeline: view();
+    }
+  }
+
+  /* How we work (Home, Services): one round every 8 seconds, starting when the section comes on screen
+     (and waiting while it is off screen, [data-live]). Computers: the diamond (the brief) rests behind
+     a circle, glides along the line to the next one, and the line fills in orange behind it; at the
+     last step the orange fades and the round starts again. Each step lights up while the diamond rests
+     on it: the circle turns orange with a white icon, a ring spreads from it and the title turns blue.
+     Phones and tablets: the steps light up in turn the same way. Step n starts n × 2 s into the round. */
+  .js .journey__node {
+    animation: journey-step 8s var(--ease) calc(.8s + var(--step, 0) * 2s) infinite;
+  }
+
+  .js .journey__node::after {
+    animation: journey-ring 8s var(--ease-out) calc(.8s + var(--step, 0) * 2s) infinite;
+  }
+
+  .js .journey__step h3 {
+    animation: journey-title 8s var(--ease) calc(.8s + var(--step, 0) * 2s) infinite;
+  }
+
+  @media (min-width: 1024px) {
+    .js .journey__runner {
+      display: block;
+      animation: journey-run 8s cubic-bezier(.65, 0, .35, 1) .8s infinite backwards;
+    }
+
+    .js .journey__fill {
+      animation: journey-fill 8s cubic-bezier(.65, 0, .35, 1) .8s infinite backwards;
+    }
+  }
+
+  /* Phones and tablets, the same round down the left: each line between two circles fills in orange
+     from the top as the diamond glides down it, at the moment the computers' line fills that stretch;
+     the diamond rests hidden behind the next circle, and the orange fades with the computers' line.
+     The fill is the step's ::after over its grey line (::before); the diamond is drawn by the step's
+     text (::before), placed against the step. */
+  @media (max-width: 1023px) {
+    .js .journey__step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: var(--node);
+      bottom: calc(var(--row-gap) * -1);
+      left: calc(var(--node) / 2 - 1px);
+      width: 2px;
+      background: linear-gradient(180deg, var(--brand-orange), var(--deep-orange));
+      transform: scaleY(0);
+      transform-origin: 50% 0;
+      animation: journey-line-1 8s cubic-bezier(.65, 0, .35, 1) .8s infinite backwards;
+    }
+
+    .js .journey__step:not(:last-child) .journey__text::before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      top: calc(var(--node) / 2);
+      left: calc(var(--node) / 2);
+      width: 12px;
+      height: 12px;
+      margin: -6px 0 0 -6px;
+      border-radius: 3px;
+      background: var(--brand-orange);
+      box-shadow: 0 0 0 3px var(--white), 0 6px 14px rgba(var(--brand-orange-rgb), .55);
+      transform: rotate(45deg);
+      animation: journey-drop-1 8s cubic-bezier(.65, 0, .35, 1) .8s infinite backwards;
+    }
+
+    .js .journey__step:nth-child(2)::after { animation-name: journey-line-2; }
+    .js .journey__step:nth-child(2) .journey__text::before { animation-name: journey-drop-2; }
+    .js .journey__step:nth-child(3)::after { animation-name: journey-line-3; }
+    .js .journey__step:nth-child(3) .journey__text::before { animation-name: journey-drop-3; }
+  }
+
+  /* Why choose us: the tiles rise in, the photo settles */
+  .js .why-tile[data-reveal].is-visible .icon-diamond {
+    animation: diamond-in .65s cubic-bezier(.34, 1.56, .64, 1) calc(var(--reveal-delay, 0s) + .35s) backwards;
+  }
+
+  /* Page headers (inner pages): the header plays in as the page opens */
+  .js .page-hero .eyebrow {
+    animation: eyebrow-in .8s var(--ease-out) .1s backwards;
+  }
+
+  .js .page-hero .eyebrow::before {
+    animation: diamond-pop .9s cubic-bezier(.34, 1.56, .64, 1) .2s backwards;
+  }
+
+  .js .page-hero .w__i {
+    animation: word-up 1s var(--ease-out) calc(.15s + var(--i, 0) * .06s) backwards;
+  }
+
+  .js .page-hero__lead,
+  .js .page-hero .post-meta {
+    animation: reveal-up .9s var(--ease-out) .45s backwards;
+  }
+
+  .js .page-hero .btn-row {
+    animation: reveal-up .9s var(--ease-out) .58s backwards;
+  }
+
+  .js .page-hero__media {
+    animation: media-in 1.2s var(--ease-out) .2s backwards;
+  }
+
+  /* Mobile menu: the links slide in one after another */
+  .mobile-nav.is-open .mobile-nav__list > li {
+    animation: slide-in-right .55s var(--ease-out) calc(.08s + var(--n, 0) * .045s) backwards;
+  }
+
+  .mobile-nav__list > li:nth-child(2) { --n: 1; }
+  .mobile-nav__list > li:nth-child(3) { --n: 2; }
+  .mobile-nav__list > li:nth-child(4) { --n: 3; }
+  .mobile-nav__list > li:nth-child(5) { --n: 4; }
+  .mobile-nav__list > li:nth-child(6) { --n: 5; }
+
+  /* Buttons: the arrow slides out and comes back in */
+  .btn:hover .icon--arrow {
+    animation: arrow-loop .6s var(--ease-out);
+  }
+
+  /* Home About: the orange line is drawn under the quoted words once they are in */
+  .js .about__head[data-reveal].is-visible .about__hl {
+    animation: underline-sweep .8s cubic-bezier(.65, 0, .35, 1) 1s backwards;
+  }
+
+  /* Home "Why choose us" mosaic: the three photos rise in one after another; then, without end
+     (paused while the section is off screen, [data-live]), each pans and zooms slowly inside its
+     tile, each towards its own point, and a soft light crosses the tiles in turn every 9 seconds. */
+  .js .why-visual__mosaic[data-reveal].is-visible {
+    animation: none;
+  }
+
+  .js .why-visual__mosaic.is-visible .why-visual__tile {
+    animation: reveal-up .8s var(--ease-out) calc(var(--k, 0) * .15s) backwards;
+  }
+
+  .js .why-visual__tile img {
+    animation: why-pan 14s ease-in-out calc(var(--k, 0) * -4.5s) infinite alternate;
+  }
+
+  .js .why-visual__tile::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .32) 50%, transparent 65%);
+    pointer-events: none;
+    transform: translateX(-120%);
+    animation: why-sheen 9s ease-in-out calc(1.4s + var(--k, 0) * .7s) infinite;
+  }
+
+  /* Home About collage. The photos rise in and the orange card pops up; then, without end (paused
+     while the section is off screen, [data-live]):
+     - the two photos pan and zoom slowly inside their frames, in opposite directions;
+     - the printer photo and the card float up a few pixels, one rising as the other settles. */
+  .js .about__collage[data-reveal].is-visible {
+    animation: none;
+  }
+
+  .js .about__collage.is-visible .collage__photo--main {
+    animation: collage-main 1s var(--ease-out) .15s backwards;
+  }
+
+  .js .about__collage.is-visible .collage__photo--second {
+    animation:
+      collage-second 1s var(--ease-out) .35s backwards,
+      collage-float 7s ease-in-out 1.6s infinite;
+  }
+
+  .js .about__collage.is-visible .collage__card {
+    animation:
+      collage-card .8s cubic-bezier(.34, 1.56, .64, 1) .6s backwards,
+      collage-float 7s ease-in-out 5.1s infinite;
+  }
+
+  .js .collage__photo--main img {
+    animation: collage-pan-a 16s ease-in-out infinite alternate;
+  }
+
+  .js .collage__photo--second img {
+    animation: collage-pan-b 13s ease-in-out infinite alternate;
+  }
+
+  /* the four services come in one after another */
+  .js .about__services[data-reveal].is-visible {
+    animation: none;
+  }
+
+  .js .about__services.is-visible .about__service {
+    animation: reveal-up .7s var(--ease-out) calc(.1s + var(--n, 0) * .09s) backwards;
+  }
+
+  /* Service cards come in like a print run: the card rises, its photo is printed from top to
+     bottom under an orange print head, then the icon and the link come in */
+  .js .service-card.is-visible .card__photos {
+    animation: print-reveal 1s cubic-bezier(.7, 0, .3, 1) calc(var(--reveal-delay, 0s) + .2s) backwards;
+  }
+
+  .js .service-card.is-visible .card__media::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-bottom: 3px solid var(--primary-orange);
+    background: linear-gradient(to top, rgba(var(--brand-orange-rgb), .35), rgba(var(--brand-orange-rgb), 0)) left bottom / 100% 18px no-repeat;
+    opacity: 0;
+    pointer-events: none;
+    animation: print-head 1s cubic-bezier(.7, 0, .3, 1) calc(var(--reveal-delay, 0s) + .2s) backwards;
+  }
+
+  .js .service-card.is-visible .icon-diamond {
+    animation: diamond-in .65s cubic-bezier(.34, 1.56, .64, 1) calc(var(--reveal-delay, 0s) + .9s) backwards;
+  }
+
+  .js .service-card.is-visible .card__foot {
+    animation: slide-in .5s var(--ease) calc(var(--reveal-delay, 0s) + 1.05s) backwards;
+  }
+
+  /* "Call Us" on the call-to-action card: the phone rings briefly every few seconds */
+  .cta-card .btn--light .icon {
+    animation: phone-ring 4.5s ease-in-out 2s infinite;
+  }
+
+  /* The contact form's message: it slides in when it appears; on "submitted" the tick pops in its disc */
+  .form-status.is-visible {
+    animation: status-in .5s var(--ease-out) both;
+  }
+
+  .form-status--success.is-visible .icon {
+    animation: status-tick .6s cubic-bezier(.34, 1.56, .64, 1) .2s both;
+  }
+
+  /* Need a consultation (Home, Services, About). Without end, while the card is on screen ([data-live]):
+     the photo zooms slowly in and out, a soft light crosses the card every 6 seconds with a glint
+     running along "Consultation" as it passes, and an orange ring pulses out of Get a Quote. */
+  .js .consult__media img {
+    animation: consult-pan 16s ease-in-out infinite alternate;
+  }
+
+  .js .consult__shine {
+    display: block;
+    background: linear-gradient(105deg, transparent 36%, rgba(255, 255, 255, .1) 45%, rgba(255, 255, 255, .22) 50%, rgba(255, 255, 255, .1) 55%, transparent 64%);
+    transform: translateX(-100%);
+    animation: consult-sheen 6s ease-in-out 1s infinite;
+  }
+
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .js .consult__title span {
+      background: linear-gradient(100deg, var(--brand-orange) 42%, var(--white) 50%, var(--brand-orange) 58%) 100% 0 / 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: consult-glint 6s ease-in-out 1.3s infinite;
+    }
+  }
+
+  .js .consult__btn {
+    animation: consult-pulse 2.4s ease-out 1s infinite;
+  }
+
+  /* Subtle cross-document page transitions (supported browsers only) */
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: .28s;
+    animation-timing-function: var(--ease);
+  }
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(26px); }
+}
+
+@keyframes word-up {
+  from { transform: translateY(120%); }
+}
+
+@keyframes eyebrow-in {
+  from { opacity: 0; transform: translateX(-18px); }
+}
+
+@keyframes diamond-pop {
+  from { transform: rotate(-135deg) scale(0); }
+}
+
+@keyframes wipe-up {
+  from { clip-path: inset(100% 0 0 0 round var(--radius-md)); }
+  to { clip-path: inset(0 0 0 0 round var(--radius-md)); }
+}
+
+@keyframes img-settle {
+  from { transform: scale(1.14); }
+}
+
+@keyframes parallax-y {
+  from { translate: 0 -4%; }
+  to { translate: 0 4%; }
+}
+
+/* How we work (Home, Services): the round of 8 s in four quarters, one per step. In each quarter the
+   diamond rests on a circle for the first half (0–13 %) and travels to the next one in the second. */
+@keyframes journey-run {
+  0%, 13% { transform: translateX(0); }
+  25%, 38% { transform: translateX(33.333%); }
+  50%, 63% { transform: translateX(66.667%); }
+  75%, 100% { transform: translateX(100%); }
+}
+
+@keyframes journey-fill {
+  0%, 13% { transform: scaleX(0); opacity: 1; }
+  25%, 38% { transform: scaleX(.3333); }
+  50%, 63% { transform: scaleX(.6667); }
+  75%, 90% { transform: scaleX(1); opacity: 1; }
+  98%, 100% { transform: scaleX(1); opacity: 0; }
+}
+
+/* phones and tablets: line n (from circle n down to circle n + 1) fills while the computers' line fills
+   that stretch (13-25%, 38-50%, 63-75% of the round) and fades with it; its diamond glides from the
+   middle of circle n to the middle of circle n + 1 (hidden behind both) in the same time */
+@keyframes journey-line-1 {
+  0%, 13% { transform: scaleY(0); opacity: 1; }
+  25%, 90% { transform: scaleY(1); opacity: 1; }
+  98%, 100% { transform: scaleY(1); opacity: 0; }
+}
+
+@keyframes journey-line-2 {
+  0%, 38% { transform: scaleY(0); opacity: 1; }
+  50%, 90% { transform: scaleY(1); opacity: 1; }
+  98%, 100% { transform: scaleY(1); opacity: 0; }
+}
+
+@keyframes journey-line-3 {
+  0%, 63% { transform: scaleY(0); opacity: 1; }
+  75%, 90% { transform: scaleY(1); opacity: 1; }
+  98%, 100% { transform: scaleY(1); opacity: 0; }
+}
+
+@keyframes journey-drop-1 {
+  0%, 13% { top: calc(var(--node) / 2); }
+  25%, 100% { top: calc(100% + var(--row-gap) + var(--node) / 2); }
+}
+
+@keyframes journey-drop-2 {
+  0%, 38% { top: calc(var(--node) / 2); }
+  50%, 100% { top: calc(100% + var(--row-gap) + var(--node) / 2); }
+}
+
+@keyframes journey-drop-3 {
+  0%, 63% { top: calc(var(--node) / 2); }
+  75%, 100% { top: calc(100% + var(--row-gap) + var(--node) / 2); }
+}
+
+/* one step, from its own start (the diamond arriving on it) */
+@keyframes journey-step {
+  3%, 13% {
+    border-color: var(--brand-orange);
+    background-color: var(--brand-orange);
+    box-shadow: 0 12px 26px -10px rgba(var(--brand-orange-rgb), .9);
+    color: var(--white);
+    transform: scale(1.1);
+  }
+  17%, 100% {
+    border-color: rgba(var(--brand-blue-rgb), .2);
+    background-color: var(--white);
+    box-shadow: 0 0 0 transparent;
+    color: var(--brand-blue);
+    transform: none;
+  }
+}
+
+@keyframes journey-ring {
+  0%, 2% { opacity: 0; transform: scale(1); }
+  4% { opacity: .9; }
+  15%, 100% { opacity: 0; transform: scale(1.7); }
+}
+
+@keyframes journey-title {
+  3%, 13% { color: var(--brand-blue); }
+  17%, 100% { color: var(--charcoal); }
+}
+}
+
+@keyframes media-in {
+  from { opacity: 0; transform: translateX(40px) scale(.97); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(24px); }
+}
+
+@keyframes arrow-loop {
+  0% { transform: none; }
+  40% { transform: translateX(140%); opacity: 0; }
+  41% { transform: translateX(-140%); opacity: 0; }
+  100% { transform: none; opacity: 1; }
+}
+
+@keyframes reveal-left {
+  from { opacity: 0; transform: translateX(-28px); }
+}
+
+@keyframes reveal-right {
+  from { opacity: 0; transform: translateX(28px); }
+}
+
+@keyframes reveal-fade {
+  from { opacity: 0; }
+}
+
+@keyframes marker-draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes underline-sweep {
+  from { background-size: 0 .3em; }
+}
+
+/* Why choose us mosaic: the slow zoom (alternate: in and back out) and the light crossing a tile */
+@keyframes why-pan {
+  from { transform: scale(1.02); }
+  to { transform: scale(1.12); }
+}
+
+@keyframes why-sheen {
+  0% { transform: translateX(-120%); }
+  20%, 100% { transform: translateX(120%); }
+}
+
+@keyframes collage-main {
+  from { opacity: 0; transform: translateY(40px) scale(.96); }
+}
+
+@keyframes collage-second {
+  from { opacity: 0; transform: translate(-30px, 30px) scale(.96); }
+}
+
+@keyframes collage-card {
+  from { opacity: 0; transform: scale(.6); }
+}
+
+/* the printer photo and the card: up a little and back (they never drop below where they rest) */
+@keyframes collage-float {
+  0%, 100% { transform: none; }
+  50% { transform: translateY(-9px); }
+}
+
+/* slow pan and zoom inside the frames (alternate: there and back) */
+@keyframes collage-pan-a {
+  from { transform: scale(1.02); }
+  to { transform: scale(1.1) translate(-2%, -1.5%); }
+}
+
+@keyframes collage-pan-b {
+  from { transform: scale(1.1) translate(2%, 1.5%); }
+  to { transform: scale(1.02); }
+}
+
+@keyframes print-reveal {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes print-head {
+  from { transform: translateY(-100%); opacity: 1; }
+  88% { opacity: 1; }
+  to { transform: translateY(0); opacity: 0; }
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(-12px); }
+}
+
+@keyframes diamond-in {
+  from { opacity: 0; transform: scale(.3) rotate(-90deg); }
+}
+
+@keyframes status-in {
+  from { opacity: 0; transform: translateY(10px); }
+}
+
+@keyframes status-tick {
+  from { opacity: 0; transform: scale(.4) rotate(-30deg); }
+}
+
+@keyframes phone-ring {
+  0%, 74%, 100% { transform: none; }
+  78% { transform: rotate(-16deg); }
+  82% { transform: rotate(14deg); }
+  86% { transform: rotate(-10deg); }
+  90% { transform: rotate(6deg); }
+  94% { transform: none; }
+}
+
+/* Need a consultation: the photo's slow zoom, the light crossing the card, the glint on
+   "Consultation" (the gradient slides from its orange right end to its orange left end, so the
+   white middle passes over the word) and the ring around Get a Quote */
+@keyframes consult-pan {
+  from { transform: scale(1.02); }
+  to { transform: scale(1.1) translateX(-1.5%); }
+}
+
+@keyframes consult-sheen {
+  0% { transform: translateX(-100%); }
+  35%, 100% { transform: translateX(100%); }
+}
+
+@keyframes consult-glint {
+  0% { background-position: 100% 0; }
+  22%, 100% { background-position: 0 0; }
+}
+
+@keyframes consult-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(var(--brand-orange-rgb), .55), var(--consult-btn-shadow); }
+  70%, 100% { box-shadow: 0 0 0 16px rgba(var(--brand-orange-rgb), 0), var(--consult-btn-shadow); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print */
+@media print {
+  .site-header,
+  .mobile-cta,
+  .to-top,
+  .hero__controls,
+  .mobile-nav,
+  .site-footer .footer-social {
+    display: none !important;
+  }
+
+  body {
+    padding: 0 !important;
+  }
+
+  .page-hero,
+  .hero {
+    background: none !important;
+    color: var(--charcoal) !important;
+  }
+
+  .page-hero h1,
+  .hero-slide__title {
+    color: var(--charcoal) !important;
+  }
+}

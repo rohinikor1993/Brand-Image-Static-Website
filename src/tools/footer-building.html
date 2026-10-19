@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- The office building behind the footer: the AI shop-front photo at dusk with the Brand Image logo as a lit sign.
+     Rendered to WebP by src/tools/render_artwork.js (job "footer"). -->
+<style>
+  html, body { margin: 0; background: #000; }
+  #art { position: relative; width: 1672px; height: 941px; overflow: hidden; isolation: isolate; }
+  #art > img, .layer { position: absolute; inset: 0; width: 100%; height: 100%; }
+  /* evening: deep-blue shade over the street and the facade ... */
+  .dusk { background: linear-gradient(180deg, rgba(29,85,146,.95) 0%, rgba(29,85,146,.82) 45%, rgba(29,85,146,.92) 100%); mix-blend-mode: multiply; }
+  .dim { background: rgba(43,42,40,.28); mix-blend-mode: multiply; }
+  /* ... while the lit windows and lamps keep their warm glow */
+  .glow { mix-blend-mode: screen; opacity: .75; filter: brightness(.62) contrast(3.4) saturate(1.2); }
+  .warm { background: radial-gradient(40% 55% at 62% 45%, rgba(247,164,10,.16), rgba(247,164,10,0) 70%); mix-blend-mode: screen; }
+  /* the sign: a white light box with the Brand Image logo, fixed to the blue fascia */
+  #sign {
+    position: absolute; left: 0; top: 0; width: 600px; height: 150px;
+    transform-origin: 0 0;
+    display: grid; place-items: center;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 0 34px 6px rgba(255, 244, 214, .55), 0 0 90px 24px rgba(247, 164, 10, .2);
+  }
+  #sign img { width: 86%; height: auto; }
+  #sign { filter: blur(.5px) brightness(.97); }
+  #sign-shade { position: absolute; inset: 0; border-radius: 14px; background: linear-gradient(90deg, rgba(29,85,146,.22), rgba(29,85,146,0) 55%); }
+</style>
+</head>
+<body>
+<div id="art">
+  <img src="../../site/assets/img/hero-ai/hero-ai-shop-branding-1672.png" alt="">
+  <span class="layer dusk"></span><span class="layer dim"></span>
+  <img class="glow" src="../../site/assets/img/hero-ai/hero-ai-shop-branding-1672.png" alt="">
+  <span class="layer warm"></span>
+  <div id="sign"><img src="../../site/assets/img/brand/brand-image-logo-720.webp" alt=""><span id="sign-shade"></span></div>
+</div>
+<script>
+// Projective transform that maps the sign's rectangle onto four points on the fascia (CSS matrix3d).
+function adj(m) { return [m[4]*m[8]-m[5]*m[7], m[2]*m[7]-m[1]*m[8], m[1]*m[5]-m[2]*m[4], m[5]*m[6]-m[3]*m[8], m[0]*m[8]-m[2]*m[6], m[2]*m[3]-m[0]*m[5], m[3]*m[7]-m[4]*m[6], m[1]*m[6]-m[0]*m[7], m[0]*m[4]-m[1]*m[3]]; }
+function mul(a, b) { const c = []; for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) { let s = 0; for (let k = 0; k < 3; k++) s += a[3*i+k] * b[3*k+j]; c[3*i+j] = s; } return c; }
+function mulv(m, v) { return [m[0]*v[0]+m[1]*v[1]+m[2]*v[2], m[3]*v[0]+m[4]*v[1]+m[5]*v[2], m[6]*v[0]+m[7]*v[1]+m[8]*v[2]]; }
+function basis(p) { const m = [p[0][0], p[1][0], p[2][0], p[0][1], p[1][1], p[2][1], 1, 1, 1]; const v = mulv(adj(m), [p[3][0], p[3][1], 1]); return mul(m, [v[0],0,0, 0,v[1],0, 0,0,v[2]]); }
+function project(from, to) { const t = mul(basis(to), adj(basis(from))); for (let i = 0; i < 9; i++) t[i] /= t[8]; return [t[0], t[3], 0, t[6], t[1], t[4], 0, t[7], 0, 0, 1, 0, t[2], t[5], 0, t[8]]; }
+const W = 600, H = 150;
+const SIGN = window.SIGN || [[528, 200], [880, 44], [880, 150], [528, 268]];   // TL, TR, BR, BL
+document.getElementById('sign').style.transform = `matrix3d(${project([[0,0],[W,0],[W,H],[0,H]], SIGN).join(',')})`;
+window.__ready = Promise.all([...document.images].map((i) => i.decode()));
+</script>
+</body>
+</html>

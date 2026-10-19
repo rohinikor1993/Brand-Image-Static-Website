@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- The photo behind the Gallery page header: gallery-header.png in the project folder (1672 x 941), shown at its
+     own size. Rendered to WebP by src/tools/render_artwork.js (job "gallery"). -->
+<style>
+  html, body { margin: 0; background: #000; }
+  #art { position: relative; width: 1672px; height: 941px; overflow: hidden; }
+  #art img { position: absolute; inset: 0; width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+<div id="art"><img src="../../gallery-header.png" alt=""></div>
+<script>
+window.__ready = Promise.all([...document.images].map((i) => i.decode()));
+</script>
+</body>
+</html>

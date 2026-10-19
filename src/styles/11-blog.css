@@ -1,0 +1,615 @@
+/* ==========================================================================
+   Blog
+   The listing (blog.html): the compact photo header with "The Brand Image Blog" (.page-hero--photo in
+   06-hero.css), the newest article as a compact featured card, the other articles four across. Every
+   blog card shows its topic (also on the related cards under each post); no dates or reading times. The
+   loops (a shine over "Blog", a soft light passing over the card photos in turn, the header photo
+   drifting slowly) only run while on screen and never with "reduce motion".
+   An article (src/pages/blog.js, postPage): the compact photo header over the article's own photo; the
+   article beside "In this article" and a card about its service; related articles; Need a Consultation.
+   Its type follows the service pages (10-services.css): the same body size, colour and line length.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- topic badge */
+.blog-topic {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--deep-blue);
+  font-family: var(--font-heading);
+  font-size: .6875rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.blog-card .card__media {
+  aspect-ratio: 16 / 10;
+}
+
+.blog-card__topic {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 1;
+  box-shadow: 0 8px 18px -10px rgba(var(--charcoal-rgb), .6);
+}
+
+/* ---------------------------------------------------------------- header */
+.blog-hero__hl {
+  color: var(--brand-orange);
+}
+
+/* ---------------------------------------------------------------- featured article (compact) */
+.page-blog .blog-feature .card__media {
+  aspect-ratio: 16 / 10;
+}
+
+.blog-feature__tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+
+.blog-feature__tags .blog-feature__label {
+  margin: 0;
+}
+
+.blog-feature__tags .blog-topic {
+  background: var(--soft-blue);
+}
+
+@media (min-width: 900px) {
+  .page-blog .blog-feature {
+    grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+    align-items: center;
+    padding: 18px;
+  }
+
+  .page-blog .blog-feature .card__media {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+    border-radius: 14px;
+  }
+
+  .page-blog .blog-feature__body {
+    padding: 8px clamp(18px, 3vw, 40px);
+  }
+}
+
+/* ---------------------------------------------------------------- the other articles: four across */
+@media (min-width: 640px) {
+  .blog-grid--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .blog-grid--4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+  }
+}
+
+.page-blog .blog-card .card__title {
+  font-size: 1.0625rem;
+  line-height: 1.35;
+}
+
+/* the soft light that passes over each card's photo in turn (the loop below) */
+.page-blog .blog-grid--4 .card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, .34) 50%, transparent 70%);
+  pointer-events: none;
+  transform: translateX(-120%);
+}
+
+.page-blog .blog-card .card__text {
+  -webkit-line-clamp: 2;
+  font-size: .9375rem;
+}
+
+/* ---------------------------------------------------------------- the loops */
+@media (prefers-reduced-motion: no-preference) {
+  /* a white shine crosses "Blog" every 6 seconds (after the heading has come in) */
+  .js .page-hero--blog .blog-hero__hl .w__i {
+    background: linear-gradient(100deg, var(--brand-orange) 0 40%, rgba(255, 255, 255, .95) 50%, var(--brand-orange) 60% 100%) 100% 0 / 300% 100% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation:
+      word-up 1s var(--ease-out) calc(.15s + var(--i, 0) * .06s) backwards,
+      live-shine 6s ease-in-out 1.4s infinite;
+  }
+
+  /* a soft light passes over the card photos, one card after another (2 s apart) */
+  .js .page-blog .blog-grid--4 .card__media::after {
+    animation: blog-photo-light 8s ease-in-out calc(1s + var(--k, 0) * 2s) infinite;
+  }
+}
+
+@keyframes blog-photo-light {
+  0% { transform: translateX(-120%); }
+  14%, 100% { transform: translateX(120%); }
+}
+
+/* ======================================================================== an article */
+.page-post {
+  --post-text: rgba(var(--charcoal-rgb), .8);   /* body text, as on the service pages */
+  --post-cream: #FFF9EC;                        /* the warm cream of the service pages */
+  --post-line: rgba(var(--navy-bar-rgb), .1);
+  --post-shadow: 0 1px 2px rgba(var(--navy-bar-rgb), .05), 0 16px 34px -24px rgba(var(--navy-bar-rgb), .45);
+}
+
+/* the orange line under the header that fills as the article is read (main.js) */
+.read-progress {
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  right: 0;
+  z-index: 59;
+  height: 3px;
+  pointer-events: none;
+}
+
+.read-progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand-orange), var(--deep-orange));
+  transform: scaleX(var(--read, 0));
+  transform-origin: 0 50%;
+}
+
+/* ---------------------------------------------------------------- layout */
+.post-layout {
+  display: grid;
+  gap: clamp(40px, 5vw, 56px);
+}
+
+@media (min-width: 1024px) {
+  .post-layout {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: clamp(48px, 5vw, 80px);
+    align-items: start;
+  }
+}
+
+/* ---------------------------------------------------------------- the article */
+.post-body {
+  min-width: 0;
+  max-width: 780px;
+  color: var(--post-text);
+  font-size: clamp(1rem, .97rem + .15vw, 1.0625rem);
+  line-height: 1.75;
+}
+
+.post-body p {
+  margin: 0;
+  max-width: 68ch;
+}
+
+.post-body p + p {
+  margin-top: 14px;
+}
+
+.post-body a {
+  color: var(--brand-blue);
+  font-weight: 600;
+}
+
+.post-lead {
+  padding-left: 20px;
+  border-left: 3px solid var(--brand-orange);
+}
+
+.post-lead p {
+  color: rgba(var(--charcoal-rgb), .88);
+  font-size: var(--fs-lead);
+  line-height: 1.7;
+}
+
+.post-figure {
+  overflow: hidden;
+  margin: clamp(28px, 3.4vw, 40px) 0 0;
+  border-radius: 18px;
+  aspect-ratio: 16 / 9;
+  background: var(--soft-blue);
+  box-shadow: var(--post-shadow);
+}
+
+.post-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-section {
+  margin-top: clamp(44px, 5vw, 64px);
+  scroll-margin-top: calc(var(--header-h) + 24px);
+}
+
+.post-section__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* the section's number: orange on a navy tile, like the icon tiles of the service pages */
+.post-section__num {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-top: -2px;
+  border-radius: 11px;
+  background: var(--navy-bar);
+  color: var(--brand-orange);
+  font-family: var(--font-heading);
+  font-size: .9375rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.post-section h2 {
+  color: var(--text-primary);
+  font-size: clamp(1.4rem, 1.15rem + .9vw, 1.95rem);
+  line-height: 1.2;
+  letter-spacing: -.02em;
+}
+
+/* h3 + text: cards, two side by side (an odd last one across both), or one under another */
+.post-cards {
+  display: grid;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.post-body p + .post-cards,
+.post-cards + p {
+  margin-top: 22px;
+}
+
+@media (min-width: 640px) {
+  .post-cards:not(.post-cards--stack) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .post-cards:not(.post-cards--stack) > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+.post-card {
+  position: relative;
+  padding: 22px 22px 24px;
+  border: 1px solid var(--post-line);
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: var(--post-shadow);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+}
+
+.post-card:hover {
+  border-color: rgba(var(--brand-orange-rgb), .45);
+  box-shadow: 0 2px 6px rgba(var(--navy-bar-rgb), .06), 0 26px 44px -26px rgba(var(--navy-bar-rgb), .55);
+  transform: translateY(-3px);
+}
+
+.post-card__mark {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  background: rgba(var(--brand-orange-rgb), .14);
+  color: var(--deep-orange);
+  font-family: var(--font-heading);
+  font-size: .875rem;
+  font-weight: 800;
+}
+
+.post-card__mark--dot::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--brand-orange);
+  transform: rotate(45deg);
+}
+
+.post-card h3 {
+  margin-bottom: 8px;
+  color: var(--text-primary);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.post-card p {
+  font-size: .96875rem;
+  line-height: 1.7;
+}
+
+/* lists: ticks on a soft panel */
+.post-checks {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0 0;
+  padding: 22px 24px;
+  border: 1px solid var(--post-line);
+  border-radius: 16px;
+  background: var(--soft-blue);
+  list-style: none;
+}
+
+.post-checks li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.post-checks .icon {
+  flex: none;
+  margin-top: .2em;
+  color: var(--brand-orange);
+}
+
+/* the conclusion: on the warm cream with an orange edge */
+.post-section--closing {
+  padding: clamp(24px, 3vw, 36px);
+  border-left: 4px solid var(--brand-orange);
+  border-radius: 18px;
+  background: var(--post-cream);
+}
+
+.post-faq .faq {
+  margin-top: 6px;
+}
+
+/* ---------------------------------------------------------------- beside the article */
+.post-aside {
+  display: grid;
+  gap: 20px;
+  align-content: start;
+}
+
+/* Computers: the column is as tall as the article; "In this article" stays in view under the header
+   while it is read (when the window is tall enough to show it), and the service card waits at the end
+   of the column, beside the conclusion */
+@media (min-width: 1024px) {
+  .post-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-self: stretch;
+  }
+
+  .post-aside__track {
+    flex: 1 1 auto;
+  }
+}
+
+@media (min-width: 1024px) and (min-height: 700px) {
+  .post-toc {
+    position: sticky;
+    top: calc(var(--header-h) + 28px);
+  }
+}
+
+.post-toc {
+  padding: 22px 18px 18px;
+  border: 1px solid var(--post-line);
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: var(--post-shadow);
+}
+
+.post-toc__title {
+  margin: 0 0 12px 10px;
+  color: var(--brand-blue);
+  font-family: var(--font-heading);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.post-toc ol {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.post-toc a {
+  display: flex;
+  gap: 10px;
+  padding: 8px 10px;
+  border-left: 2px solid transparent;
+  border-radius: 8px;
+  color: var(--post-text);
+  font-size: .875rem;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.post-toc a span {
+  flex: none;
+  min-width: 1.4em;
+  color: var(--brand-orange);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.post-toc a:hover {
+  background: var(--soft-blue);
+  color: var(--text-primary);
+}
+
+.post-toc a.is-active {
+  border-left-color: var(--brand-orange);
+  background: rgba(var(--brand-blue-rgb), .07);
+  color: var(--deep-blue);
+  font-weight: 600;
+}
+
+.post-share {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 16px 10px 0;
+  border-top: 1px solid var(--post-line);
+}
+
+.post-share p {
+  margin: 0 auto 0 0;
+  color: var(--text-secondary);
+  font-size: .8125rem;
+  font-weight: 600;
+}
+
+.post-share a,
+.post-share button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid var(--post-line);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--deep-blue);
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.post-share a:hover,
+.post-share button:hover,
+.post-share a:focus-visible,
+.post-share button:focus-visible {
+  border-color: var(--brand-blue);
+  background: var(--brand-blue);
+  color: var(--white);
+}
+
+/* After a copy, for a moment (main.js, .is-copied): "Link copied" in place of "Share", in the same row,
+   and a tick on the copy button */
+.post-share__ok,
+.post-share__tick {
+  display: none;
+}
+
+.post-share.is-copied .post-share__say,
+.post-share.is-copied .post-share__copy {
+  display: none;
+}
+
+.post-share.is-copied .post-share__ok {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--brand-blue);
+  animation: share-ok .25s ease;
+}
+
+.post-share.is-copied .post-share__tick {
+  display: block;
+}
+
+.post-share.is-copied button {
+  border-color: var(--brand-blue);
+  background: var(--brand-blue);
+  color: var(--white);
+}
+
+@keyframes share-ok {
+  from { opacity: 0; transform: translateX(-4px); }
+}
+
+/* the service card: navy, with Get a Quote and a link to the service */
+.post-cta {
+  position: relative;
+  overflow: hidden;
+  padding: 26px 24px;
+  border-radius: 16px;
+  background: linear-gradient(150deg, var(--navy-bar-light), var(--navy-bar) 60%);
+  box-shadow: var(--post-shadow);
+  color: var(--on-dark);
+}
+
+.post-cta .eyebrow {
+  margin: 0;
+}
+
+.post-cta__title {
+  margin: 10px 0 0;
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.post-cta__text {
+  margin: 8px 0 18px;
+  font-size: .9375rem;
+  line-height: 1.6;
+}
+
+.post-cta__link {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  color: var(--white);
+  font-size: .875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.post-cta__link:hover {
+  color: var(--brand-orange);
+}
+
+/* phones and tablets: "In this article" is left out (the sections follow one another), the service card
+   and sharing come after the article */
+@media (max-width: 1023px) {
+  .post-toc nav {
+    display: none;
+  }
+
+  .post-aside__track {
+    order: 2;
+  }
+
+  .post-toc {
+    padding: 6px 14px 14px;
+  }
+
+  .post-share {
+    margin: 0;
+    border-top: 0;
+  }
+}
+
+/* the consultation card sits on the related articles' soft background */
+.page-post .consult {
+  background: var(--soft-blue);
+}

@@ -1,0 +1,161 @@
+/* ==========================================================================
+   Gallery (gallery.html)
+   A header with "Project Gallery" and the number of photos and services over one real project photo
+   (the compact photo header, .page-hero--photo in 06-hero.css, the photo drifting slowly); the filters as rounded pills; the photos as equal
+   4:3 tiles, five across on large screens, with a soft light running across them in reading order. The
+   loops only run while on screen and never with "reduce motion".
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- header */
+/* the header is a wide strip, so the photo shows the band with most of its detail (about 35% to 72% from
+   the top, above the plain orange-lit foot of the picture); this replaces the photo's own focal point,
+   which img() sets inline */
+.page-hero--gallery .page-hero__backdrop img {
+  object-position: 50% 55% !important;
+  transform-origin: 60% 55%;
+}
+
+.gallery-hero__hl {
+  color: var(--brand-orange);
+}
+
+/* 55 project photos · 7 services */
+.gal-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0 0;
+}
+
+.gal-stats span {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .06);
+  color: rgba(255, 255, 255, .82);
+  font-size: .875rem;
+}
+
+.gal-stats strong {
+  color: var(--brand-orange);
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+/* ---------------------------------------------------------------- filters */
+.page-gallery .filter-btn {
+  border-radius: 999px;
+  padding-inline: 16px 10px;
+}
+
+.page-gallery .filter-btn:hover {
+  border-color: var(--brand-orange);
+  color: var(--deep-blue);
+}
+
+.page-gallery .filter-btn[aria-pressed="true"] {
+  border-color: var(--navy-bar);
+  background: var(--navy-bar);
+  color: var(--white);
+  box-shadow: 0 10px 22px -12px rgba(var(--navy-bar-rgb), .8);
+}
+
+.page-gallery .filter-btn__count {
+  border-radius: 999px;
+}
+
+/* phones: the filters in one row to swipe (only the row scrolls) */
+@media (max-width: 639.98px) {
+  .page-gallery .gallery-filters {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    margin-inline: calc(var(--gutter) * -1);
+    padding: 2px var(--gutter) 10px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .page-gallery .filter-btn {
+    flex: none;
+  }
+}
+
+/* ---------------------------------------------------------------- the photos: equal tiles */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .gallery-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+.gallery-grid .g-item {
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px -16px rgba(var(--charcoal-rgb), .55);
+}
+
+.gallery-grid .g-item img {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* the light that runs across the photos */
+.gallery-grid .g-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .26) 50%, transparent 65%);
+  pointer-events: none;
+  transform: translateX(-120%);
+}
+
+/* ---------------------------------------------------------------- the loops */
+@media (prefers-reduced-motion: no-preference) {
+  /* a white shine crosses "Gallery" every 6 seconds (after the heading has come in) */
+  .js .page-hero--gallery .gallery-hero__hl .w__i {
+    background: linear-gradient(100deg, var(--brand-orange) 0 40%, rgba(255, 255, 255, .95) 50%, var(--brand-orange) 60% 100%) 100% 0 / 300% 100% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation:
+      word-up 1s var(--ease-out) calc(.15s + var(--i, 0) * .06s) backwards,
+      live-shine 6s ease-in-out 1.4s infinite;
+  }
+
+  /* a soft light runs across the photos in reading order, every 10 seconds */
+  .js .gallery-grid .g-item::after {
+    animation: gal-sheen 10s ease-in-out calc(1.2s + var(--n, 0) * .08s) infinite;
+  }
+}
+
+@keyframes gal-sheen {
+  0% { transform: translateX(-120%); }
+  10%, 100% { transform: translateX(120%); }
+}

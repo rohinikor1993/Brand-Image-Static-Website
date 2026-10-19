@@ -1,0 +1,5 @@
+# SMTP credentials and contact form configuration (never commit)
+.env
+
+# Node.js dependencies
+/node_modules/

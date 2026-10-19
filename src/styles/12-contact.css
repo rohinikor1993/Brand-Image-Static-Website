@@ -1,0 +1,179 @@
+/* ==========================================================================
+   Contact page (src/pages/contact.js)
+   The compact photo header with the Brand Image office building, then one simple section: the
+   heading; the ways to reach us (call, WhatsApp, email, office) as a plain list on the left and the
+   enquiry form (S.contactForm in sections.js, base styles in 04-components.css) in a white card on
+   the right; the Google map across the width below. On phones: the list, the form, then the map.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- header (contact.js, pageHero) */
+/* The Brand Image office building is a tall picture, so on computers it stands on the right of the
+   navy header, sized to the header's height so that its lit sign and all seven services on its wall
+   (Printing to Promotional Material) are always in view, fading into the navy on its left;
+   on phones and tablets it fills the header under a slightly deeper navy veil, showing the lit
+   windows and plants (the lettering on the wall would show through the text). */
+.page-hero--contact .page-hero__backdrop img {
+  object-position: 50% 72%;
+}
+
+.page-hero--contact .page-hero__backdrop::after {
+  background: rgba(var(--navy-bar-rgb), .86);
+}
+
+@media (min-width: 900px) {
+  .page-hero--contact {
+    background: linear-gradient(100deg, var(--navy-bar-dark) 0%, var(--navy-bar) 55%, var(--navy-bar-light) 100%);
+  }
+
+  /* the picture's rows 108 to 452 (on a scale of 820 rows: just above "Printing" to just below
+     "Promotional Material", with the lit sign beside them) fill the header's height at every screen
+     size; its width follows its own proportions. The slow drift grows from the middle of the list, so
+     the list stays in view. */
+  .page-hero--contact .page-hero__backdrop img {
+    position: absolute;
+    top: calc(-108 / 344 * 100%);
+    right: 0;
+    width: auto;
+    max-width: none;
+    height: calc(820 / 344 * 100%);
+    transform-origin: 50% 34%;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 24%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 24%);
+  }
+
+  /* only a light shade at the foot, so "Promotional Material" stays as clear as the others */
+  .page-hero--contact .page-hero__backdrop::after {
+    background: linear-gradient(0deg, rgba(var(--navy-bar-rgb), .22), transparent 30%);
+  }
+}
+
+/* ---------------------------------------------------------------- the section */
+/* "Talk to our team": in the logo's colours, blue with "team" in orange (.live-hl, no underline).
+   Its live highlight (07-sections.css, "Live headings") flashes the blue words orange. */
+.contact-simple {
+  --live-base: var(--brand-blue);
+  --live-glow: var(--brand-orange);
+}
+
+.contact-simple .section-title {
+  color: var(--brand-blue);
+}
+
+.contact-simple__grid {
+  display: grid;
+  gap: clamp(28px, 3.6vw, 48px);
+  margin-bottom: clamp(28px, 3.6vw, 48px);
+}
+
+@media (min-width: 1024px) {
+  .contact-simple__grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+  }
+}
+
+/* the ways to reach us: an icon, the label and the details, a thin line between them */
+.contact-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-list__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding-block: 20px;
+  border-bottom: 1px solid var(--light-grey);
+}
+
+.contact-list__item:first-child {
+  padding-top: 4px;
+}
+
+.contact-list__item:last-child {
+  border-bottom: 0;
+}
+
+.contact-list__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(var(--brand-orange-rgb), .14);
+  color: var(--deep-orange);
+}
+
+.contact-list__icon .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.contact-list h3 {
+  margin: 0 0 4px;
+  color: var(--text-primary);
+  font-size: 1.0625rem;
+  line-height: 1.3;
+}
+
+.contact-list p,
+.contact-list address {
+  margin: 0;
+  color: var(--text-secondary);
+  font-style: normal;
+  line-height: 1.6;
+}
+
+.contact-list a {
+  color: var(--primary-blue);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .25s var(--ease);
+}
+
+.contact-list a:hover {
+  color: var(--deep-orange);
+}
+
+.contact-list__directions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: .9375rem;
+}
+
+.contact-list__directions .icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* the form in a plain white card */
+.contact-simple__form {
+  padding: clamp(22px, 3vw, 36px);
+  border: 1px solid var(--light-grey);
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: 0 24px 48px -36px rgba(var(--deep-blue-rgb), .4);
+}
+
+.contact-simple__form-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: clamp(1.25rem, 1.1rem + .5vw, 1.5rem);
+  line-height: 1.25;
+}
+
+.contact-simple__form-lead {
+  margin: 6px 0 22px;
+  color: var(--text-secondary);
+}
+
+/* the map across the width */
+.contact-simple .map-frame {
+  min-height: 0;
+  height: clamp(280px, 28vw, 380px);
+}

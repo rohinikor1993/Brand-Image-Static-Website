@@ -1,0 +1,1802 @@
+﻿/* ==========================================================================
+   Page sections
+   ========================================================================== */
+
+/* ------------------------------------------------------------ About intro */
+.about-collage {
+  position: relative;
+  max-width: 560px;
+  margin-inline: auto;
+  padding: 0 0 70px 0;
+}
+
+.about-collage__main {
+  position: relative;
+  overflow: hidden;
+  width: 88%;
+  aspect-ratio: 495 / 300;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.about-collage__main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-collage__second {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 46%;
+  aspect-ratio: 260 / 180;
+  overflow: hidden;
+  border: 6px solid var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.about-collage__second img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-collage__badge {
+  position: absolute;
+  left: 4%;
+  bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  background: var(--dark-blue);
+  color: var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+.about-collage__badge .stat__value {
+  font-size: 2.6rem;
+}
+
+.about-collage__badge .stat__label {
+  font-size: .9rem;
+  color: var(--white);
+}
+
+.about-collage .deco-dots {
+  --dot: var(--primary-blue);
+  top: -26px;
+  right: 4%;
+  z-index: -1;
+  opacity: .5;
+}
+
+.about-collage .deco-diamond {
+  --s: 150px;
+  left: -40px;
+  top: -40px;
+  z-index: -1;
+  border-color: rgba(var(--brand-orange-rgb), .55);
+}
+
+.quote-heading {
+  position: relative;
+  padding-left: 22px;
+  border-left: 4px solid var(--primary-orange);
+  font-size: clamp(1.5rem, 1.1rem + 1.5vw, 2.25rem);
+  line-height: 1.25;
+}
+
+.about-points {
+  margin-top: 26px;
+}
+
+/* ------------------------------------------------------------ About (home page)
+   A layered photo collage (the office, a printer and the years of experience on an orange card);
+   the quote and the introduction beside it. */
+.about-home {
+  overflow: hidden;
+  overflow: clip;                            /* clip (not a scroll box), so the collage can stay in view */
+  isolation: isolate;
+  /* warm cream: a very light tint of Brand Orange on white */
+  background: linear-gradient(rgba(var(--brand-orange-rgb), .08), rgba(var(--brand-orange-rgb), .08)), var(--white);
+}
+
+.about {
+  display: grid;
+  gap: clamp(36px, 5vw, 56px);
+  align-items: center;
+}
+
+/* computers: the photos and the text share the width equally, so the photos are as large as the
+   text beside them is tall */
+@media (min-width: 1024px) {
+  .about {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: clamp(36px, 4vw, 64px);
+  }
+
+  /* beside the text the photos fill their column (the 620px cap is for one column on tablets) */
+  .collage {
+    width: 100%;
+  }
+}
+
+/* Tablets in landscape and small laptops: the same two columns with slightly smaller text, so the
+   text stays about as tall as the photos beside it */
+@media (min-width: 1024px) and (max-width: 1279.98px) {
+  .about {
+    column-gap: 40px;
+  }
+
+  .about .about__lead,
+  .about .about__text {
+    font-size: .96875rem;
+    line-height: 1.65;
+  }
+
+  .about .about__text {
+    margin-top: 12px;
+  }
+
+  .about .about__services {
+    margin-top: 22px;
+  }
+}
+
+.about__content {
+  container-type: inline-size;
+}
+
+/* The collage: the office photo large at the top right, the printer photo over its lower left and
+   the "12+ Years of Experience" card over its lower right, all straight. Every piece is placed in
+   cqw (1/100 of the collage width), so the composition stays the same at every screen size and
+   fills the box exactly (90cqw tall): the space above and below matches every other section. The
+   continuous motion (the slow pan inside the photos, the floating printer photo and card) is in
+   08-motion.css. */
+.collage {
+  position: relative;
+  width: min(100%, 620px);
+  aspect-ratio: 100 / 90;
+  margin-inline: auto;
+  container-type: inline-size;
+}
+
+.collage > * {
+  position: absolute;
+}
+
+/* photos: a white frame (the border, so the photo can move inside it without showing outside),
+   rounded corners, soft shadow */
+.collage__photo {
+  margin: 0;
+  overflow: hidden;
+  border: 1.6cqw solid var(--white);
+  border-radius: 20px;
+  background: var(--white);
+  box-shadow: 0 2px 6px rgba(var(--charcoal-rgb), .08), 0 28px 50px -24px rgba(var(--charcoal-rgb), .55);
+}
+
+.collage__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.collage__photo--main {
+  left: 12cqw;
+  top: 0;
+  z-index: 1;
+  width: 88cqw;
+  height: 63cqw;
+}
+
+.collage__photo--main img {
+  object-position: 38% 50%;                 /* keep the Brand Image sign on the left wall */
+}
+
+.collage__photo--second {
+  left: 0;
+  top: 50cqw;
+  z-index: 2;
+  width: 53cqw;
+  height: 39.75cqw;
+  border-width: 2cqw;
+}
+
+/* 12+ years of experience */
+.collage__card {
+  left: 61cqw;
+  top: 55cqw;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 32cqw;
+  height: 32cqw;
+  margin: 0;
+  padding: 6%;
+  border: 5px solid var(--white);
+  border-radius: 20px;
+  background: linear-gradient(145deg, var(--brand-orange), var(--deep-orange));
+  box-shadow: 0 26px 44px -22px rgba(var(--deep-orange-rgb), .75);
+  color: var(--charcoal);
+  text-align: center;
+}
+
+.collage__card-icon {
+  width: 5.4cqw;
+  min-width: 22px;
+  height: auto;
+  margin-bottom: .35em;
+}
+
+.collage__card-value {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 1rem + 3.4vw, 3.4rem);
+  font-size: max(1.75rem, 8.6cqw);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.03em;
+}
+
+.collage__card-label {
+  margin-top: .55em;
+  font-family: var(--font-heading);
+  font-size: clamp(.625rem, .5rem + .45vw, .9rem);
+  font-size: max(.625rem, 2.35cqw);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+/* ---- the text side */
+/* sized so that "Business has only two functions â€“" stays on one line beside the photos */
+.about__title {
+  font-size: clamp(1.75rem, .95rem + 2.1vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.14;
+  letter-spacing: -.03em;
+}
+
+@media (min-width: 1024px) {
+  .about__title {
+    font-size: clamp(1.75rem, 2.6vw, 2.5rem);
+  }
+}
+
+/* the quoted words in orange, with an orange brush stroke under them (Deep Orange text: the darker
+   brand orange reads better on white) */
+.about__hl {
+  padding-bottom: .16em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' preserveAspectRatio='none'%3E%3Cpath d='M2 17C80 7 170 3 298 5 180 7 90 11 6 20Z' fill='%23F7A40A'/%3E%3C/svg%3E") 0 100% / 62% .3em no-repeat;
+  color: var(--deep-orange);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.about__body {
+  margin-top: clamp(18px, 2vw, 24px);
+}
+
+.about__lead,
+.about__text {
+  max-width: 68ch;
+  margin: 0;
+  color: var(--charcoal);
+  font-size: clamp(1rem, .96rem + .15vw, 1.0625rem);
+  line-height: 1.72;
+}
+
+.about__text {
+  margin-top: 16px;
+  color: var(--text-secondary);
+}
+
+/* Printing Â· Branding Â· Advertising Â· Events: two by two, or in one row when there is room
+   (the strip measures its own width) */
+.about__services {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 0;
+  margin: clamp(24px, 3vw, 32px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about__service {
+  --tone: var(--brand-blue-rgb);
+  --ink: var(--brand-blue);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.about__service--orange {
+  --tone: var(--brand-orange-rgb);
+  --ink: var(--deep-orange);
+}
+
+.about__service:nth-child(even) {
+  padding-left: 16px;
+  border-left: 1px solid var(--light-grey);
+}
+
+@container (min-width: 600px) {
+  .about__services {
+    display: flex;
+    gap: 0;
+  }
+
+  .about__service,
+  .about__service:nth-child(even) {
+    padding: 0 12px;
+    border-left: 1px solid rgba(var(--brand-orange-rgb), .45);
+  }
+
+  .about__service:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .about__service .about__service-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .about__service .about__service-name {
+    font-size: 1rem;
+  }
+}
+
+@container (min-width: 710px) {
+  .about__service,
+  .about__service:nth-child(even) {
+    padding: 0 clamp(12px, 1.4vw, 20px);
+  }
+
+  .about__service:first-child {
+    padding-left: 0;
+  }
+
+  .about__service .about__service-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .about__service .about__service-name {
+    font-size: 1.0625rem;
+  }
+}
+
+.about__service-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  flex: none;
+  color: var(--ink);
+}
+
+.about__service-icon::before {
+  content: "";
+  position: absolute;
+  inset: 11%;
+  border-radius: 9px;
+  background: rgba(var(--tone), .12);
+  transform: rotate(45deg);
+  transition: transform .5s var(--ease-out), background-color .3s var(--ease);
+}
+
+.about__service:hover .about__service-icon::before {
+  transform: rotate(135deg);
+  background: rgba(var(--tone), .2);
+}
+
+.about__service-icon .icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.about__service-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.about__service-num {
+  color: var(--deep-orange);
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.about__service-name {
+  color: var(--charcoal);
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Very narrow phones: smaller service icons so each name fits beside its icon */
+@container (max-width: 340px) {
+  .about__service {
+    gap: 8px;
+  }
+
+  .about__service:nth-child(even) {
+    padding-left: 12px;
+  }
+
+  .about__service-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .about__service-icon .icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .about__service-name {
+    font-size: .96875rem;
+  }
+}
+
+/* ------------------------------------------------------------ Why us (bento grid) */
+.why-head {
+  display: grid;
+  gap: 18px 56px;
+  margin-bottom: clamp(28px, 3.5vw, 44px);
+}
+
+.why-head__side .btn-row {
+  margin-top: 24px;
+}
+
+@media (min-width: 1200px) {
+  .why-head {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+    align-items: end;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1199px) {
+  .why-head .section-title {
+    max-width: 22ch;
+  }
+}
+
+.why-bento {
+  display: grid;
+  gap: 14px;
+}
+
+@media (min-width: 640px) {
+  .why-bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "photo photo"
+      "stat  blue"
+      "stat  f1"
+      "f2    f2"
+      "f3    f3";
+    gap: 16px;
+  }
+
+  .why-bento > :nth-child(1) { grid-area: photo; }
+  .why-bento > :nth-child(2) { grid-area: stat; }
+  .why-bento > :nth-child(3) { grid-area: blue; }
+  .why-bento > :nth-child(4) { grid-area: f1; }
+  .why-bento > :nth-child(5) { grid-area: f2; }
+  .why-bento > :nth-child(6) { grid-area: f3; }
+}
+
+@media (min-width: 1024px) {
+  .why-bento {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-areas:
+      "photo photo stat blue"
+      "photo photo stat f1"
+      "f2    f2    f3   f3";
+    gap: 18px;
+  }
+}
+
+.why-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 22px;
+  min-height: 210px;
+  padding: clamp(22px, 2.2vw, 30px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--off-white);
+  isolation: isolate;
+  transition: transform .5s var(--ease-out), box-shadow .5s var(--ease-out), border-color .3s var(--ease), background-color .3s var(--ease);
+}
+
+.why-tile:hover {
+  transform: translateY(-4px);
+  border-color: transparent;
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+.why-tile .icon-diamond::before {
+  transition: transform .6s var(--ease-out);
+}
+
+.why-tile:hover .icon-diamond::before {
+  transform: rotate(135deg);
+}
+
+.why-tile h3 {
+  font-size: 1.125rem;
+  line-height: 1.25;
+}
+
+.why-tile p {
+  margin-top: 8px;
+  color: var(--text-secondary);
+  font-size: .9375rem;
+  line-height: 1.6;
+}
+
+/* 12+ years: a large figure on brand orange */
+.why-tile--stat {
+  border-color: transparent;
+  background: var(--brand-orange);
+  color: var(--charcoal);
+}
+
+.why-tile--stat:hover {
+  background: var(--brand-orange);
+}
+
+.why-tile--stat h3 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1.2rem;
+}
+
+.why-tile__big {
+  font-size: clamp(3.75rem, 2.6rem + 3.2vw, 5.75rem);
+  font-weight: 800;
+  line-height: .9;
+  letter-spacing: -.045em;
+}
+
+.why-tile--stat p {
+  color: var(--charcoal);
+}
+
+.why-tile--stat .deco-mark {
+  --s: min(300px, 90%);
+  right: -22%;
+  bottom: 8%;
+  z-index: -1;
+  opacity: .3;
+}
+
+/* Deep blue tile */
+.why-tile--blue {
+  border-color: transparent;
+  background: var(--deep-blue);
+}
+
+.why-tile--blue:hover {
+  background: var(--deep-blue);
+}
+
+.why-tile--blue h3 {
+  color: var(--white);
+}
+
+.why-tile--blue p {
+  color: var(--on-dark);
+}
+
+/* Photo tile: the team, with "Experienced Professionals" over the picture */
+.why-tile--photo {
+  justify-content: flex-end;
+  min-height: 340px;
+  border-color: transparent;
+  background: var(--deep-blue);
+}
+
+.why-tile__img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.why-tile__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 58%;
+  transition: transform 1.2s var(--ease-out);
+}
+
+.why-tile--photo:hover .why-tile__img img {
+  transform: scale(1.05);
+}
+
+.why-tile--photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(0deg, rgba(var(--deep-blue-rgb), .96) 0%, rgba(var(--deep-blue-rgb), .78) 34%, rgba(var(--deep-blue-rgb), 0) 68%);
+}
+
+.why-tile--photo .why-tile__body {
+  max-width: 460px;
+}
+
+.why-tile--photo .icon-diamond {
+  margin-bottom: 14px;
+}
+
+.why-tile--photo h3 {
+  color: var(--white);
+  font-size: 1.3rem;
+}
+
+.why-tile--photo p {
+  color: var(--on-dark);
+}
+
+.why-tile--photo:hover {
+  background: var(--deep-blue);
+}
+
+@media (max-width: 639px) {
+  .why-tile:not(.why-tile--photo) {
+    min-height: 0;
+    justify-content: flex-start;
+    gap: 18px;
+  }
+
+  .why-tile--stat {
+    gap: 14px;
+  }
+}
+
+/* Wide tile: icon beside the text */
+@media (min-width: 640px) {
+  .why-tile--wide {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 24px;
+    min-height: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .why-tile--photo {
+    min-height: 460px;
+  }
+}
+
+/* ------------------------------------------------------------ Live headings */
+/* Headings with a live highlight: home "We help you to establish your Brand presence" (#services)
+   and Contact "Talk to our team" (.contact-simple). The key words are in orange with no marker
+   (.live-hl). While on screen a light passes along the words one after another every 7 seconds
+   (blue on Home; on Contact, whose heading is blue, orange: --live-base / --live-glow in
+   12-contact.css), and a white shine sweeps across the orange words as the light reaches them.
+   With reduced motion the heading stays still. */
+.live-hl {
+  color: var(--brand-orange);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js #services [data-reveal].is-visible .section-title .w__i,
+  .js .contact-simple [data-reveal].is-visible .section-title .w__i {
+    animation:
+      word-up .9s var(--ease-out) calc(.08s + var(--i, 0) * .055s) backwards,
+      live-wave 7s ease-in-out calc(1.6s + var(--i, 0) * .18s) infinite;
+  }
+
+  .js #services [data-reveal].is-visible .live-hl .w__i,
+  .js .contact-simple [data-reveal].is-visible .live-hl .w__i {
+    background: linear-gradient(100deg, var(--brand-orange) 0 40%, rgba(255, 255, 255, .95) 50%, var(--brand-orange) 60% 100%) 100% 0 / 300% 100% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation:
+      word-up .9s var(--ease-out) calc(.08s + var(--i, 0) * .055s) backwards,
+      live-shine 7s ease-in-out calc(1.6s + var(--i, 0) * .18s) infinite;
+  }
+}
+
+@keyframes live-wave {
+  0%, 16%, 100% { color: var(--live-base, var(--text-primary)); }
+  7% { color: var(--live-glow, var(--brand-blue)); }
+}
+
+@keyframes live-shine {
+  0% { background-position: 100% 0; }
+  24%, 100% { background-position: 0 0; }
+}
+
+/* ------------------------------------------------------------ Why us (editorial collage) */
+.why-visual {
+  --why-blue: #123A63;
+  --why-bright-blue: #0B5D91;
+  --why-orange: #FF9418;
+  --why-cream: #FFF9E8;
+  --why-ink: #172A3A;
+  position: relative;
+  overflow: hidden;
+  overflow: clip;
+  isolation: isolate;
+  background: var(--why-cream);
+}
+
+.why-visual__layout {
+  display: grid;
+  align-items: center;
+  gap: clamp(44px, 6vw, 84px);
+}
+
+.why-visual__content { max-width: 620px; }
+
+.why-visual__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 20px;
+  color: var(--why-bright-blue);
+  font-weight: 800;
+  letter-spacing: .035em;
+  text-transform: uppercase;
+}
+
+.why-visual__eyebrow::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  flex: 0 0 15px;
+  background: var(--why-orange);
+  transform: rotate(45deg);
+}
+
+.why-visual__title {
+  max-width: 16ch;
+  color: var(--why-blue);
+  font-size: var(--fs-h2);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.035em;
+}
+
+.why-visual__highlight { color: var(--why-orange); }
+
+.why-visual__intro {
+  max-width: 59ch;
+  margin-top: clamp(22px, 2vw, 30px);
+  color: #536371;
+  font-size: clamp(1rem, 1.15vw, 1.2rem);
+  line-height: 1.72;
+}
+
+/* Right: three project photos in a mosaic, the team photo tall on the left, the showroom and the bus
+   stand boards stacked on the right. Computers: as tall as the text beside it (at least 400px), so the
+   column is filled from top to bottom; phones and tablets: 4 : 3.4. */
+.why-visual__mosaic {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 1.2vw, 16px);
+  aspect-ratio: 4 / 3.4;
+}
+
+.why-visual__tile {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: 0 18px 40px -22px rgba(23, 42, 58, .45);
+}
+
+.why-visual__tile img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.why-visual__tile--team {
+  grid-row: 1 / span 2;
+}
+
+/* where each photo zooms towards (08-motion.css), so they drift in different directions */
+.why-visual__tile--team img { object-position: 55% 50%; transform-origin: 35% 60%; }
+.why-visual__tile--shop img { transform-origin: 70% 30%; }
+.why-visual__tile--outdoor img { transform-origin: 40% 80%; }
+
+@media (min-width: 1024px) {
+  .why-visual__layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: stretch; }
+  .why-visual__content { align-self: center; }
+  .why-visual__mosaic { height: 100%; min-height: clamp(400px, 34vw, 520px); aspect-ratio: auto; }
+}
+
+@media (max-width: 639px) {
+  .why-visual__title { max-width: none; }
+}
+
+/* ------------------------------------------------------------ How we work (Home, Services) */
+/* The four steps on one thin line: down the left on phones and tablets, in a row on computers (the
+   circles sit on the line, each step centred below its circle). The heading is centred above. White
+   on Home, so it stands apart from the cream sections around it (cream on Services, 10-services.css).
+   The loop (the diamond travelling the line, the steps lighting up in turn) is in 08-motion.css. */
+.journey {
+  --node: 56px;                 /* the circle of each step */
+  --row-gap: 36px;              /* between the steps on phones and tablets */
+  background: var(--white);
+}
+
+.journey__hl {
+  color: var(--brand-orange);
+}
+
+.journey__flow {
+  position: relative;
+}
+
+.journey__steps {
+  display: grid;
+  gap: var(--row-gap);
+  max-width: 680px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.journey__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--node) minmax(0, 1fr);
+  column-gap: 20px;
+  align-content: start;
+}
+
+.journey__step > :not(.journey__node) {
+  grid-column: 2;
+}
+
+/* phones and tablets: the line from this circle down to the next one */
+.journey__step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: var(--node);
+  bottom: calc(var(--row-gap) * -1);
+  left: calc(var(--node) / 2 - 1px);
+  width: 2px;
+  background: rgba(var(--brand-blue-rgb), .14);
+}
+
+.journey__node {
+  position: relative;
+  z-index: 2;
+  grid-row: 1 / span 2;
+  display: grid;
+  place-items: center;
+  width: var(--node);
+  height: var(--node);
+  border: 2px solid rgba(var(--brand-blue-rgb), .2);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--brand-blue);
+}
+
+.journey__node .icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* a ring that spreads out from the circle as the step lights up (08-motion.css) */
+.journey__node::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border: 2px solid var(--brand-orange);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* phones and tablets: the title level with the middle of its circle */
+.journey__step h3 {
+  margin: 15px 0 8px;
+  color: var(--charcoal);
+  font-size: clamp(1.125rem, 1rem + .35vw, 1.3125rem);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.journey__text {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: .9375rem;
+  line-height: 1.7;
+}
+
+/* the line on computers, the orange fill and the travelling diamond (only drawn on computers) */
+.journey__track {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .journey {
+    --gap: clamp(28px, 3vw, 48px);
+  }
+
+  .journey__steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--gap);
+    max-width: none;
+  }
+
+  /* each step centred in its column: circle, title and text */
+  .journey__step {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+  }
+
+  .journey__step > :not(.journey__node) {
+    grid-column: 1;
+  }
+
+  .journey__step:not(:last-child)::before {
+    display: none;
+  }
+
+  .journey__node {
+    grid-row: auto;
+    margin-bottom: 18px;
+  }
+
+  .journey__step h3 {
+    margin-top: 0;
+  }
+
+  /* from the middle of the first circle to the middle of the last (the circles sit in the middle
+     of their columns: half a column in from each end) */
+  .journey__track {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    top: calc(var(--node) / 2 - 1px);
+    left: calc((100% - 3 * var(--gap)) / 8);
+    right: calc((100% - 3 * var(--gap)) / 8);
+    height: 2px;
+    background: rgba(var(--brand-blue-rgb), .14);
+  }
+
+  .journey__fill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--brand-orange), var(--deep-orange));
+    transform-origin: left center;
+  }
+
+  /* the diamond: as wide as the line, so translateX(100%) carries it from the first circle to the
+     last; it rests hidden behind each circle */
+  .journey__runner {
+    display: none;
+    position: absolute;
+    inset: 0;
+  }
+
+  .journey__runner span {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    margin: -7px 0 0 -7px;
+    border-radius: 3px;
+    background: var(--brand-orange);
+    box-shadow: 0 0 0 3px var(--white), 0 6px 16px rgba(var(--brand-orange-rgb), .55);
+    transform: rotate(45deg);
+  }
+}
+
+/* ------------------------------------------------------------ Need a consultation (Home, Services, About) */
+/* A rounded card within the page width (S.consultBand). The photo of an adviser with a client
+   (consultation.png, made by src/tools/consultation-photo.html) fills it and fades into navy on the left,
+   where the text sits: the eyebrow, "Need a" over "Consultation?" in orange (at the site's section heading
+   size), and Get a Quote. From 768px the text sits on the photo and the card's shape and spacing follow its
+   width (cqi: % of its width); on phones the photo is on top and the text under it on navy. The space
+   around it has the background of the section above it (white on Home, cream on Services in 10-services.css). */
+.consult {
+  padding-bottom: var(--section-y);
+  background: var(--white);
+}
+
+.consult__band {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  container-type: inline-size;
+  border-radius: clamp(18px, 2vw, 28px);
+  background: var(--navy-bar);
+  box-shadow: 0 24px 48px -18px rgba(var(--navy-bar-rgb), .45);
+}
+
+.consult__media {
+  position: relative;
+  z-index: -2;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.consult__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 100% 50%;
+}
+
+/* the navy veil: under the photo on phones, on its left from 768px */
+.consult__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(var(--navy-bar-rgb), 0) 40%, rgba(var(--navy-bar-rgb), .7) 75%, var(--navy-bar));
+}
+
+/* the light that crosses the card (shown only with motion, 08-motion.css), under the text */
+.consult__shine {
+  display: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.consult__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  margin-top: -14cqi;
+  padding: 0 6cqi 8cqi;
+}
+
+.consult__eyebrow {
+  margin: 0 0 12px;
+  color: var(--on-dark);
+  font-size: clamp(.6875rem, 3.4cqi, .875rem);
+  font-weight: 500;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+
+/* the same size as every section heading on the site (--fs-h2, as .section-title) */
+.consult__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: var(--fs-h2);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -.005em;
+  text-transform: uppercase;
+}
+
+.consult__title span {
+  display: block;
+  color: var(--brand-orange);
+}
+
+.consult__btn {
+  --consult-btn-shadow: 0 0 0 0 transparent;  /* kept under the pulsing ring (08-motion.css) */
+  flex-shrink: 0;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .consult__media {
+    position: absolute;
+    inset: 0;
+    aspect-ratio: auto;
+  }
+
+  .consult__media::after {
+    background: linear-gradient(90deg, rgba(var(--navy-bar-rgb), .55), rgba(var(--navy-bar-rgb), .4) 34%, rgba(var(--navy-bar-rgb), 0) 56%);
+  }
+
+  /* as tall as a third of the width (the shape of the photo), at least 230px */
+  .consult__inner {
+    justify-content: center;
+    gap: 2.6cqi;
+    min-height: max(230px, 33.333cqi);
+    margin: 0;
+    padding: 4cqi 4.75cqi;
+  }
+
+  .consult__eyebrow {
+    margin-bottom: 14px;
+    font-size: var(--fs-small);
+  }
+
+  .consult__btn {
+    --consult-btn-shadow: 0 12px 28px rgba(var(--navy-bar-rgb), .45);
+    box-shadow: var(--consult-btn-shadow);
+  }
+}
+
+/* tablets: a smaller button, in proportion with the smaller text */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .consult__btn {
+    min-height: 48px;
+    padding: 11px 24px;
+    font-size: .9375rem;
+  }
+}
+
+/* ------------------------------------------------------------ Footer */
+/* The same navy as the header bar (--navy-bar in 01-tokens.css, the same left-to-right gradient), so
+   the top and bottom of every page match. The Brand Image office at dusk fades in on the right; no
+   other decoration. Layers: picture 0, content 2. */
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  overflow: clip;
+  isolation: isolate;
+  background: linear-gradient(90deg, var(--navy-bar) 30%, var(--navy-bar-light));
+  color: rgba(255, 255, 255, .86);
+  font-size: .96875rem;
+}
+
+.footer-top,
+.footer-bottom {
+  position: relative;
+  z-index: 2;
+}
+
+/* the office on the right: faded in from the left and toward the bottom, under a navy veil */
+.footer-art {
+  position: absolute;
+  top: clamp(40px, 6vw, 110px);
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  width: clamp(380px, 36vw, 720px);
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, rgba(0, 0, 0, .55) 26%, #000 50%), linear-gradient(180deg, transparent 0, #000 16%, #000 60%, rgba(0, 0, 0, .3) 84%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent 0, rgba(0, 0, 0, .55) 26%, #000 50%), linear-gradient(180deg, transparent 0, #000 16%, #000 60%, rgba(0, 0, 0, .3) 84%, transparent 100%);
+  mask-composite: intersect;
+}
+
+.footer-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 0%;
+  opacity: .8;
+}
+
+.footer-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(var(--navy-bar-rgb), .75) 0%, rgba(var(--navy-bar-rgb), .3) 55%, rgba(var(--navy-bar-rgb), .12) 100%);
+}
+
+/* columns: about, quick links, services, contact */
+.footer-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 40px;
+  padding-block: clamp(52px, 6.4vw, 96px) clamp(40px, 4.4vw, 64px);
+}
+
+@media (min-width: 600px) {
+  .footer-top {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 44px 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-top {
+    grid-template-columns: 1.1fr .72fr .92fr 1.36fr;
+    gap: clamp(32px, 3.6vw, 56px);
+  }
+}
+
+/* wide screens: the columns leave room on the right for the office, as in the design. On very wide
+   screens the margin beside the container is already enough, so less (or nothing) is kept free. */
+@media (min-width: 1280px) {
+  .footer-top {
+    padding-right: clamp(0px, 973px - 50vw, 220px);
+    gap: clamp(28px, 2.8vw, 48px);
+  }
+}
+
+/* laptops: the columns use the full width, so the office stays faint behind the contact details */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .footer-art img {
+    opacity: .45;
+  }
+}
+
+.footer-logo {
+  display: inline-flex;
+}
+
+.footer-logo img {
+  width: auto;
+  height: 110px;
+}
+
+.footer-about p {
+  max-width: 36ch;
+  margin-top: 22px;
+  line-height: 1.75;
+}
+
+.footer-about p strong {
+  color: inherit;
+  font-weight: 600;
+}
+
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.footer-social a {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(255, 255, 255, .32);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .06);
+  color: var(--white);
+  transition: background-color .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), transform .35s var(--ease-out);
+}
+
+.footer-social a:hover {
+  border-color: var(--brand-orange);
+  background: var(--brand-orange);
+  color: var(--navy-bar);
+  transform: translateY(-2px);
+}
+
+.footer-social .icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* the column titles, plain (no line under them); the first row of every column starts the same
+   distance below them */
+.footer-title {
+  margin-bottom: 22px;
+  color: var(--white);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -.005em;
+}
+
+.footer-links {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+}
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, .88);
+  text-decoration: none;
+  transition: color .25s var(--ease);
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  color: var(--brand-orange);
+}
+
+/* the small orange arrow in front of every Quick Link and service; it nudges right under the pointer */
+.footer-links__arrow {
+  flex: none;
+  width: 15px;
+  height: 15px;
+  color: var(--brand-orange);
+  transition: transform .25s var(--ease);
+}
+
+.footer-links a:hover .footer-links__arrow,
+.footer-links a:focus-visible .footer-links__arrow {
+  transform: translateX(3px);
+}
+
+/* the first phone number on the same line as "Home" and "Printing" in the columns beside it; each
+   orange tile centred on its text (the two phone numbers, the email address), and on the first line of
+   the address */
+.footer-contact {
+  display: grid;
+  gap: 18px;
+  list-style: none;
+}
+
+.footer-contact li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  line-height: 1.6;
+}
+
+.footer-contact li.footer-contact__place {
+  align-items: flex-start;
+}
+
+.footer-contact li > span:last-child {
+  padding-top: 1px;
+}
+
+.footer-contact address {
+  padding-top: 5px;
+  font-style: normal;
+}
+
+/* orange tiles with a navy icon */
+.footer-contact__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--brand-orange);
+  color: var(--navy-bar);
+  box-shadow: 0 8px 18px -10px rgba(var(--deep-orange-rgb), .8);
+}
+
+.footer-contact__icon .icon {
+  width: 17px;
+  height: 17px;
+}
+
+.footer-contact a {
+  color: var(--white);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color .25s var(--ease);
+}
+
+.footer-contact a:hover {
+  color: var(--brand-orange);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, .14);
+  background: rgba(var(--charcoal-rgb), .12);
+}
+
+.footer-bottom__inner p {
+  margin: 0;
+}
+
+.footer-bottom__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-block: 22px;
+  color: rgba(255, 255, 255, .82);
+  font-size: .9375rem;
+}
+
+.footer-bottom__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  letter-spacing: .02em;
+}
+
+.footer-bottom__tag .diamond {
+  background: var(--brand-orange);
+}
+
+/* Tablets: two columns; the office stays in the top right corner, fainter */
+@media (min-width: 600px) and (max-width: 1023px) {
+  .footer-art {
+    width: 52%;
+    bottom: 34%;
+  }
+
+  .footer-art img {
+    opacity: .55;
+  }
+}
+
+/* Phones: one column; the office only as a faint picture behind the company name */
+@media (max-width: 599px) {
+  .footer-art {
+    top: auto;
+    width: 100%;
+    height: 300px;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 45%), linear-gradient(90deg, transparent 0, #000 40%);
+    mask-image: linear-gradient(180deg, transparent 0, #000 45%), linear-gradient(90deg, transparent 0, #000 40%);
+  }
+
+  .footer-art img {
+    opacity: .45;
+  }
+
+  .footer-links {
+    gap: 10px;
+  }
+
+  .footer-bottom__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-block: 18px 20px;
+  }
+}
+
+/* ------------------------------------------------------------ About page */
+.mission {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(32px, 5vw, 64px);
+  border-radius: 20px;
+  background: var(--dark-blue);
+  color: var(--white);
+  isolation: isolate;
+}
+
+.mission .deco-mark {
+  --s: 340px;
+  right: -60px;
+  bottom: -90px;
+  z-index: -1;
+  opacity: .08;
+}
+
+.mission blockquote {
+  margin: 0;
+  max-width: 62ch;
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 1rem + .9vw, 1.65rem);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--white);
+}
+
+.mission blockquote p {
+  color: var(--white);
+}
+
+.pillars {
+  display: grid;
+  gap: 16px;
+  margin-top: 28px;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .pillars {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+.pillar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.pillars--stack {
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 16px;
+  margin-top: 0;
+}
+
+.pillars--stack .pillar {
+  gap: 20px;
+  padding: 26px 28px;
+  font-size: clamp(1.15rem, 1rem + .6vw, 1.5rem);
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+
+.pillars--stack .pillar:hover {
+  transform: translateX(6px);
+  box-shadow: var(--shadow-md);
+}
+
+.pillars--stack .pillar:hover .icon-diamond::before {
+  transform: rotate(135deg);
+}
+
+.pillar > span:last-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 479px) {
+  .pillars--stack .pillar {
+    padding: 20px;
+    gap: 14px;
+  }
+}
+
+.pillar__num {
+  font-size: .85rem;
+  letter-spacing: .08em;
+  color: var(--primary-blue);
+  opacity: .6;
+}
+
+.capabilities {
+  display: grid;
+  gap: 14px;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .capabilities {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .capabilities {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.capability {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 84px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+}
+
+.capability:hover {
+  transform: translateY(-3px);
+  border-color: transparent;
+  box-shadow: var(--shadow-md);
+  color: var(--text-primary);
+}
+
+.capability span {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.capability .icon--arrow {
+  width: 18px;
+  height: 18px;
+  margin-left: auto;
+  color: var(--primary-blue);
+  transition: transform .3s var(--ease);
+}
+
+.capability:hover .icon--arrow {
+  transform: translateX(4px);
+}
+
+.service-tree {
+  columns: 1;
+  column-gap: 16px;
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  .service-tree {
+    columns: 2;
+  }
+}
+
+@media (min-width: 1200px) {
+  .service-tree {
+    columns: 3;
+  }
+}
+
+.service-tree > li {
+  break-inside: avoid;
+  margin-bottom: 16px;
+}
+
+.service-tree > li:last-child {
+  margin-bottom: 0;
+}
+
+.service-tree > li {
+  padding: 22px;
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.service-tree__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.service-tree__head:hover {
+  color: var(--primary-blue);
+}
+
+.service-tree ul {
+  display: grid;
+  gap: 6px;
+  margin: 14px 0 0 20px;
+  padding-left: 22px;
+  border-left: 2px solid var(--soft-blue);
+  list-style: none;
+  font-size: .9375rem;
+  color: var(--text-primary);
+}
+
+.service-tree ul li {
+  position: relative;
+}
+
+.service-tree ul li::before {
+  content: "";
+  position: absolute;
+  left: -24px;
+  top: .8em;
+  width: 14px;
+  border-top: 2px solid var(--soft-blue);
+}
+
+/* the title of a list that is not the service's features (Digital Wall Painting: "Transform Any Space") */
+.service-tree__label {
+  margin: 12px 0 -4px 20px;
+  color: var(--deep-orange);
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.prose-block p {
+  color: var(--text-primary);
+}
+
+.closing-note {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(28px, 4vw, 48px);
+  border-radius: 20px;
+  background: var(--cream);
+  isolation: isolate;
+}
+
+.closing-note h2 {
+  font-size: clamp(1.4rem, 1.15rem + 1vw, 2rem);
+  line-height: 1.25;
+}
+
+.closing-note p {
+  max-width: 75ch;
+  margin-top: 14px;
+  color: var(--text-primary);
+}
+
+.closing-note .btn-row {
+  margin-top: 24px;
+}
+
+.closing-note .deco-mark {
+  --s: 260px;
+  right: -40px;
+  bottom: -70px;
+  z-index: -1;
+  filter: none;
+  opacity: .09;
+}
+
+/* ------------------------------------------------------------ Blog */
+.blog-grid {
+  display: grid;
+  gap: clamp(20px, 2.4vw, 28px);
+  margin-top: clamp(28px, 4vw, 44px);
+}
+
+@media (min-width: 768px) {
+  .blog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .blog-grid--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ------------------------------------------------------------ 404 */
+.not-found {
+  padding-block: clamp(56px, 8vw, 112px);
+  text-align: center;
+}
+
+.not-found__code {
+  font-family: var(--font-heading);
+  font-size: clamp(5rem, 3rem + 10vw, 9rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--primary-blue);
+}
+
+.not-found__code span {
+  color: var(--primary-orange);
+}
+
+.not-found h1 {
+  margin-top: 12px;
+  font-size: var(--fs-h2);
+}
+
+.not-found p {
+  max-width: 52ch;
+  margin: 16px auto 0;
+  color: var(--text-secondary);
+}
+
+.not-found .btn-row {
+  justify-content: center;
+  margin-top: 30px;
+}

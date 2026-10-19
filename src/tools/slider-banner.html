@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- One home-page slider banner, shown at its own size so it can be saved as WebP.
+     Rendered by src/tools/render_artwork.js (job "slider"); the banner's file is given as ?src=<file URL>. -->
+<style>
+  html, body { margin: 0; background: #fff; }
+  img { display: block; width: 100vw; height: 100vh; }
+</style>
+</head>
+<body>
+<img id="banner" alt="">
+<script>
+  const banner = document.getElementById('banner');
+  banner.src = new URLSearchParams(location.search).get('src');
+  // resolves with the banner's own size once it has loaded
+  window.__ready = banner.decode().then(() => ({ width: banner.naturalWidth, height: banner.naturalHeight }));
+</script>
+</body>
+</html>

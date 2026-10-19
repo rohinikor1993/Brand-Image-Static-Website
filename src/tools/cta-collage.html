@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- Layout of the home-page call-to-action collage. Rendered to WebP by src/tools/render_artwork.js (job "cta"). -->
+<style>
+  html, body { margin: 0; background: transparent; }
+  #art { position: relative; width: 1600px; height: 1120px; overflow: hidden; }
+  #panels {
+    position: absolute; inset: 0;
+    /* the left edge dissolves into the section's blue; a touch of fade at the top */
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, rgba(0,0,0,.25) 9%, rgba(0,0,0,.8) 22%, #000 32%), linear-gradient(180deg, rgba(0,0,0,.55) 0, #000 14%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(90deg, transparent 0, rgba(0,0,0,.25) 9%, rgba(0,0,0,.8) 22%, #000 32%), linear-gradient(180deg, rgba(0,0,0,.55) 0, #000 14%);
+    mask-composite: intersect;
+  }
+  .panel { position: absolute; inset: 0; }
+  .panel img { position: absolute; object-fit: cover; filter: saturate(1.04) contrast(1.04); }
+  /* one colour grade for every photo: cool deep-blue shadows, warm light from the top right */
+  .panel::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(70% 60% at 85% 10%, rgba(247,164,10,.16), rgba(247,164,10,0) 70%),
+      linear-gradient(200deg, rgba(29,85,146,0) 35%, rgba(29,85,146,.34) 100%);
+    mix-blend-mode: soft-light;
+  }
+  .panel .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(29,85,146,0) 55%, rgba(29,85,146,.28) 100%); }
+  .accent { position: absolute; inset: 0; }
+</style>
+</head>
+<body>
+<div id="art"><div id="panels"></div><div id="accents"></div></div>
+<script>
+const W = 1600, H = 1120, G = 14, S = 250, K = -0.11;
+const base = '../../site/assets/img/hero-ai/hero-ai-';
+// column lines: x = bottomX + S * (1 - y / H)  ->  x = a + b*y  with a = bottomX + S, b = -S / H
+const colLine = (bottomX, off = 0) => ({ a: bottomX + S + off, b: -S / H });
+// row lines: y = c + K * x
+const rowLine = (yAtCenterX, centerX, off = 0) => ({ c: yAtCenterX - K * centerX + off, k: K });
+const meet = (col, row) => { const x = (col.a + col.b * row.c) / (1 - col.b * row.k); return [x, row.c + row.k * x]; };
+const cuts = [-2000, 470, 1050, 4000];       // column boundaries (x at the bottom edge)
+const TOP = rowLine(-2000, 800), BOTTOM = rowLine(H + 2000, 800);
+// [column, top row y (at the column centre) or null, bottom row y or null, photo, focal x%, focal y%, zoom]
+const panels = [
+  [0, null, 560, 'events', 80, 28, 1.12],
+  [0, 560, null, 'transit', 64, 58, 1.0],
+  [1, null, 500, 'outdoor', 66, 40, 1.0],
+  [1, 500, null, 'printing', 72, 62, 1.0],
+  [2, null, 360, 'wall-painting', 64, 40, 1.0],
+  [2, 360, 760, 'shop-branding', 70, 50, 1.0],
+  [2, 760, null, 'promotional', 50, 58, 1.0],
+];
+const host = document.getElementById('panels');
+panels.forEach(([c, yTop, yBot, name, fx, fy, zoom]) => {
+  const cx = ((cuts[c] < 0 ? 0 : cuts[c]) + Math.min(cuts[c + 1], W)) / 2 + S / 2;
+  const left = colLine(cuts[c], cuts[c] < 0 ? 0 : G / 2);
+  const right = colLine(cuts[c + 1], cuts[c + 1] > W ? 0 : -G / 2);
+  const top = yTop == null ? TOP : rowLine(yTop, cx, G / 2);
+  const bot = yBot == null ? BOTTOM : rowLine(yBot, cx, -G / 2);
+  const pts = [meet(left, top), meet(right, top), meet(right, bot), meet(left, bot)];
+  const xs = pts.map((p) => Math.max(0, Math.min(W, p[0]))), ys = pts.map((p) => Math.max(0, Math.min(H, p[1])));
+  let bx = Math.min(...xs), by = Math.min(...ys), bw = Math.max(...xs) - bx, bh = Math.max(...ys) - by;
+  // zoom in around the focal point
+  const zw = bw * zoom, zh = bh * zoom;
+  bx -= (zw - bw) * fx / 100; by -= (zh - bh) * fy / 100; bw = zw; bh = zh;
+  const d = document.createElement('div');
+  d.className = 'panel';
+  d.style.clipPath = `polygon(${pts.map((p) => `${p[0].toFixed(1)}px ${p[1].toFixed(1)}px`).join(',')})`;
+  d.innerHTML = `<img src="${base}${name}-1672.png" style="left:${bx}px;top:${by}px;width:${bw}px;height:${bh}px;object-position:${fx}% ${fy}%"><span class="shade"></span>`;
+  host.appendChild(d);
+});
+// accents along the cuts: Brand Orange on the right cut (lower part), Brand Blue on the left cut (upper part)
+const acc = document.getElementById('accents');
+function stripe(bottomX, y0, y1, colour) {
+  const l = colLine(bottomX, -G / 2), r = colLine(bottomX, G / 2);
+  const x = (line, y) => line.a + line.b * y;
+  const el = document.createElement('div');
+  el.className = 'accent';
+  el.style.background = colour;
+  el.style.clipPath = `polygon(${x(l, y0)}px ${y0}px, ${x(r, y0)}px ${y0}px, ${x(r, y1)}px ${y1}px, ${x(l, y1)}px ${y1}px)`;
+  acc.appendChild(el);
+}
+stripe(1050, 610, 1120, '#F7A40A');
+stripe(470, 140, 470, '#2468B1');
+window.__ready = Promise.all([...document.images].map((i) => i.decode()));
+</script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+/* ==========================================================================
+   Layout: containers, sections, grids, brand decorations
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--wide {
+  max-width: calc(var(--container-wide) + var(--gutter) * 2);
+}
+
+.container--narrow {
+  max-width: calc(820px + var(--gutter) * 2);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-y);
+}
+
+.section--tight {
+  padding-block: calc(var(--section-y) * .7);
+}
+
+.section--flush-top {
+  padding-top: 0;
+}
+
+.section--page {
+  background: var(--page-bg);
+}
+
+.section--soft {
+  background: var(--soft-blue);
+}
+
+.section--cream {
+  background: var(--cream);
+}
+
+.section--blue {
+  background: var(--primary-blue);
+  color: var(--white);
+}
+
+.section--dark {
+  background: var(--dark-blue);
+  color: var(--white);
+}
+
+.section--blue h2,
+.section--blue h3,
+.section--dark h2,
+.section--dark h3,
+.on-dark h1,
+.on-dark h2,
+.on-dark h3,
+.on-dark h4 {
+  color: var(--white);
+}
+
+.stack > * + * {
+  margin-top: var(--stack, 1rem);
+}
+
+/* Grids */
+.grid {
+  display: grid;
+  gap: var(--grid-gap, clamp(20px, 2.4vw, 28px));
+}
+
+@media (min-width: 640px) {
+  .grid--2,
+  .grid--3,
+  .grid--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .grid--4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(36px, 5vw, 72px);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .split {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .split--wide-left {
+    grid-template-columns: 1.15fr .85fr;
+  }
+
+  .split--wide-right {
+    grid-template-columns: .85fr 1.15fr;
+  }
+
+  .split--top {
+    align-items: start;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Brand decorations (inspired by the diamond geometry of the logo)
+   -------------------------------------------------------------------------- */
+.deco {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Hollow diamond outline */
+.deco-diamond {
+  width: var(--s, 420px);
+  aspect-ratio: 1;
+  border: 2px solid rgba(255, 255, 255, .1);
+  transform: rotate(45deg);
+}
+
+.deco-diamond--blue {
+  border-color: rgba(var(--brand-blue-rgb), .1);
+}
+
+/* Two parallel orange bars, like the orange blocks in the logo (inline SVG) */
+.deco-bars {
+  width: var(--s, 170px);
+  height: var(--s, 170px);
+  fill: var(--primary-orange);
+}
+
+/* Dotted grid */
+.deco-dots {
+  width: var(--w, 112px);
+  height: var(--h, 80px);
+  background-image: radial-gradient(circle, var(--dot, var(--primary-orange)) 2.4px, transparent 2.9px);
+  background-size: 20px 20px;
+}
+
+/* Logo mark watermark (the official mark, used as a silhouette) */
+.deco-mark {
+  width: var(--s, 360px);
+  aspect-ratio: 1;
+  background: url("../img/brand/brand-image-mark.png") center / contain no-repeat;
+  filter: brightness(0) invert(1);
+  opacity: .06;
+}
+
+/* Small diamond used as bullet/marker */
+.diamond {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  flex: none;
+  border-radius: 1px;
+  background: var(--primary-orange);
+  transform: rotate(45deg);
+}
+
+/* Media frames */
+.frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--soft-blue);
+}
+
+.frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ratio-4x3 { aspect-ratio: 4 / 3; }
+.ratio-16x10 { aspect-ratio: 16 / 10; }
+.ratio-16x9 { aspect-ratio: 16 / 9; }
+.ratio-1x1 { aspect-ratio: 1; }
+.ratio-5x4 { aspect-ratio: 5 / 4; }

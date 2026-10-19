@@ -1,0 +1,279 @@
+{
+  "topLine": {
+    "dashLeft": 3.073,
+    "dashWidth": 2.552,
+    "dashHeight": 0.26,
+    "gap": 0.781,
+    "centre": 2.995,
+    "capHeight": 0.729,
+    "textWidth": 48.177
+  },
+  "slides": {
+    "printing": {
+      "source": "Slider images/printing.png",
+      "banner": {
+        "path": "assets/img/hero/banner-printing",
+        "widths": [
+          960,
+          1280,
+          1600,
+          1920
+        ],
+        "width": 1920,
+        "height": 820
+      },
+      "phone": {
+        "path": "assets/img/hero/banner-printing-phone",
+        "widths": [
+          480,
+          800,
+          1080
+        ],
+        "width": 1080,
+        "height": 720
+      },
+      "buttons": {
+        "explore": {
+          "left": 3.59,
+          "top": 75.0,
+          "width": 19.48,
+          "height": 10.49
+        },
+        "quote": {
+          "left": 23.85,
+          "top": 75.24,
+          "width": 13.96,
+          "height": 10.24
+        }
+      }
+    },
+    "shop-branding": {
+      "source": "Slider images/shop-branding.png",
+      "banner": {
+        "path": "assets/img/hero/banner-shop-branding",
+        "widths": [
+          960,
+          1280,
+          1600,
+          1920
+        ],
+        "width": 1920,
+        "height": 820
+      },
+      "phone": {
+        "path": "assets/img/hero/banner-shop-branding-phone",
+        "widths": [
+          480,
+          800,
+          1080
+        ],
+        "width": 1080,
+        "height": 720
+      },
+      "buttons": {
+        "explore": {
+          "left": 3.91,
+          "top": 69.15,
+          "width": 20.42,
+          "height": 10.24
+        },
+        "quote": {
+          "left": 24.74,
+          "top": 69.39,
+          "width": 13.23,
+          "height": 10.0
+        }
+      }
+    },
+    "outdoor": {
+      "source": "Slider images/outdoor.png",
+      "banner": {
+        "path": "assets/img/hero/banner-outdoor",
+        "widths": [
+          960,
+          1280,
+          1600,
+          1920
+        ],
+        "width": 1920,
+        "height": 820
+      },
+      "phone": {
+        "path": "assets/img/hero/banner-outdoor-phone",
+        "widths": [
+          480,
+          800,
+          1080
+        ],
+        "width": 1080,
+        "height": 720
+      },
+      "buttons": {
+        "explore": {
+          "left": 3.8,
+          "top": 79.15,
+          "width": 20.31,
+          "height": 9.51
+        },
+        "quote": {
+          "left": 24.84,
+          "top": 79.15,
+          "width": 11.98,
+          "height": 9.63
+        }
+      }
+    },
+    "transit": {
+      "source": "Slider images/transit.png",
+      "banner": {
+        "path": "assets/img/hero/banner-transit",
+        "widths": [
+          960,
+          1280,
+          1600,
+          1920
+        ],
+        "width": 1920,
+        "height": 820
+      },
+      "phone": {
+        "path": "assets/img/hero/banner-transit-phone",
+        "widths": [
+          480,
+          800,
+          1080
+        ],
+        "width": 1080,
+        "height": 720
+      },
+      "buttons": {
+        "explore": {
+          "left": 3.91,
+          "top": 74.02,
+          "width": 19.9,
+          "height": 10.0
+        },
+        "quote": {
+          "left": 24.48,
+          "top": 74.39,
+          "width": 12.81,
+          "height": 10.0
+        }
+      }
+    },
+    "wall-painting": {
+      "source": "Slider images/wall-painting.png",
+      "banner": {
+        "path": "assets/img/hero/banner-wall-painting",
+        "widths": [
+          960,
+          1280,
+          1600,
+          1920
+        ],
+        "width": 1920,
+        "height": 820
+      },
+      "phone": {
+        "path": "assets/img/hero/banner-wall-painting-phone",
+        "widths": [
+          480,
+          800,
+          1080
+        ],
+        "width": 1080,
+        "height": 720
+      },
+      "buttons": {
+        "explore": {
+          "left": 3.39,
+          "top": 76.71,
+          "width": 22.08,
+          "height": 9.76
+        },
+        "quote": {
+          "left": 26.09,
+          "top": 76.83,
+          "width": 11.56,
+          "height": 9.76
+        }
+      }
+    },
+    "events": {
+      "source": "Slider images/events.png",
+      "banner": {
+        "path": "assets/img/hero/banner-events",
+        "widths": [
+          960,
+          1280,
+          1600,
+          1920
+        ],
+        "width": 1920,
+        "height": 820
+      },
+      "phone": {
+        "path": "assets/img/hero/banner-events-phone",
+        "widths": [
+          480,
+          800,
+          1080
+        ],
+        "width": 1080,
+        "height": 720
+      },
+      "buttons": {
+        "explore": {
+          "left": 4.01,
+          "top": 81.1,
+          "width": 17.29,
+          "height": 9.02
+        },
+        "quote": {
+          "left": 21.88,
+          "top": 81.1,
+          "width": 13.28,
+          "height": 9.15
+        }
+      }
+    },
+    "promotional": {
+      "source": "Slider images/promotional.png",
+      "banner": {
+        "path": "assets/img/hero/banner-promotional",
+        "widths": [
+          960,
+          1280,
+          1600,
+          1920
+        ],
+        "width": 1920,
+        "height": 820
+      },
+      "phone": {
+        "path": "assets/img/hero/banner-promotional-phone",
+        "widths": [
+          480,
+          800,
+          1080
+        ],
+        "width": 1080,
+        "height": 720
+      },
+      "buttons": {
+        "explore": {
+          "left": 3.59,
+          "top": 76.71,
+          "width": 21.77,
+          "height": 9.76
+        },
+        "quote": {
+          "left": 25.89,
+          "top": 76.59,
+          "width": 11.88,
+          "height": 9.76
+        }
+      }
+    }
+  }
+}

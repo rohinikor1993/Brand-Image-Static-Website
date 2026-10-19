@@ -1,0 +1,860 @@
+﻿{
+  "print-machine": {
+    "path": "assets/img/work/printing-large-format-printer",
+    "widths": [
+      480,
+      800,
+      1040
+    ],
+    "width": 1040,
+    "height": 780,
+    "alt": "Large-format printer producing flex prints",
+    "focal": "50% 50%",
+    "category": "printing"
+  },
+  "print-smart-posters": {
+    "path": "assets/img/work/printing-smart-superstore-posters",
+    "widths": [
+      480,
+      800,
+      1124
+    ],
+    "width": 1124,
+    "height": 833,
+    "alt": "Large printed posters on the wall of a SMART superstore",
+    "focal": "50% 40%",
+    "category": "printing"
+  },
+  "print-offer-display": {
+    "path": "assets/img/work/printing-in-store-offer-display",
+    "widths": [
+      480,
+      800,
+      1280
+    ],
+    "width": 1280,
+    "height": 960,
+    "alt": "Printed 'Buy 1 Get 1 Free' promotional display inside a supermarket",
+    "focal": "50% 30%",
+    "category": "printing"
+  },
+  "print-store-posters": {
+    "path": "assets/img/work/printing-retail-wall-posters",
+    "widths": [
+      480,
+      800,
+      1280
+    ],
+    "width": 1280,
+    "height": 960,
+    "alt": "Printed promotional posters along the walls of a retail store",
+    "focal": "50% 45%",
+    "category": "printing"
+  },
+  "print-instore-branding": {
+    "path": "assets/img/work/printing-in-store-price-branding",
+    "widths": [
+      480,
+      800,
+      1280
+    ],
+    "width": 1280,
+    "height": 960,
+    "alt": "Printed in-store price promotion graphics at a SMART superstore",
+    "focal": "40% 40%",
+    "category": "printing"
+  },
+  "print-mahindra-backdrop": {
+    "path": "assets/img/work/printing-mahindra-backdrop-flex",
+    "widths": [
+      480,
+      800,
+      1040
+    ],
+    "width": 1040,
+    "height": 780,
+    "alt": "Mahindra backdrop flex coming off a large-format printer",
+    "focal": "50% 50%",
+    "category": "printing"
+  },
+  "shop-arch-vivo": {
+    "path": "assets/img/work/shop-branding-vivo-arch-gate",
+    "widths": [
+      480,
+      800,
+      1280
+    ],
+    "width": 1280,
+    "height": 960,
+    "alt": "vivo branded arch gate at a store entrance inside a mall",
+    "focal": "50% 35%",
+    "category": "shop-branding"
+  },
+  "shop-hero-showroom": {
+    "path": "assets/img/work/shop-branding-hero-showroom",
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "width": 1600,
+    "height": 1200,
+    "alt": "Hero two-wheeler showroom entrance with branded displays",
+    "focal": "50% 40%",
+    "category": "shop-branding"
+  },
+  "shop-counter-venus": {
+    "path": "assets/img/work/shop-branding-venus-counter",
+    "widths": [
+      480,
+      800,
+      960
+    ],
+    "width": 960,
+    "height": 720,
+    "alt": "Venus branded promotional counter",
+    "focal": "50% 60%",
+    "category": "shop-branding"
+  },
+  "shop-anchor-board": {
+    "path": "assets/img/work/shop-branding-anchor-panasonic-board",
+    "widths": [
+      480,
+      800,
+      1152
+    ],
+    "width": 1152,
+    "height": 864,
+    "alt": "Anchor by Panasonic shop board above an electrical store",
+    "focal": "50% 30%",
+    "category": "shop-branding"
+  },
+  "shop-bosch-board": {
+    "path": "assets/img/work/shop-branding-bosch-store-board",
+    "widths": [
+      480,
+      800,
+      1152
+    ],
+    "width": 1152,
+    "height": 864,
+    "alt": "Bosch shop board above an appliance store",
+    "focal": "50% 40%",
+    "category": "shop-branding"
+  },
+  "shop-medical-board": {
+    "path": "assets/img/work/shop-branding-medical-store-board",
+    "widths": [
+      480,
+      850
+    ],
+    "width": 850,
+    "height": 420,
+    "alt": "Shop board above a medical and general store in Nashik",
+    "focal": "50% 45%",
+    "category": "shop-branding"
+  },
+  "outdoor-bus-stand": {
+    "path": "assets/img/work/outdoor-bus-stand-display-boards",
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "width": 6000,
+    "height": 4000,
+    "alt": "Row of advertising display boards along a city bus stand",
+    "focal": "50% 45%",
+    "category": "outdoor"
+  },
+  "outdoor-hoarding-nashik": {
+    "path": "assets/img/work/outdoor-hoarding-nashik",
+    "widths": [
+      800
+    ],
+    "width": 124,
+    "height": 135,
+    "alt": "Hoarding billboard on a Nashik road",
+    "focal": "50% 50%",
+    "category": "outdoor"
+  },
+  "outdoor-hoarding-gujral-arcade": {
+    "path": "assets/img/work/outdoor-hoarding-gujral-arcade",
+    "widths": [800],
+    "width": 1444,
+    "height": 915,
+    "alt": "Gujral Arcade hoarding billboard on a Nashik road",
+    "focal": "50% 50%",
+    "category": "outdoor"
+  },
+  "outdoor-pole-kiosk-display": {
+    "path": "assets/img/work/outdoor-pole-kiosk-display",
+    "widths": [800],
+    "width": 1487,
+    "height": 838,
+    "alt": "Vivo advertising display boards at a bus stand",
+    "focal": "50% 50%",
+    "category": "outdoor"
+  },
+  "outdoor-bus-shelter": {
+    "path": "assets/img/work/outdoor-bus-shelter",
+    "widths": [800],
+    "width": 985,
+    "height": 554,
+    "alt": "Bus shelter with Vaseline advertising displays",
+    "focal": "50% 50%",
+    "category": "outdoor"
+  },
+  "outdoor-wall-wrap-hero": {
+    "path": "assets/img/work/outdoor-wall-wrap-hero",
+    "widths": [800],
+    "width": 2000,
+    "height": 1500,
+    "alt": "Hero motorcycle wall wrap advertising on a building",
+    "focal": "50% 50%",
+    "category": "outdoor"
+  },
+  "outdoor-mobile-van-hcg": {
+    "path": "assets/img/work/outdoor-mobile-van-hcg",
+    "widths": [800],
+    "width": 985,
+    "height": 554,
+    "alt": "HCG Manav mobile hoarding van",
+    "focal": "50% 50%",
+    "category": "outdoor"
+  },
+  "outdoor-mall-backlit": {
+    "path": "assets/img/work/outdoor-mall-backlit-displays",
+    "widths": [
+      480,
+      800,
+      1280
+    ],
+    "width": 1280,
+    "height": 960,
+    "alt": "Illuminated vivo displays at a mall entrance at night",
+    "focal": "50% 40%",
+    "category": "outdoor"
+  },
+  "outdoor-wall-wrap": {
+    "path": "assets/img/work/outdoor-wall-wrap",
+    "widths": [
+      480,
+      800,
+      1000
+    ],
+    "width": 1000,
+    "height": 499,
+    "alt": "Painted tractor advertisement on the wall of a village building",
+    "focal": "70% 50%",
+    "category": "outdoor"
+  },
+  "outdoor-bus-stand-boards": {
+    "path": "assets/img/work/outdoor-bus-stand-hanging-boards",
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "width": 4160,
+    "height": 3120,
+    "alt": "vivo display boards hanging above a busy bus stand platform",
+    "focal": "50% 35%",
+    "category": "outdoor"
+  },
+  "outdoor-highway-hoarding": {
+    "path": "assets/img/work/outdoor-highway-hoarding",
+    "widths": [
+      480,
+      800,
+      1152
+    ],
+    "width": 1152,
+    "height": 570,
+    "alt": "Hero Destini 125 hoarding beside a highway",
+    "focal": "50% 60%",
+    "category": "outdoor"
+  },
+  "transit-mahindra-van": {
+    "path": "assets/img/work/transit-mahindra-mobile-van",
+    "widths": [
+      480,
+      800,
+      1280
+    ],
+    "width": 1280,
+    "height": 720,
+    "alt": "Mahindra EPC mobile van with advertising panels",
+    "focal": "50% 50%",
+    "category": "transit"
+  },
+  "transit-led-van": {
+    "path": "assets/img/work/transit-led-screen-van",
+    "widths": [
+      480,
+      800,
+      1280
+    ],
+    "width": 1280,
+    "height": 959,
+    "alt": "LED screen van used for mobile advertising",
+    "focal": "50% 45%",
+    "category": "transit"
+  },
+  "transit-celekt-vans": {
+    "path": "assets/img/work/transit-celekt-branded-vans",
+    "widths": [
+      480,
+      800,
+      1032
+    ],
+    "width": 1032,
+    "height": 774,
+    "alt": "Convoy of Celekt branded mobile vans",
+    "focal": "50% 50%",
+    "category": "transit"
+  },
+  "transit-tricycles-lineup": {
+    "path": "assets/img/work/transit-branded-tricycles-lineup",
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "width": 5152,
+    "height": 3864,
+    "alt": "Branded tricycles lined up for a Celekt campaign",
+    "focal": "50% 45%",
+    "category": "transit"
+  },
+  "transit-auto": {
+    "path": "assets/img/work/transit-auto-rickshaw-branding",
+    "widths": [
+      480,
+      800,
+      1280
+    ],
+    "width": 1280,
+    "height": 960,
+    "alt": "Auto rickshaw with a bank advertising panel on the back",
+    "focal": "50% 50%",
+    "category": "transit"
+  },
+  "transit-tricycles-road": {
+    "path": "assets/img/work/transit-tricycles-on-road",
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "width": 5152,
+    "height": 3864,
+    "alt": "Branded advertising tricycles moving along a city road",
+    "focal": "50% 50%",
+    "category": "transit"
+  },
+  "wall-work-1": {
+    "path": "assets/img/work/wall-work-1",
+    "widths": [480, 800],
+    "width": 800,
+    "height": 600,
+    "alt": "Digital wall painting advertising by Brand Image",
+    "focal": "50% 50%"
+  },
+  "wall-work-2": {
+    "path": "assets/img/work/wall-work-2",
+    "widths": [480, 800, 1040],
+    "width": 1040,
+    "height": 780,
+    "alt": "Wall painting advertisement by Brand Image Nashik",
+    "focal": "50% 50%"
+  },
+  "wall-work-3": {
+    "path": "assets/img/work/wall-work-3",
+    "widths": [480, 800, 1040],
+    "width": 1040,
+    "height": 780,
+    "alt": "Brand wall painting work by Brand Image",
+    "focal": "50% 50%"
+  },
+  "wall-work-4": {
+    "path": "assets/img/work/wall-work-4",
+    "widths": [480, 800, 1040],
+    "width": 1040,
+    "height": 780,
+    "alt": "Outdoor wall painting advertising in Nashik",
+    "focal": "50% 50%"
+  },
+  "wall-work-5": {
+    "path": "assets/img/work/wall-work-5",
+    "widths": [480, 800, 1040],
+    "width": 1040,
+    "height": 780,
+    "alt": "Wall painting campaign by Brand Image Media",
+    "focal": "50% 50%"
+  },
+  "event-stage": {
+    "path": "assets/img/work/event-stage-performance",
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "width": 3680,
+    "height": 2456,
+    "alt": "Dance performance on stage at a vivo V5 launch event",
+    "focal": "50% 40%",
+    "category": "events"
+  },
+  "event-bosch-stall": {
+    "path": "assets/img/work/event-bosch-exhibition-stall",
+    "widths": [
+      480,
+      800,
+      1280
+    ],
+    "width": 1280,
+    "height": 959,
+    "alt": "Bosch exhibition stall inside a shopping mall",
+    "focal": "50% 50%",
+    "category": "events"
+  },
+  "event-hall": {
+    "path": "assets/img/work/event-corporate-hall",
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "width": 6240,
+    "height": 4160,
+    "alt": "Audience seated at a corporate event in a banquet hall",
+    "focal": "50% 50%",
+    "category": "events"
+  },
+  "event-launch-stage": {
+    "path": "assets/img/work/event-product-launch-stage",
+    "widths": [
+      480,
+      800,
+      1280
+    ],
+    "width": 1280,
+    "height": 853,
+    "alt": "Stage and LED screen set up for a smartphone launch event",
+    "focal": "50% 55%",
+    "category": "events"
+  },
+  "event-photo-booth": {
+    "path": "assets/img/work/event-celekt-photo-booth",
+    "widths": [
+      480,
+      800,
+      1280
+    ],
+    "width": 1280,
+    "height": 959,
+    "alt": "Celekt branded photo booth with a balloon arch at a store event",
+    "focal": "45% 40%",
+    "category": "events"
+  },
+  "event-gulf-team": {
+    "path": "assets/img/work/event-gulf-promotion-team",
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "width": 4160,
+    "height": 3120,
+    "alt": "Promotion team standing beside a Gulf branded car",
+    "focal": "50% 55%",
+    "category": "events"
+  },
+  "promo-standees": {
+    "path": "assets/img/work/promotional-roll-up-standees",
+    "widths": [
+      480,
+      800,
+      1040
+    ],
+    "width": 1040,
+    "height": 780,
+    "alt": "Roll-up standees for Hero two-wheelers",
+    "focal": "50% 50%",
+    "category": "promotional"
+  },
+  "promo-danglers": {
+    "path": "assets/img/work/promotional-vivo-diwali-danglers",
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "width": 1983,
+    "height": 1518,
+    "alt": "vivo Diwali dangler designs",
+    "focal": "50% 50%",
+    "category": "promotional"
+  },
+  "promo-canopy": {
+    "path": "assets/img/work/promotional-mahindra-canopy",
+    "widths": [
+      800
+    ],
+    "width": 144,
+    "height": 198,
+    "alt": "Mahindra EPC branded canopy booth",
+    "focal": "50% 50%",
+    "category": "promotional"
+  },
+  "promo-umbrella": {
+    "path": "assets/img/work/promotional-mahindra-umbrella",
+    "widths": [
+      480,
+      800,
+      1152
+    ],
+    "width": 1152,
+    "height": 528,
+    "alt": "Mahindra branded umbrella",
+    "focal": "55% 50%",
+    "category": "promotional"
+  },
+  "promo-vivo-bag": {
+    "path": "assets/img/work/promotional-vivo-carry-bag",
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "width": 4160,
+    "height": 3120,
+    "alt": "vivo branded paper carry bag",
+    "focal": "50% 55%",
+    "category": "promotional"
+  },
+  "promo-cutout": {
+    "path": "assets/img/work/promotional-vivo-cutout-standee",
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "width": 4160,
+    "height": 3120,
+    "alt": "vivo cutout standee for a smartphone campaign",
+    "focal": "45% 40%",
+    "category": "promotional"
+  },
+  "office-reception": {
+    "path": "assets/img/about/brand-image-office-reception",
+    "widths": [
+      495
+    ],
+    "width": 495,
+    "height": 300,
+    "alt": "Brand Image office reception",
+    "focal": "50% 50%",
+    "category": null
+  },
+  "office-wall": {
+    "path": "assets/img/about/brand-image-office-interior",
+    "widths": [
+      261
+    ],
+    "width": 261,
+    "height": 180,
+    "alt": "Brand Image office interior",
+    "focal": "50% 50%",
+    "category": null
+  },
+  "office-printer": {
+    "path": "assets/img/about/brand-image-office-printer",
+    "widths": [
+      260
+    ],
+    "width": 260,
+    "height": 180,
+    "alt": "Large-format printer at the Brand Image office",
+    "focal": "50% 50%",
+    "category": null
+  },
+  "person-sagar": {
+    "path": "assets/img/people/sagar-thakare",
+    "widths": [
+      160,
+      320
+    ],
+    "width": 514,
+    "height": 514,
+    "alt": "Sagar Thakare",
+    "focal": "50% 35%",
+    "category": null
+  },
+  "person-sureka": {
+    "path": "assets/img/people/sureka-sarode",
+    "widths": [
+      160,
+      320
+    ],
+    "width": 420,
+    "height": 420,
+    "alt": "Sureka Sarode",
+    "focal": "50% 22%",
+    "category": null
+  },
+  "hero-ai-printing": {
+    "path": "assets/img/hero-ai/hero-ai-printing",
+    "widths": [
+      800,
+      1200,
+      1672
+    ],
+    "width": 1672,
+    "height": 941,
+    "alt": "Premium large-format printer producing a blue, orange and ivory advertising banner",
+    "focal": "50% 50%",
+    "category": "printing"
+  },
+  "hero-ai-shop-branding": {
+    "path": "assets/img/hero-ai/hero-ai-shop-branding",
+    "widths": [
+      800,
+      1200,
+      1672
+    ],
+    "width": 1672,
+    "height": 941,
+    "alt": "Modern retail storefront with coordinated professional branding",
+    "focal": "50% 50%",
+    "category": "shop-branding"
+  },
+  "hero-ai-outdoor": {
+    "path": "assets/img/hero-ai/hero-ai-outdoor",
+    "widths": [
+      800,
+      1200,
+      1672
+    ],
+    "width": 1672,
+    "height": 941,
+    "alt": "Professionally installed outdoor billboard in a modern city",
+    "focal": "50% 50%",
+    "category": "outdoor"
+  },
+  "hero-ai-transit": {
+    "path": "assets/img/hero-ai/hero-ai-transit",
+    "widths": [
+      800,
+      1200,
+      1672
+    ],
+    "width": 1672,
+    "height": 941,
+    "alt": "Blue and orange branded commercial vehicle in an urban setting",
+    "focal": "50% 50%",
+    "category": "transit"
+  },
+  "hero-ai-wall-painting": {
+    "path": "assets/img/hero-ai/hero-ai-wall-painting",
+    "widths": [
+      800,
+      1200,
+      1672
+    ],
+    "width": 1672,
+    "height": 941,
+    "alt": "Contemporary blue and orange branded mural on a commercial building",
+    "focal": "50% 50%"
+  },
+  "hero-ai-events": {
+    "path": "assets/img/hero-ai/hero-ai-events",
+    "widths": [
+      800,
+      1200,
+      1672
+    ],
+    "width": 1672,
+    "height": 941,
+    "alt": "Navy and orange corporate brand activation event stage",
+    "focal": "50% 50%",
+    "category": "events"
+  },
+  "hero-ai-promotional": {
+    "path": "assets/img/hero-ai/hero-ai-promotional",
+    "widths": [
+      800,
+      1200,
+      1672
+    ],
+    "width": 1672,
+    "height": 941,
+    "alt": "Coordinated blue, orange and ivory branded promotional products",
+    "focal": "50% 50%",
+    "category": "promotional"
+  },
+  "slider-art-printing": {
+    "path": "assets/img/slider-artwork/printing",
+    "widths": [
+      800,
+      1280,
+      1672
+    ],
+    "width": 1672,
+    "height": 729,
+    "alt": "Brand Image printing services",
+    "focal": "50% 50%",
+    "category": "printing"
+  },
+  "slider-art-shop-branding": {
+    "path": "assets/img/slider-artwork/shop-branding",
+    "widths": [
+      800,
+      1280,
+      1672
+    ],
+    "width": 1672,
+    "height": 729,
+    "alt": "Brand Image shop branding services",
+    "focal": "50% 50%",
+    "category": "shop-branding"
+  },
+  "slider-art-outdoor": {
+    "path": "assets/img/slider-artwork/outdoor",
+    "widths": [
+      800,
+      1280,
+      1672
+    ],
+    "width": 1672,
+    "height": 729,
+    "alt": "Brand Image outdoor advertising services",
+    "focal": "50% 50%",
+    "category": "outdoor"
+  },
+  "slider-art-transit": {
+    "path": "assets/img/slider-artwork/transit",
+    "widths": [
+      800,
+      1280,
+      1672
+    ],
+    "width": 1672,
+    "height": 729,
+    "alt": "Brand Image transit media advertising",
+    "focal": "50% 50%",
+    "category": "transit"
+  },
+  "slider-art-wall-painting": {
+    "path": "assets/img/slider-artwork/wall-painting",
+    "widths": [
+      800,
+      1280,
+      1672
+    ],
+    "width": 1672,
+    "height": 729,
+    "alt": "Brand Image digital wall painting services",
+    "focal": "50% 50%"
+  },
+  "slider-art-events": {
+    "path": "assets/img/slider-artwork/events",
+    "widths": [
+      800,
+      1280,
+      1672
+    ],
+    "width": 1672,
+    "height": 729,
+    "alt": "Brand Image event and promotional services",
+    "focal": "50% 50%",
+    "category": "events"
+  },
+  "slider-art-promotional": {
+    "path": "assets/img/slider-artwork/promotional",
+    "widths": [
+      800,
+      1280,
+      1672
+    ],
+    "width": 1672,
+    "height": 729,
+    "alt": "Brand Image promotional material services",
+    "focal": "50% 50%",
+    "category": "promotional"
+  },
+  "cta-collage": {
+    "path": "assets/img/cta/brand-image-services-collage",
+    "widths": [
+      960,
+      1600
+    ],
+    "width": 1600,
+    "height": 1120,
+    "alt": "Brand Image services: an event stage, a city billboard, a painted wall mural, a branded shop front, a branded city bus, a large-format printer and promotional products",
+    "focal": "50% 50%",
+    "category": null
+  },
+  "consult-photo": {
+    "path": "assets/img/cta/brand-image-consultation",
+    "widths": [
+      960,
+      1440,
+      2172
+    ],
+    "width": 2172,
+    "height": 724,
+    "alt": "A Brand Image adviser talking a client through print and billboard designs at the office",
+    "focal": "50% 50%",
+    "category": null
+  },
+  "footer-office": {
+    "path": "assets/img/footer/brand-image-office",
+    "widths": [
+      600,
+      1000
+    ],
+    "width": 1000,
+    "height": 941,
+    "alt": "An office front at dusk with a lit Brand Image sign",
+    "focal": "50% 50%",
+    "category": null
+  },
+  "contact-office": {
+    "path": "assets/img/contact/brand-image-office-building",
+    "widths": [
+      452,
+      904
+    ],
+    "width": 904,
+    "height": 1641,
+    "alt": "The Brand Image office building at dusk, its lit sign and the seven services on the wall",
+    "focal": "50% 50%",
+    "category": null
+  },
+  "gallery-header": {
+    "path": "assets/img/gallery/gallery-header",
+    "widths": [
+      800,
+      1200,
+      1672
+    ],
+    "width": 1672,
+    "height": 941,
+    "alt": "Brand Image project work",
+    "focal": "50% 50%",
+    "category": null
+  }
+}

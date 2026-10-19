@@ -1,0 +1,1676 @@
+/* ==========================================================================
+   Services (service.html and the seven service pages: src/pages/services.js,
+   src/pages/service-detail.js)
+   One design system for the whole Services section: deep navy as the
+   foundation, warm cream for light surfaces, Brand Blue for links and
+   detail, orange as the accent (buttons, icons, highlights). Each service
+   page opens with its full-screen banner from the home page slider
+   (.svc-banner, 06-hero.css); everything below it is the same set of parts.
+   Motion is quiet: sections rise in, photos are uncovered from the top,
+   cards lift under the pointer, numbers count up. No floating decorations:
+   the photos and the type carry the design. Nothing moves with "reduce motion".
+   ========================================================================== */
+
+/* The site's brand colours (01-tokens.css): the navy of the header and footer for dark tiles, cards and
+   bands, Brand Blue for highlights and links, Dark Charcoal for headings and text (as on every other
+   page); the warm orange and creams of the service pages. */
+.page-service,
+.page-services {
+  --sv-navy: var(--navy-bar);                /* #062F55 */
+  --sv-navy-2: var(--navy-bar-light);        /* #063B67 */
+  --sv-blue: var(--brand-blue);              /* #2468B1 */
+  --sv-orange: #FF7A1A;
+  --sv-orange-2: #FF8A24;
+  --sv-cream: #FFF4D8;
+  --sv-cream-2: #FFF0D0;
+  --sv-cream-soft: #FFF9EC;                  /* Warm Cream, lightened: large light bands */
+  --sv-ink: var(--charcoal);                 /* #2B2A28 */
+  --sv-muted: rgba(var(--charcoal-rgb), .72);
+  --sv-navy-rgb: var(--navy-bar-rgb);
+  --sv-blue-rgb: var(--brand-blue-rgb);
+  --sv-orange-rgb: 255, 122, 26;
+  --sv-text: rgba(var(--charcoal-rgb), .8);  /* body text on white and cream */
+  --sv-r-lg: 24px;
+  --sv-r: 18px;
+  --sv-r-sm: 12px;
+  --sv-shadow: 0 1px 2px rgba(var(--sv-navy-rgb), .05), 0 16px 34px -24px rgba(var(--sv-navy-rgb), .45);
+  --sv-shadow-hover: 0 2px 6px rgba(var(--sv-navy-rgb), .06), 0 26px 44px -26px rgba(var(--sv-navy-rgb), .55);
+  --sv-shadow-lg: 0 34px 64px -32px rgba(var(--sv-navy-rgb), .6);
+  --sv-line: rgba(var(--sv-navy-rgb), .1);
+  --sv-pad: var(--section-y);                /* the same space between sections as on every other page */
+}
+
+.page-service main,
+.page-services main {
+  color: var(--sv-ink);
+}
+
+/* ---------------------------------------------------------------- Shared parts */
+.svc-container {
+  width: 100%;
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.svc-section {
+  position: relative;
+  padding-block: var(--sv-pad);
+  background: var(--white);
+}
+
+.svc-section--cream {
+  background: var(--sv-cream-soft);
+}
+
+.svc-section--navy {
+  background:
+    radial-gradient(ellipse 70% 80% at 85% 10%, rgba(var(--sv-blue-rgb), .32), transparent 60%),
+    linear-gradient(160deg, var(--sv-navy) 30%, var(--sv-navy-2));
+  color: var(--white);
+}
+
+/* Eyebrows, links, buttons: the shared components in the services colours */
+:is(.page-service, .page-services) main .eyebrow {
+  color: var(--sv-blue);
+}
+
+:is(.page-service, .page-services) main .eyebrow::before {
+  background: var(--sv-orange-2);
+}
+
+:is(.page-service, .page-services) main :is(.on-dark, .svc-section--navy) .eyebrow {
+  color: var(--sv-cream);
+}
+
+/* The header: the service's banner from the home page slider, full screen (06-hero.css), with its words
+   exactly as on Home (white label, Brand Orange diamond) */
+.page-service main .svc-banner .slide-copy__tag {
+  color: var(--white);
+}
+
+.page-service main .svc-banner .slide-copy__tag::before {
+  background: var(--brand-orange);
+}
+
+/* the photo stays inside its frame while it zooms (on phones the words are under it) */
+.svc-banner .hero-slide__stage {
+  overflow: hidden;
+}
+
+/* Scroll cue: a mouse outline at the bottom middle of the banner, only where the banner fills the
+   screen (06-hero.css); it leads to the overview */
+.svc-banner__scroll {
+  display: none;
+}
+
+@media (min-width: 900px) and (min-aspect-ratio: 1/1) {
+  .svc-banner__scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 26px;
+    z-index: 5;
+    display: block;
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba(255, 255, 255, .7);
+    border-radius: 14px;
+    transform: translateX(-50%);
+    transition: border-color .2s ease;
+  }
+
+  .svc-banner__scroll::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 4px;
+    height: 8px;
+    margin-left: -2px;
+    border-radius: 2px;
+    background: var(--brand-orange);
+  }
+
+  .svc-banner__scroll:hover,
+  .svc-banner__scroll:focus-visible {
+    border-color: var(--white);
+  }
+}
+
+/* The banner's loops, without end while it is on screen ([data-live], main.js) and never with
+   "reduce motion": the photo zooms in and drifts slowly, and back (20 s each way); every 8 s a soft
+   light crosses the photo and, a few seconds later, a white shine crosses the orange words of the
+   headline (as on the Gallery header); the dot in the scroll cue keeps rolling down. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .svc-banner .hero-slide__artwork {
+    animation: hero-drift 20s ease-in-out infinite alternate;
+  }
+
+  /* under the navy shade on computers (both are z-index 3; the shade comes later) */
+  .js .svc-banner .hero-slide__stage::before {
+    content: "";
+    grid-area: 1 / 1;
+    z-index: 3;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 32%, rgba(255, 255, 255, .38) 50%, transparent 68%);
+    transform: translateX(-100%);
+    animation: svc-banner-sheen 8s ease-in-out 1.2s infinite;
+  }
+
+  .js .svc-banner .slide-copy__hl {
+    background: linear-gradient(100deg, var(--brand-orange) 0 40%, rgba(255, 255, 255, .95) 50%, var(--brand-orange) 60% 100%) 100% 0 / 300% 100% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    animation: live-shine 8s ease-in-out 4s infinite;
+  }
+
+  .js .svc-banner__scroll::before {
+    animation: svc-scroll-cue 1.8s ease-in-out infinite;
+  }
+}
+
+@keyframes svc-banner-sheen {
+  0% { transform: translateX(-100%); }
+  30%, 100% { transform: translateX(100%); }
+}
+
+@keyframes svc-scroll-cue {
+  0% { opacity: 0; transform: translateY(0); }
+  15% { opacity: 1; }
+  70%, 100% { opacity: 0; transform: translateY(14px); }
+}
+
+:is(.page-service, .page-services) main .btn {
+  min-height: 48px;
+  padding: 11px 22px;
+  border-radius: 10px;
+  font-size: .95rem;
+}
+
+:is(.page-service, .page-services) main .btn--sm {
+  min-height: 42px;
+  padding: 8px 16px;
+  font-size: .875rem;
+}
+
+:is(.page-service, .page-services) main .btn--lg {
+  min-height: 52px;
+  padding: 13px 26px;
+}
+
+:is(.page-service, .page-services) main .btn--primary {
+  --btn-bg: var(--sv-orange-2);
+  --btn-fg: var(--sv-ink);
+  --btn-bd: var(--sv-orange-2);
+  --btn-sweep: var(--sv-orange);
+  --btn-bd-hover: var(--sv-orange);
+  --btn-fg-hover: var(--sv-ink);
+}
+
+:is(.page-service, .page-services) main .btn--primary:hover {
+  box-shadow: 0 14px 26px -14px rgba(var(--sv-orange-rgb), .85);
+}
+
+:is(.page-service, .page-services) main .btn--secondary {
+  --btn-fg: var(--sv-navy);
+  --btn-bd: rgba(var(--sv-navy-rgb), .4);
+  --btn-sweep: var(--sv-navy);
+  --btn-bd-hover: var(--sv-navy);
+  --btn-fg-hover: var(--white);
+}
+
+:is(.page-service, .page-services) main :is(.btn--light, .on-dark .btn--secondary) {
+  --btn-fg: var(--white);
+  --btn-bd: rgba(255, 255, 255, .55);
+  --btn-sweep: var(--sv-cream);
+  --btn-bd-hover: var(--sv-cream);
+  --btn-fg-hover: var(--sv-navy);
+}
+
+.svc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--sv-blue);
+  font-family: var(--font-heading);
+  font-size: .95rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.svc-link .icon {
+  transition: transform .3s var(--ease);
+}
+
+.svc-link:hover .icon,
+a:hover .svc-link .icon,
+.svc-index-card:hover .svc-link .icon {
+  transform: translateX(4px);
+}
+
+/* Section heading */
+.svc-head {
+  max-width: 760px;
+  margin-bottom: clamp(28px, 3.4vw, 44px);
+}
+
+.svc-head--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.svc-head--split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px 40px;
+  max-width: none;
+}
+
+.svc-head--split > div:first-child {
+  max-width: 760px;
+}
+
+.svc-title {
+  margin: 0;
+  color: var(--sv-ink);
+  font-size: clamp(1.65rem, 1.2rem + 1.5vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -.022em;
+  text-wrap: balance;
+}
+
+.svc-section--navy .svc-title,
+.on-dark .svc-title {
+  color: var(--white);
+}
+
+.svc-lead {
+  max-width: 64ch;
+  margin-top: 14px;
+  color: var(--sv-text);
+  font-size: clamp(1rem, .96rem + .2vw, 1.125rem);
+  line-height: 1.7;
+}
+
+.svc-section--navy .svc-lead {
+  color: rgba(255, 255, 255, .8);
+}
+
+.svc-prose p {
+  max-width: 66ch;
+  color: var(--sv-text);
+  font-size: clamp(1rem, .97rem + .15vw, 1.0625rem);
+  line-height: 1.75;
+}
+
+.svc-prose p + p {
+  margin-top: 14px;
+}
+
+.svc-prose a {
+  color: var(--sv-blue);
+  font-weight: 600;
+}
+
+/* Icon tiles: navy with an orange line icon */
+.svc-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  flex: none;
+  border-radius: 14px;
+  background: var(--sv-navy);
+  color: var(--sv-orange-2);
+  box-shadow: 0 10px 20px -12px rgba(var(--sv-navy-rgb), .7);
+  transition: background-color .35s var(--ease), transform .45s var(--ease-out);
+}
+
+.svc-icon .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.svc-icon--sm {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+}
+
+.svc-icon--sm .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.svc-icon--xs {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  box-shadow: none;
+}
+
+.svc-icon--xs .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.svc-icon--light {
+  background: rgba(255, 255, 255, .1);
+  box-shadow: none;
+}
+
+/* ---------------------------------------------------------------- Overview */
+.svc-intro__grid {
+  display: grid;
+  gap: clamp(40px, 5vw, 80px);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .svc-intro__grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
+  }
+}
+
+.svc-intro .svc-head {
+  margin-bottom: 20px;
+}
+
+.svc-features {
+  margin-top: 26px;
+  padding: 20px 22px;
+  border: 1px solid rgba(var(--sv-orange-rgb), .22);
+  border-radius: var(--sv-r);
+  background: var(--sv-cream-soft);
+}
+
+.svc-features__title {
+  margin: 0;
+  color: var(--sv-blue);
+  font-size: .8125rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.svc-features ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 10px 20px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.svc-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: var(--sv-ink);
+  font-size: .95rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.svc-features .icon {
+  flex: none;
+  margin-top: 1px;
+  color: var(--sv-orange);
+}
+
+/* the photos: the overview photo, a second project photo over its lower left, a navy block behind */
+.svc-intro__media {
+  position: relative;
+  isolation: isolate;
+  padding: 0 0 14% 10%;
+}
+
+.svc-intro__media--single {
+  padding: 0;
+}
+
+@media (max-width: 1023px) {
+  .svc-intro__media {
+    width: 100%;
+    max-width: 560px;
+    margin-inline: auto;
+  }
+}
+
+.svc-shot {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 22px;
+  background: var(--sv-cream);
+  box-shadow: var(--sv-shadow-lg);
+}
+
+.svc-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: scale .8s var(--ease-out);
+}
+
+.svc-shot:hover img {
+  scale: 1.04;
+}
+
+.svc-shot--main {
+  aspect-ratio: 4 / 3.2;
+}
+
+.svc-shot--sub {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  bottom: 0;
+  width: 44%;
+  aspect-ratio: 4 / 3;
+  border: 6px solid var(--white);
+  border-radius: 18px;
+}
+
+/* ---------------------------------------------------------------- Outdoor: the power of outdoor */
+.svc-power__grid {
+  display: grid;
+  gap: 40px clamp(40px, 6vw, 88px);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .svc-power__grid {
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  }
+}
+
+.svc-power__media {
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 4.2;
+  border-radius: var(--sv-r-lg);
+  box-shadow: 0 34px 64px -30px rgba(0, 0, 0, .7);
+}
+
+.svc-power__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 1023px) {
+  .svc-power__media {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+.svc-power .svc-head {
+  margin-bottom: 24px;
+}
+
+.svc-steps {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.svc-steps li {
+  display: flex;
+  gap: 16px;
+  padding: 18px 20px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .05);
+}
+
+.svc-steps__num {
+  color: var(--sv-orange-2);
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.svc-steps h3 {
+  margin: 0;
+  color: var(--white);
+  font-size: 1.1rem;
+}
+
+.svc-steps p {
+  margin-top: 6px;
+  color: rgba(255, 255, 255, .78);
+  font-size: .95rem;
+  line-height: 1.65;
+}
+
+/* ---------------------------------------------------------------- What we offer */
+/* capabilities with a description (printing, events): a two-column list */
+.svc-caps {
+  display: grid;
+  column-gap: clamp(32px, 4.5vw, 72px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 900px) {
+  .svc-caps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.svc-cap {
+  display: flex;
+  gap: 18px;
+  padding: 24px 0 26px;
+  border-top: 1px solid var(--sv-line);
+}
+
+.svc-cap:hover .svc-icon {
+  background: var(--sv-blue);
+  transform: translateY(-2px);
+}
+
+.svc-cap__num {
+  margin: 0;
+  color: var(--sv-blue);
+  font-family: var(--font-heading);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+.svc-cap h3,
+.svc-tile h3,
+.svc-chip h3,
+.svc-card h3,
+.svc-why__list h3,
+.svc-promise__list h3 {
+  margin: 0;
+  color: var(--sv-ink);
+  font-size: clamp(1.1rem, 1.02rem + .3vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.svc-cap h3 {
+  margin-top: 4px;
+}
+
+.svc-cap p:not(.svc-cap__num),
+.svc-tile p,
+.svc-chip p,
+.svc-card p,
+.svc-why__list p {
+  margin-top: 8px;
+  color: var(--sv-text);
+  font-size: .975rem;
+  line-height: 1.7;
+}
+
+/* formats with a project photo: photo cards */
+.svc-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (max-width: 639px) {
+  .svc-tiles > :last-child:nth-child(odd) {
+    grid-column: span 2;
+  }
+
+  .svc-tiles > :last-child:nth-child(odd) .svc-tile__media {
+    aspect-ratio: 16 / 7;
+  }
+}
+
+@media (min-width: 640px) {
+  .svc-tiles--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .svc-tiles--5 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .svc-tiles--5 > * { grid-column: span 2; }
+  .svc-tiles--5 > :nth-child(n + 4) { grid-column: span 3; }
+}
+
+@media (min-width: 1100px) {
+  .svc-tiles { gap: 20px; }
+  .svc-tiles--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .svc-tiles--5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .svc-tiles--5 > *,
+  .svc-tiles--5 > :nth-child(n + 4) { grid-column: auto; }
+}
+
+.svc-tile {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--sv-r);
+  background: var(--white);
+  box-shadow: var(--sv-shadow);
+  transition: translate .45s var(--ease-out), box-shadow .45s var(--ease);
+}
+
+.svc-tile:hover {
+  box-shadow: var(--sv-shadow-hover);
+  translate: 0 -4px;
+}
+
+.svc-tile__media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--sv-cream);
+}
+
+.svc-tile__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: scale .8s var(--ease-out);
+}
+
+.svc-tile:hover .svc-tile__media img {
+  scale: 1.05;
+}
+
+.svc-tile__body {
+  padding: 16px 18px 20px;
+}
+
+.svc-tile h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(1.02rem, .98rem + .2vw, 1.15rem);
+}
+
+.svc-tile__icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 8px;
+  background: var(--sv-navy);
+  color: var(--sv-orange-2);
+}
+
+.svc-tile p {
+  font-size: .925rem;
+  line-height: 1.6;
+}
+
+/* the other formats: compact icon cards (the last row stretches, so there are no gaps) */
+.svc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.svc-tiles + .svc-chips {
+  margin-top: 16px;
+}
+
+.svc-chip {
+  display: flex;
+  flex: 1 1 calc(33.333% - 14px);
+  align-items: flex-start;
+  gap: 14px;
+  min-width: min(100%, 260px);
+  padding: 18px;
+  border: 1px solid var(--sv-line);
+  border-radius: 16px;
+  background: var(--white);
+  transition: border-color .35s var(--ease), translate .45s var(--ease-out), box-shadow .45s var(--ease);
+}
+
+.svc-chip:hover {
+  border-color: rgba(var(--sv-orange-rgb), .45);
+  box-shadow: var(--sv-shadow);
+  translate: 0 -3px;
+}
+
+.svc-chip h3 {
+  margin-top: 2px;
+  font-size: clamp(1rem, .97rem + .15vw, 1.1rem);
+}
+
+.svc-chip p {
+  margin-top: 4px;
+  font-size: .9rem;
+  line-height: 1.6;
+}
+
+.svc-chips--plain .svc-chip {
+  flex-basis: calc(20% - 14px);
+  min-width: min(100%, 190px);
+  align-items: center;
+  padding: 14px 16px;
+}
+
+.svc-chips--plain .svc-chip h3 {
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------- Benefits */
+/* The heading above, the numbered cards below in two columns from 900px (an odd last card goes across),
+   so no column is left half empty */
+.svc-why__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.svc-why__list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.svc-why__list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  padding: 22px 24px;
+  border: 1px solid var(--sv-line);
+  border-radius: var(--sv-r);
+  background: var(--white);
+  transition: border-color .35s var(--ease), box-shadow .45s var(--ease), translate .45s var(--ease-out);
+}
+
+.svc-why__list li:hover {
+  border-color: rgba(var(--sv-orange-rgb), .45);
+  box-shadow: var(--sv-shadow);
+  translate: 0 -3px;
+}
+
+.svc-why__num {
+  min-width: 2ch;
+  color: var(--sv-orange);
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+}
+
+.svc-why__list p {
+  margin-top: 6px;
+}
+
+@media (min-width: 900px) {
+  .svc-why__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .svc-why__list > :last-child:nth-child(odd) {
+    grid-column: span 2;
+  }
+}
+
+/* ---------------------------------------------------------------- What we do (cards) */
+.svc-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.svc-card {
+  padding: 26px 24px 28px;
+  border: 1px solid var(--sv-line);
+  border-radius: var(--sv-r);
+  background: var(--white);
+  box-shadow: var(--sv-shadow);
+  transition: translate .45s var(--ease-out), box-shadow .45s var(--ease);
+}
+
+.svc-card:hover {
+  box-shadow: var(--sv-shadow-hover);
+  translate: 0 -4px;
+}
+
+.svc-card:hover .svc-icon {
+  background: var(--sv-blue);
+}
+
+.svc-card h3 {
+  margin-top: 20px;
+}
+
+.svc-card p {
+  font-size: .95rem;
+}
+
+/* ---------------------------------------------------------------- Our promise (navy) */
+.svc-promise__grid {
+  display: grid;
+  gap: 8px clamp(40px, 6vw, 88px);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .svc-promise__grid {
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  }
+
+  .svc-promise .svc-head {
+    margin-bottom: 0;
+  }
+}
+
+.svc-promise__list {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.svc-promise__list li {
+  display: flex;
+  gap: 18px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: var(--sv-r);
+  background: rgba(255, 255, 255, .05);
+}
+
+.svc-promise__list h3 {
+  color: var(--white);
+}
+
+.svc-promise__list p {
+  margin-top: 8px;
+  color: rgba(255, 255, 255, .78);
+  font-size: .975rem;
+  line-height: 1.7;
+}
+
+/* ---------------------------------------------------------------- Our work */
+/* One row of equal 4:3 project photos (four, or three when that is all there is) with rounded corners
+   and a soft shadow; phones: two columns (with three, the first goes across). */
+.svc-bento {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.svc-bento__item {
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--sv-r);
+  box-shadow: var(--sv-shadow);
+}
+
+.svc-bento--3 .svc-bento__item:first-child {
+  grid-column: span 2;
+  aspect-ratio: 8 / 3;
+}
+
+.svc-bento .g-item {
+  height: 100%;
+  border-radius: inherit;
+}
+
+.svc-bento .g-item img {
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .svc-bento {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .svc-bento--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .svc-bento--3 .svc-bento__item:first-child {
+    grid-column: auto;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* ---------------------------------------------------------------- Start a project */
+/* One navy banner across the container: the closing text on the left (the service's name in orange),
+   four contact tiles on the right, and the service's photo fading into the navy behind them.
+   Phones: the text, then the tiles (the photo fades in at the bottom). */
+.svc-start__panel {
+  position: relative;
+  display: grid;
+  gap: clamp(28px, 4vw, 52px);
+  align-items: center;
+  overflow: hidden;
+  padding: clamp(28px, 4.4vw, 60px);
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse 70% 90% at 0% 0%, rgba(var(--sv-blue-rgb), .42), transparent 65%),
+    linear-gradient(120deg, var(--sv-navy), var(--sv-navy-2));
+  box-shadow: var(--sv-shadow-lg);
+  color: var(--white);
+  isolation: isolate;
+}
+
+@media (min-width: 1024px) {
+  .svc-start__panel {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  }
+}
+
+/* the service's photo, fading into the navy (from the left on computers, from the top on phones) */
+.svc-start__photo {
+  position: absolute;
+  inset: 45% 0 0;
+  z-index: -1;
+  opacity: .3;
+  pointer-events: none;
+}
+
+.svc-start__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 55%);
+  mask-image: linear-gradient(180deg, transparent, #000 55%);
+}
+
+@media (min-width: 1024px) {
+  .svc-start__photo {
+    inset: 0 0 0 40%;
+    opacity: .3;
+  }
+
+  .svc-start__photo img {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 50%);
+    mask-image: linear-gradient(90deg, transparent, #000 50%);
+  }
+}
+
+.svc-start__text .eyebrow {
+  margin-bottom: 14px;
+}
+
+.svc-start .svc-title {
+  color: var(--white);
+}
+
+.svc-start__hl {
+  color: var(--sv-orange-2);
+}
+
+.svc-start__text .svc-prose {
+  max-width: 60ch;
+  margin-top: 16px;
+}
+
+.svc-start__text .svc-prose p {
+  color: rgba(255, 255, 255, .8);
+}
+
+.svc-start__text .svc-prose a {
+  color: var(--sv-orange-2);
+}
+
+/* the contact tiles: two across from 560px */
+.svc-start__tiles {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 560px) {
+  .svc-start__tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.svc-start__tile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 100%;
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 16px;
+  background: rgba(var(--sv-navy-rgb), .62);     /* navy under the white text, whatever the photo behind */
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: var(--white);
+  text-decoration: none;
+  transition: border-color .25s var(--ease), background-color .25s var(--ease);
+}
+
+.svc-start__tile:hover,
+.svc-start__tile:focus-visible {
+  border-color: rgba(var(--sv-orange-rgb), .7);
+  background: rgba(var(--sv-navy-rgb), .8);
+}
+
+.svc-start__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, var(--sv-orange), var(--sv-orange-2));
+  color: var(--sv-navy);
+}
+
+.svc-start__tile-text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.svc-start__tile-label {
+  color: rgba(255, 255, 255, .66);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.svc-start__tile-value {
+  font-family: var(--font-heading);
+  font-size: .975rem;
+  font-weight: 700;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+/* ---------------------------------------------------------------- Other services */
+/* A turning row of photo cards, laid out like the client's reference (service-detail.js, moreSection;
+   main.js, initServiceFlow): the pills of the six services, one large card in the middle with the ones
+   beside it smaller and behind it, and the two arrows. Every card stands in the same spot and is moved
+   to its place by data-pos (0 the middle, 1 / -1 beside it, 2 / -2 further out, 3 / -3 out of sight).
+   Computers show five cards, tablets three; on phones the cards beside the middle one peek in from the
+   edges of the screen and the pills scroll sideways. */
+.svc-flow__pills {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+}
+
+.svc-flow__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 8px 18px;
+  border: 1px solid rgba(var(--sv-blue-rgb), .35);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--sv-blue);
+  font: 600 .875rem/1.2 var(--font-heading);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease), box-shadow .3s var(--ease);
+}
+
+.svc-flow__pill .icon {
+  flex: none;
+}
+
+.svc-flow__pill:hover {
+  border-color: var(--sv-blue);
+  box-shadow: 0 8px 18px -12px rgba(var(--sv-blue-rgb), .6);
+}
+
+.svc-flow__pill[aria-pressed="true"] {
+  border-color: var(--sv-blue);
+  background: var(--sv-blue);
+  color: var(--white);
+  box-shadow: 0 10px 20px -12px rgba(var(--sv-blue-rgb), .8);
+}
+
+.svc-flow__stage {
+  position: relative;
+  display: grid;
+  margin-top: clamp(24px, 3vw, 40px);
+  padding-block: 6px 48px;            /* room for the cards' shadow */
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+/* --x: how far beside the middle (a share of the card's width), --s: its size */
+.svc-flow__card {
+  --x: 0%;
+  --s: 1;
+  grid-area: 1 / 1;
+  justify-self: center;
+  position: relative;
+  z-index: 5;
+  width: 42%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: var(--sv-r);
+  background: var(--sv-navy);
+  box-shadow: 0 26px 44px -24px rgba(var(--sv-navy-rgb), .65);
+  transform: translateX(var(--x)) scale(var(--s));
+  transition: transform .7s cubic-bezier(.22, .8, .24, 1), opacity .5s var(--ease), visibility 0s linear 0s;
+}
+
+.svc-flow__card[data-pos="1"],
+.svc-flow__card[data-pos="-1"] {
+  --x: 48%;
+  --s: .82;
+  z-index: 4;
+}
+
+.svc-flow__card[data-pos="2"],
+.svc-flow__card[data-pos="-2"] {
+  --x: 86%;
+  --s: .66;
+  z-index: 3;
+}
+
+.svc-flow__card[data-pos="3"],
+.svc-flow__card[data-pos="-3"] {
+  --x: 110%;
+  --s: .5;
+  z-index: 2;
+}
+
+/* the cards on the left */
+.svc-flow__card[data-pos^="-"] {
+  transform: translateX(calc(var(--x) * -1)) scale(var(--s));
+}
+
+/* out of sight (hidden once it has moved there) */
+.svc-flow__card[data-pos="3"],
+.svc-flow__card[data-pos="-3"] {
+  opacity: 0;
+  visibility: hidden;
+  transition: transform .7s cubic-bezier(.22, .8, .24, 1), opacity .5s var(--ease), visibility 0s linear .7s;
+}
+
+/* a card coming round to the other side moves there out of sight, at once (main.js) */
+.svc-flow__card.is-jump {
+  transition: none;
+}
+
+.svc-flow__link {
+  position: absolute;
+  inset: 0;
+  display: block;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.svc-flow__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .8s var(--ease);
+}
+
+/* the shade under the words, and the veil that dims the cards beside the middle one */
+.svc-flow__link::before,
+.svc-flow__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.svc-flow__link::before {
+  background: linear-gradient(180deg, rgba(var(--sv-navy-rgb), 0) 38%, rgba(var(--sv-navy-rgb), .55) 66%, rgba(var(--sv-navy-rgb), .92));
+}
+
+.svc-flow__link::after {
+  background: rgba(var(--sv-navy-rgb), .32);
+  transition: opacity .5s var(--ease);
+}
+
+.svc-flow__card[data-pos="0"] .svc-flow__link::after {
+  opacity: 0;
+}
+
+.svc-flow__link:focus-visible {
+  outline: 3px solid var(--brand-orange);
+  outline-offset: -3px;
+  border-radius: inherit;
+}
+
+/* the round "open" button in the middle of the photo, on the middle card only */
+.svc-flow__open {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: clamp(52px, 4.6vw, 68px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .94);
+  color: var(--sv-blue);
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, .22), 0 14px 30px -10px rgba(var(--sv-navy-rgb), .6);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.6);
+  transition: opacity .45s var(--ease), transform .45s var(--ease), background-color .3s var(--ease), color .3s var(--ease);
+}
+
+.svc-flow__open .icon {
+  width: 42%;
+  height: 42%;
+}
+
+.svc-flow__card[data-pos="0"] .svc-flow__open {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  transition-delay: .25s;
+}
+
+/* the name, and under it on the middle card its line of text (opened by the grid row) */
+.svc-flow__body {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
+  display: grid;
+  grid-template-rows: auto 0fr;
+  padding: clamp(16px, 2vw, 26px);
+  transition: grid-template-rows .5s var(--ease), opacity .4s var(--ease);
+}
+
+.svc-flow__name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: clamp(1.0625rem, .85rem + .75vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.svc-flow__name .icon-diamond {
+  --size: clamp(34px, 2.8vw, 42px);
+}
+
+.svc-flow__text {
+  overflow: hidden;
+  min-height: 0;
+  color: rgba(255, 255, 255, .86);
+  font-size: clamp(.875rem, .8rem + .25vw, 1rem);
+  line-height: 1.5;
+  opacity: 0;
+  transition: opacity .4s var(--ease);
+}
+
+.svc-flow__text > span {
+  display: block;
+  max-width: 46ch;
+  padding-top: 8px;
+}
+
+.svc-flow__card[data-pos="0"] .svc-flow__body {
+  grid-template-rows: auto 1fr;
+}
+
+.svc-flow__card[data-pos="0"] .svc-flow__text {
+  opacity: 1;
+  transition-delay: .2s;
+}
+
+/* the cards beside the middle one: the name on the side that shows, over at most two short lines */
+.svc-flow__card:not([data-pos="0"]) .svc-flow__name {
+  max-width: 46%;
+}
+
+.svc-flow__card:not([data-pos="0"]):not([data-pos^="-"]) .svc-flow__body {
+  justify-items: end;
+  text-align: right;
+}
+
+.svc-flow__card:not([data-pos="0"]):not([data-pos^="-"]) .svc-flow__name {
+  flex-direction: row-reverse;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .svc-flow__card[data-pos="0"] .svc-flow__link:hover .svc-flow__photo {
+    transform: scale(1.05);
+  }
+
+  .svc-flow__card[data-pos="0"] .svc-flow__link:hover .svc-flow__open {
+    background: var(--brand-orange);
+    color: var(--sv-navy);
+  }
+}
+
+.svc-flow__controls {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: -12px;
+}
+
+.svc-flow__arrow {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(var(--sv-blue-rgb), .4);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--sv-blue);
+  cursor: pointer;
+  transition: background-color .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease), transform .3s var(--ease);
+}
+
+.svc-flow__arrow--next {
+  border-color: var(--sv-blue);
+  background: var(--sv-blue);
+  color: var(--white);
+  box-shadow: 0 10px 22px -12px rgba(var(--sv-blue-rgb), .9);
+}
+
+.svc-flow__arrow:hover {
+  border-color: var(--brand-orange);
+  background: var(--brand-orange);
+  color: var(--sv-navy);
+}
+
+.svc-flow__arrow:active {
+  transform: scale(.94);
+}
+
+.svc-flow__all {
+  margin: 18px 0 0;
+  text-align: center;
+}
+
+/* without JavaScript the row stands still: no pills or arrows */
+html:not(.js) .svc-flow__pills,
+html:not(.js) .svc-flow__controls {
+  display: none;
+}
+
+/* tablets: three cards */
+@media (max-width: 1023px) {
+  .svc-flow__card {
+    width: 56%;
+  }
+
+  .svc-flow__card[data-pos="1"],
+  .svc-flow__card[data-pos="-1"] {
+    --x: 50%;
+    --s: .8;
+  }
+
+  .svc-flow__card[data-pos="2"],
+  .svc-flow__card[data-pos="-2"] {
+    --x: 80%;
+    --s: .6;
+    opacity: 0;
+    visibility: hidden;
+    transition: transform .7s cubic-bezier(.22, .8, .24, 1), opacity .5s var(--ease), visibility 0s linear .7s;
+  }
+}
+
+/* phones: one card, the next ones peeking in from the edges of the screen; the pills scroll sideways */
+@media (max-width: 639px) {
+  .svc-flow__pills {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    margin-inline: calc(var(--gutter) * -1);
+    padding: 2px var(--gutter) 8px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .svc-flow__pills::-webkit-scrollbar {
+    display: none;
+  }
+
+  .svc-flow__pill {
+    flex: none;
+    min-height: 38px;
+    padding: 7px 14px;
+    font-size: .8125rem;
+  }
+
+  .svc-flow__stage {
+    margin-inline: calc(var(--gutter) * -1);
+  }
+
+  .svc-flow__card {
+    width: 74%;
+    aspect-ratio: 1;
+  }
+
+  .svc-flow__card[data-pos="1"],
+  .svc-flow__card[data-pos="-1"] {
+    --x: 34%;
+    --s: .84;
+  }
+
+  /* only a strip of the cards beside it shows: no words there */
+  .svc-flow__card:not([data-pos="0"]) .svc-flow__body {
+    opacity: 0;
+  }
+}
+
+/* ---------------------------------------------------------------- Services overview */
+.svc-index-grid {
+  display: grid;
+  gap: 20px;
+}
+
+/* two or more across: every row as tall as the tallest, so all the cards are the same height */
+@media (min-width: 640px) {
+  .svc-index-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+  }
+}
+
+/* small laptops: three across, the "Need a custom campaign?" card over two columns; from 1280px four
+   across, so the seven services and the card fill two rows of four (the card is the last tile) */
+@media (min-width: 1024px) {
+  .svc-index-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .svc-index-cta {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 1280px) {
+  .svc-index-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .svc-index-cta {
+    grid-column: auto;
+  }
+}
+
+.svc-index-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--sv-line);
+  border-radius: 20px;
+  background: var(--white);
+  box-shadow: var(--sv-shadow);
+  transition: translate .45s var(--ease-out), box-shadow .45s var(--ease);
+}
+
+.svc-index-card:hover {
+  box-shadow: var(--sv-shadow-hover);
+  translate: 0 -4px;
+}
+
+.svc-index-card__media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--sv-cream);
+}
+
+.svc-index-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: scale .8s var(--ease-out);
+}
+
+.svc-index-card:hover .svc-index-card__media img {
+  scale: 1.05;
+}
+
+.svc-index-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 0 22px 22px;
+}
+
+.svc-index-card__body > .svc-icon {
+  position: relative;
+  z-index: 1;
+  margin-top: -26px;
+}
+
+.svc-index-card__title {
+  margin-top: 14px;
+  color: var(--sv-ink);
+  font-size: clamp(1.2rem, 1.1rem + .4vw, 1.4rem);
+  line-height: 1.25;
+}
+
+.svc-index-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.svc-index-card__body > p {
+  margin-top: 8px;
+  color: var(--sv-text);
+  font-size: .95rem;
+  line-height: 1.65;
+}
+
+.svc-index-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.svc-index-card__foot .btn {
+  position: relative;
+  z-index: 2;
+}
+
+.page-services .cta-card {
+  height: 100%;
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse 70% 80% at 100% 0%, rgba(var(--sv-blue-rgb), .5), transparent 70%),
+    var(--sv-navy);
+}
+
+/* over two columns (small laptops) the card's text and buttons sit side by side; as one tile of four
+   they stack, like the service cards beside it */
+@media (min-width: 1024px) and (max-width: 1279.98px) {
+  .page-services .svc-index-cta .cta-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
+    align-items: end;
+    padding: 34px;
+  }
+}
+
+/* at a glance + the way we work */
+.svc-glance .service-tree > li {
+  border: 1px solid var(--sv-line);
+  border-radius: var(--sv-r);
+  box-shadow: none;
+}
+
+.svc-glance .service-tree__head {
+  color: var(--sv-ink);
+  font-weight: 700;
+}
+
+.svc-glance .service-tree ul {
+  border-left-color: rgba(var(--sv-orange-rgb), .35);
+  color: var(--sv-text);
+}
+
+.svc-glance .service-tree ul li::before {
+  border-top-color: rgba(var(--sv-orange-rgb), .35);
+}
+
+/* How we work (the same section as on Home, 07-sections.css) and the consultation card below it */
+.page-services .journey,
+.page-services .consult {
+  background: var(--sv-cream-soft);
+}
+
+/* ---------------------------------------------------------------- Motion */
+@media (prefers-reduced-motion: no-preference) {
+  /* photos are uncovered from the top as they come in */
+  .js [data-reveal="img"].is-visible {
+    animation: reveal-fade .5s var(--ease) var(--reveal-delay, 0s) backwards;
+  }
+
+  .js [data-reveal="img"].is-visible .svc-shot,
+  .js :is(.svc-bento__item, .svc-power__media)[data-reveal="img"].is-visible {
+    animation: svc-uncover 1.05s cubic-bezier(.7, 0, .25, 1) var(--reveal-delay, 0s) backwards;
+  }
+
+  .js [data-reveal="img"].is-visible .svc-shot--sub {
+    animation-delay: .22s;
+  }
+
+  /* Services overview header: a white shine crosses "Services" every 6 seconds */
+  .js .page-hero--services .hl .w__i {
+    background: linear-gradient(100deg, var(--brand-orange) 0 40%, rgba(255, 255, 255, .95) 50%, var(--brand-orange) 60% 100%) 100% 0 / 300% 100% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation:
+      word-up 1s var(--ease-out) calc(.15s + var(--i, 0) * .06s) backwards,
+      live-shine 6s ease-in-out 1.4s infinite;
+  }
+
+}
+
+@keyframes svc-uncover {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0); }
+}

@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- The photo of the "Need a Consultation?" card (S.consultBand): consultation.png in the project folder (2172 x 724,
+     a Brand Image adviser and a client going over print and billboard designs) with its own lines of text taken out,
+     since the card sets them as real text. Rendered to WebP by src/tools/render_artwork.js (job "consult").
+
+     The letters (light cream or orange pixels inside the TEXT boxes, grown by GROW pixels) are filled in from around
+     them, then smoothed and given a little grain. Over the man (behind "ON?" of CONSULTATION?) each letter is filled
+     only from what lies behind it there: the chair, his shirt or his arm (kind() and the ARM outline).
+     A picture without text needs TEXT emptied; another picture with text needs TEXT and kind() redrawn for it. -->
+<style>
+  html, body { margin: 0; background: #000; }
+  #art { display: block; width: 2172px; height: 724px; }
+  img { display: none; }
+</style>
+</head>
+<body>
+<img id="photo" src="../../consultation.png" alt="">
+<canvas id="art" width="2172" height="724"></canvas>
+<script>
+// The three lines of text: [left, top, right, bottom] in picture pixels
+const TEXT = [[96, 224, 990, 270], [98, 289, 574, 389], [95, 401, 1122, 504]];
+const GROW = 3;
+// The man's upper arm under the sleeve, behind the "N" (outline points)
+const ARM = [[962, 494], [966, 462], [975, 455], [988, 451], [1000, 454], [1010, 462], [1017, 476], [1021, 494]];
+const BACK = 0, SHIRT = 1, SKIN = 2;
+
+function inside(x, y, points) {
+  let hit = false;
+  for (let i = 0, j = points.length - 1; i < points.length; j = i++) {
+    const [xi, yi] = points[i], [xj, yj] = points[j];
+    if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) hit = !hit;
+  }
+  return hit;
+}
+
+function kind(x, y) {
+  if (x < 940 || y < 390) return BACK;
+  if (x < 968) return y >= 482 && x >= 952 ? SKIN : BACK;   // the chair behind him; his elbow
+  return y >= 494 || inside(x, y, ARM) ? SKIN : SHIRT;       // his forearm and upper arm; his shirt
+}
+
+function isLetter(r, g, b) {
+  return (r > 120 && g > 115 && b > 85 && r + g + b > 400)   // cream
+    || (r > 150 && r - b > 90 && g > 60 && r - g > 40);       // orange
+}
+
+window.__ready = (async () => {
+  const photo = document.getElementById('photo');
+  await photo.decode();
+  const canvas = document.getElementById('art');
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+  ctx.drawImage(photo, 0, 0);
+  const W = canvas.width, H = canvas.height, N = W * H;
+  const picture = ctx.getImageData(0, 0, W, H);
+  const px = picture.data;
+
+  const kinds = new Uint8Array(N);
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) kinds[y * W + x] = kind(x, y);
+
+  // the letters, grown to take in their soft edges
+  const known = new Uint8Array(N).fill(1);
+  for (const [x0, y0, x1, y1] of TEXT) {
+    for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++) {
+      const i = (y * W + x) * 4;
+      if (!isLetter(px[i], px[i + 1], px[i + 2])) continue;
+      for (let dy = -GROW; dy <= GROW; dy++) for (let dx = -GROW; dx <= GROW; dx++) {
+        if (dx * dx + dy * dy <= GROW * GROW + 1) known[(y + dy) * W + x + dx] = 0;
+      }
+    }
+  }
+  const hole = [];
+  for (let k = 0; k < N; k++) if (!known[k]) hole.push(k);
+
+  // fill from the edges inwards: each pixel next to a filled one of its kind takes the mean of those within 4 px
+  let todo = hole;
+  for (let pass = 0; todo.length && pass < 300; pass++) {
+    const anyKind = pass >= 150;
+    const done = [];
+    for (const k of todo) {
+      let r = 0, g = 0, b = 0, sum = 0, touch = false;
+      for (let dy = -4; dy <= 4; dy++) for (let dx = -4; dx <= 4; dx++) {
+        const q = k + dy * W + dx;
+        if (!known[q] || (!anyKind && kinds[q] !== kinds[k])) continue;
+        const w = 1 / (dx * dx + dy * dy);
+        r += px[q * 4] * w; g += px[q * 4 + 1] * w; b += px[q * 4 + 2] * w; sum += w;
+        if (dx * dx <= 1 && dy * dy <= 1) touch = true;
+      }
+      if (touch) done.push([k, r / sum, g / sum, b / sum]);
+    }
+    for (const [k, r, g, b] of done) { px[k * 4] = r; px[k * 4 + 1] = g; px[k * 4 + 2] = b; known[k] = 1; }
+    todo = todo.filter((k) => !known[k]);
+  }
+
+  // smooth the fill: each pixel the mean of its neighbours of the same kind (the edges of the holes stay as they are)
+  const val = new Float32Array(N * 3);
+  for (const k of hole) for (let c = 0; c < 3; c++) {
+    for (const q of [k, k - 1, k + 1, k - W, k + W]) val[q * 3 + c] = px[q * 4 + c];
+  }
+  const near = (k) => [k - 1, k + 1, k - W, k + W].filter((q) => kinds[q] === kinds[k]);
+  for (let round = 0; round < 300; round++) {
+    for (const k of hole) {
+      const nb = near(k);
+      if (!nb.length) continue;
+      for (let c = 0; c < 3; c++) {
+        let s = 0;
+        for (const q of nb) s += val[q * 3 + c];
+        val[k * 3 + c] = s / nb.length;
+      }
+    }
+  }
+  // soften where two kinds meet, then a little grain like the photo's
+  const soft = Float32Array.from(val);
+  for (const k of hole) {
+    const nb = [k - 1, k + 1, k - W, k + W];
+    if (nb.every((q) => kinds[q] === kinds[k])) continue;
+    for (let c = 0; c < 3; c++) soft[k * 3 + c] = (val[k * 3 + c] * 2 + nb.reduce((s, q) => s + val[q * 3 + c], 0) / 2) / 4;
+  }
+  let seed = 7;
+  const random = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (const k of hole) {
+    const grain = (random() + random() + random() - 1.5) * 4;
+    for (let c = 0; c < 3; c++) px[k * 4 + c] = Math.max(0, Math.min(255, Math.round(soft[k * 3 + c] + grain)));
+  }
+
+  // the rebuilt upper arm: darker under the sleeve and towards the back of the arm
+  const hem = (x) => { for (let y = 440; y < 494; y++) if (inside(x, y, ARM)) return y; return 494; };
+  for (const k of hole) {
+    const x = k % W, y = (k / W) | 0;
+    if (kinds[k] !== SKIN || y >= 494) continue;
+    const down = Math.min(1, (y - hem(x)) / 18), front = Math.min(1, Math.max(0, (x - 964) / 16));
+    const f = (0.5 + 0.5 * down) * (0.72 + 0.28 * front);
+    for (let c = 0; c < 3; c++) px[k * 4 + c] = Math.round(px[k * 4 + c] * f);
+  }
+  // and blur 2 px where the chair, the shirt and the arm meet over the man
+  const copy = Uint8ClampedArray.from(px);
+  for (const k of hole) {
+    if (k % W < 940) continue;
+    let edge = false;
+    for (let dy = -2; dy <= 2 && !edge; dy++) for (let dx = -2; dx <= 2; dx++) if (kinds[k + dy * W + dx] !== kinds[k]) { edge = true; break; }
+    if (!edge) continue;
+    for (let c = 0; c < 3; c++) {
+      let s = 0;
+      for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) s += copy[(k + dy * W + dx) * 4 + c];
+      px[k * 4 + c] = Math.round(s / 25);
+    }
+  }
+  ctx.putImageData(picture, 0, 0);
+})();
+</script>
+</body>
+</html>
