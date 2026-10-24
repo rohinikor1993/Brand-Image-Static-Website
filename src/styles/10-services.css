@@ -577,7 +577,7 @@ a:hover .svc-link .icon,
 }
 
 .svc-cap:hover .svc-icon {
-  background: var(--sv-blue);
+  background: var(--sv-orange);
   transform: translateY(-2px);
 }
 
@@ -849,7 +849,7 @@ a:hover .svc-link .icon,
 }
 
 .svc-card:hover .svc-icon {
-  background: var(--sv-blue);
+  background: var(--sv-orange);
 }
 
 .svc-card h3 {

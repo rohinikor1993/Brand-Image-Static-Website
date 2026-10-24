@@ -140,11 +140,12 @@
     {
      "name": "Backlit Board",
      "icon": "lightbulb",
-     "image": "shop-anchor-board"
+     "image": "shop-vivo-backlit"
     },
     {
      "name": "Frontlit Board",
-     "icon": "lamp-wall-down"
+     "icon": "lamp-wall-down",
+     "image": "shop-flex-board"
     },
     {
      "name": "Acrylic Board",
@@ -156,7 +157,8 @@
     },
     {
      "name": "Sunboard Branding",
-     "icon": "panels-top-left"
+     "icon": "panels-top-left",
+     "image": "shop-vivo-wall"
     },
     {
      "name": "Counter Branding",
@@ -166,7 +168,7 @@
     {
      "name": "Arch Gate",
      "icon": "door-open",
-     "image": "shop-arch-vivo"
+     "image": "shop-vivo-exterior"
     },
     {
      "name": "ACP Panelling",
@@ -207,6 +209,10 @@
   },
   "gallery": [
    "shop-hero-showroom",
+   "shop-vivo-exterior",
+   "shop-vivo-backlit",
+   "shop-vivo-wall",
+   "shop-flex-board",
    "shop-counter-venus",
    "shop-anchor-board",
    "shop-bosch-board",
@@ -241,10 +247,13 @@
   },
   "features": [
    "Hoarding",
-   "Pole Kiosk",
    "Bus Shelter",
    "Wall Wrap",
-   "Mobile Hoarding Van"
+   "Mobile Hoarding Van",
+   "Tricycle Advertising",
+   "Mobile Van Advertising",
+   "LED Van Advertising",
+   "Look Walker Advertising"
   ],
   "power": {
    "heading": "The Power of Outdoor Advertising",
@@ -272,12 +281,6 @@
      "text": "Eye-catching and impactful hoardings that command attention and leave a lasting impression."
     },
     {
-     "name": "Pole Kiosk",
-     "icon": "flag",
-     "image": "outdoor-pole-kiosk-display",
-     "text": "Strategically placed kiosks that offer high visibility and engagement opportunities."
-    },
-    {
      "name": "Bus Shelter",
      "icon": "bus",
      "image": "outdoor-bus-shelter",
@@ -294,6 +297,29 @@
      "icon": "truck",
      "image": "outdoor-mobile-van-hcg",
      "text": "Mobile billboards that take your brand on the move, reaching a wider audience."
+    },
+    {
+     "name": "Tricycle Advertising",
+     "icon": "bike",
+     "image": "transit-tricycles-road",
+     "text": "A unique mobile solution that navigates crowded urban areas, generating brand awareness with eye-catching ads."
+    },
+    {
+     "name": "Mobile Van Advertising",
+     "icon": "van",
+     "image": "transit-celekt-vans",
+     "text": "Versatile and attention-grabbing mobile van advertisements that deliver your brand message with high impact."
+    },
+    {
+     "name": "LED Van Advertising",
+     "icon": "monitor-play",
+     "image": "transit-led-van",
+     "text": "Vibrant LED displays on mobile vans that create dynamic, eye-catching advertisements ensuring your brand stands out."
+    },
+    {
+     "name": "Look Walker Advertising",
+     "icon": "person-standing",
+     "text": "Look walker advertising involves promoting your brand through human billboards that roam crowded areas. We provide engaging and interactive look walker advertisements that create memorable experiences for your target audience."
     }
    ]
   },
@@ -336,15 +362,11 @@
    "paragraphs": [
     "Transit Media Advertising specializes in creating dynamic marketing campaigns that effectively target audiences while they are on the move. With a primary focus on out-of-home advertising, we offer a range of innovative solutions that maximize brand exposure on buses, trains, subways, airports, and other modes of public transportation. Our team of experts works closely with clients to design captivating advertisements that capture the attention of commuters and travelers, ensuring that your brand message is seen by a wide and diverse audience."
    ],
-   "image": "transit-mahindra-van"
+   "image": "transit-bus-campaign"
   },
   "features": [
    "Auto Branding",
-   "Bus Advertising",
-   "Tricycle Advertising",
-   "Mobile Van Advertising",
-   "LED Van Advertising",
-   "Look Walker Advertising"
+   "Bus Advertising"
   ],
   "subservices": {
    "heading": "Comprehensive Transit Media Advertising Services",
@@ -354,36 +376,14 @@
     {
      "name": "Auto Branding",
      "icon": "car-taxi-front",
-     "image": "transit-auto",
+     "image": "transit-auto-campaign",
      "text": "With auto branding, your brand message travels the streets on vehicles, turning them into moving billboards. Our team works closely with you to design captivating vehicle wraps that showcase your brand's identity and message to a wide audience."
     },
     {
      "name": "Bus Advertising",
      "icon": "bus",
+     "image": "transit-bus-campaign",
      "text": "Bus advertising is an effective way to reach a large and diverse audience in urban areas. Our team collaborates with you to create attention-grabbing bus advertisements that deliver your brand message to commuters and pedestrians alike."
-    },
-    {
-     "name": "Tricycle Advertising",
-     "icon": "bike",
-     "image": "transit-tricycles-road",
-     "text": "Tricycle advertising provides a unique and mobile advertising solution, especially in crowded urban areas. We customize tricycle ads that capture attention and generate brand awareness as they navigate through busy streets."
-    },
-    {
-     "name": "Mobile Van Advertising",
-     "icon": "van",
-     "image": "transit-celekt-vans",
-     "text": "Mobile van advertising offers a versatile and attention-grabbing solution for reaching audiences on the move. We design compelling van advertisements that deliver your brand message in a highly visible and impactful manner."
-    },
-    {
-     "name": "LED Van Advertising",
-     "icon": "monitor-play",
-     "image": "transit-led-van",
-     "text": "LED van advertising takes mobile advertising to the next level with vibrant and dynamic LED displays. Our team creates visually stunning LED van ads that attract attention and ensure your brand stands out in any environment."
-    },
-    {
-     "name": "Look Walker Advertising",
-     "icon": "person-standing",
-     "text": "Look walker advertising involves promoting your brand through human billboards that roam crowded areas. We provide engaging and interactive look walker advertisements that create memorable experiences for your target audience."
     }
    ]
   },
@@ -419,6 +419,7 @@
    ]
   },
   "gallery": [
+   "transit-auto-campaign",
    "transit-celekt-vans",
    "transit-tricycles-lineup",
    "transit-auto",
@@ -434,67 +435,90 @@
   "icon": "paint-roller",
   "seo": {
    "title": "Digital Wall Painting Advertising Agency Nashik",
-   "description": "Transform your brand's presence with our expert digital wall painting advertising services in Nashik."
+   "description": "Brand Image Media Pvt. Ltd. provides Digital Wall Painting Advertising in Nashik — direct digital printing on walls with high-quality graphics for commercial buildings, retail outlets and high-visibility locations."
   },
-  "short": "Transform walls into stunning and captivating works of art.",
+  "short": "Transform ordinary walls into powerful brand communication spaces with direct digital printing.",
   "slide": {
    "title": "Turn Walls Into Powerful Brand Media",
    "cta": "Explore Digital Wall Painting"
   },
   "hero": {
-   "image": "wall-work-1",
-   "inset": "wall-work-2"
+   "image": "dwp-work-1",
+   "inset": "dwp-work-2"
   },
   "intro": {
-   "heading": "Digital Wall Painting",
+   "heading": "A New-Age Outdoor Advertising Solution",
    "paragraphs": [
-    "Digital wall painting is an innovative and creative art form that brings together technology and traditional painting techniques to create stunning and captivating wall art. Specialized digital wall painting agencies are equipped with skilled artists who utilize digital tools and techniques to design and print customized artworks on various materials, including wallpaper, vinyl, and canvas. This unique form of artistic expression offers numerous benefits and can transform any space, be it a home, office, restaurant, or commercial establishment."
+    "Digital Wall Painting Advertising is an innovative advertising solution that transforms ordinary walls into attractive brand communication spaces. Using advanced digital wall printing technology, high-quality graphics, brand logos, product visuals, and promotional messages can be printed directly onto suitable wall surfaces.",
+    "This technology offers a creative and visually impactful alternative to conventional wall painting, helping brands increase visibility and create memorable impressions among their target audiences."
    ],
-   "image": null
+   "image": "dwp-work-1"
   },
-  "features": [],
+  "features": [
+   "Direct digital printing on suitable wall surfaces.",
+   "High-quality graphics, vibrant colours, and detailed brand visuals.",
+   "Suitable for commercial buildings, retail outlets, market areas, and high-visibility locations.",
+   "Customised branding solutions based on campaign requirements.",
+   "An innovative approach to outdoor brand awareness and local market promotion."
+  ],
   "subservices": null,
   "sections": [
    {
-    "type": "benefits",
-    "heading": "The Advantages of Digital Wall Painting",
-    "intro": "Digital wall painting offers several advantages that make it an appealing choice for individuals and businesses looking to enhance their spaces:",
+    "type": "offerings",
+    "heading": "Key Features",
+    "intro": null,
     "items": [
      {
-      "title": "Personalized and Unique Designs",
-      "text": "With digital wall painting, you have the opportunity to create personalized and unique designs that perfectly reflect your style and vision. Skilled artists collaborate closely with clients to understand their preferences, color schemes, and overall aesthetic goals. They then translate these ideas into digital mockups, allowing clients to visualize the final result before printing and installation."
+      "icon": "printer",
+      "title": "Direct Digital Printing",
+      "text": "Advanced digital printing technology that applies high-resolution graphics, brand logos and promotional messages directly onto suitable wall surfaces."
      },
      {
-      "title": "Versatility in Design Options",
-      "text": "Digital wall painting provides a wide range of design options to suit any space or theme. Whether you prefer abstract and contemporary designs, realistic and lifelike scenes, or traditional and cultural motifs, digital wall painting agencies can bring your ideas to life. The flexibility of digital tools enables artists to create intricate details, vibrant colors, and stunning visual effects that make the artwork truly remarkable."
+      "icon": "image",
+      "title": "High-Quality Brand Visuals",
+      "text": "Vibrant colours and detailed brand visuals that create lasting impressions and communicate your brand identity with clarity and impact."
      },
      {
-      "title": "Customizable to Any Space",
-      "text": "One of the key benefits of digital wall painting is its adaptability to different spaces. Whether you have a small room, a large office lobby, or an expansive restaurant wall, the design can be tailored to fit the specific dimensions and layout of the area. This ensures that the artwork seamlessly integrates with the surroundings, creating a harmonious and visually appealing environment."
+      "icon": "map-pin",
+      "title": "High-Visibility Locations",
+      "text": "Ideal for commercial buildings, retail outlets, market areas and any high-visibility location where your brand needs maximum exposure."
      },
      {
-      "title": "Enhanced Aesthetics and Ambiance",
-      "text": "Digital wall paintings have the power to transform the aesthetics and ambiance of a space. They can evoke emotions, set a specific mood, and make a bold statement. Whether you want to create a calming atmosphere in a bedroom, an inspiring environment in an office, or a vibrant and energetic vibe in a restaurant, digital wall paintings can help you achieve the desired effect."
+      "icon": "layers",
+      "title": "Customised Solutions",
+      "text": "Branding solutions tailored to your campaign requirements — size, placement and design are adapted to your specific goals and target audience."
      },
      {
-      "title": "Long-lasting and Durable",
-      "text": "Digital wall paintings are created using high-quality materials and printing techniques, ensuring their longevity and durability. The prints are resistant to fading, water damage, and general wear and tear, allowing them to maintain their beauty and vibrancy over time. This ensures that your investment in digital wall painting is a worthwhile and long-lasting one."
+      "icon": "megaphone",
+      "title": "Outdoor Brand Awareness",
+      "text": "An innovative approach to local market promotion that turns ordinary walls into powerful advertising media and drives brand recognition."
+     },
+     {
+      "icon": "sparkles",
+      "title": "Our Approach",
+      "text": "Brand Image Media Pvt. Ltd. aims to provide customised Digital Wall Painting Advertising solutions that help brands utilise prominent wall spaces for effective communication and enhanced visibility."
      }
     ]
    }
   ],
   "closing": {
-   "heading": null,
+   "heading": "Turn Ordinary Walls into Powerful Brand Experiences.",
    "paragraphs": [
-    "Partnering with a digital wall painting agency offers a unique opportunity to transform your space into a visually stunning and personalized work of art. With their expertise and creativity, these agencies can help you bring your artistic visions to life and create an environment that truly stands out."
+    "Brand Image Media Pvt. Ltd. aims to provide customised Digital Wall Painting Advertising solutions that help brands utilise prominent wall spaces for effective communication and enhanced visibility."
    ]
   },
   "gallery": [
-   "wall-work-1",
-   "wall-work-2",
-   "wall-work-3",
-   "wall-work-4",
-   "wall-work-5"
+   "dwp-work-2",
+   "dwp-work-3",
+   "dwp-work-4",
+   "dwp-work-5",
+   "dwp-work-6",
+   "dwp-work-7",
+   "dwp-work-8",
+   "dwp-work-9",
+   "dwp-work-10",
+   "wall-work-new",
+   "wall-painting-digital"
   ]
  },
  {

@@ -54,8 +54,12 @@ module.exports = {
   whyUs: {
     eyebrow: 'Why Choose Us',
     title: 'One stop solution for branding, advertising and activation',
-    intro:
-      'We offer complete solutions across <strong>printing, branding, advertising and outdoor media</strong> under one roof. With creative thinking and quality execution, we help brands build a strong and consistent market presence. Our focus is on <strong>reliable service, attention to detail and impactful communication</strong>. We work closely with our clients to deliver effective solutions that support their business growth.',
+    intro: [
+      'We offer complete solutions across <strong>printing, branding, advertising and outdoor media</strong> under one roof.',
+      'With creative thinking and quality execution, we help brands build a <strong>strong and consistent market presence</strong>.',
+      'Our focus is on <strong>reliable service, attention to detail and impactful communication</strong>.',
+      'We work closely with our clients to deliver effective solutions that support their <strong>business growth</strong>.',
+    ],
     items: [
       {
         icon: 'award',

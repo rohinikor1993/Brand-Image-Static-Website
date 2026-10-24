@@ -38,7 +38,7 @@ module.exports = {
     { display: '+91 7770018173', tel: '+917770018173' },
   ],
 
-  email: 'sales@brand-image.co.in',
+  email: 'operation@brand-image.co.in',
 
   // WhatsApp number in international format without "+" (existing site: 7770009506)
   whatsapp: {

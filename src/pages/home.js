@@ -18,7 +18,6 @@ const HERO_ARTWORK = {
   transit: { image: 'slider-art-transit', label: 'Transit Media', alt: 'Brand Image transit media advertising' },
   'wall-painting': { image: 'slider-art-wall-painting', label: 'Digital Wall Painting', alt: 'Brand Image digital wall painting services' },
   events: { image: 'slider-art-events', label: 'Event & Promotion', alt: 'Brand Image event and promotional services' },
-  promotional: { image: 'slider-art-promotional', label: 'Promotional Material', alt: 'Brand Image promotional material services' },
 };
 
 /* The home page header is the slider of the seven services (src/components/hero-slider.js): a new slide
@@ -154,10 +153,6 @@ function servicesSection() {
 </section>`;
 }
 
-/* Why choose us: the copy on the left; on the right a mosaic of three project photos that fills the
-   column from top to bottom, one for each word of the heading: activation (the promotion team, tall
-   on the left), branding (a showroom entrance) and advertising (display boards at a bus stand). Each
-   photo pans slowly and a soft light crosses them in turn (08-motion.css). */
 const WHY_PHOTOS = [
   { key: 'event-gulf-team', name: 'team', sizes: '(min-width: 1024px) 340px, 52vw' },
   { key: 'shop-hero-showroom', name: 'shop', sizes: '(min-width: 1024px) 300px, 46vw' },
@@ -167,6 +162,9 @@ const WHY_PHOTOS = [
 function whySection() {
   const w = site.whyUs;
   const title = esc(w.title).replace('branding, advertising', '<span class="why-visual__highlight">branding, advertising</span>');
+  const listItems = (Array.isArray(w.intro) ? w.intro : [w.intro])
+    .map((p) => `<li class="why-visual__list-item">${icon('check', { cls: 'why-visual__list-icon' })}<span>${p}</span></li>`)
+    .join('\n        ');
   const tiles = WHY_PHOTOS
     .map((p, k) => `<figure class="why-visual__tile why-visual__tile--${p.name}" style="--k:${k}">${img(p.key, { sizes: p.sizes, target: 800 })}</figure>`)
     .join('\n      ');
@@ -174,8 +172,9 @@ function whySection() {
   <div class="container why-visual__layout">
     <div class="why-visual__content" data-reveal>
       <p class="eyebrow why-visual__eyebrow">${esc(w.eyebrow)}</p>
-      <h2 class="why-visual__title" id="why-title">${title}</h2>
-      <p class="why-visual__intro">${w.intro}</p>
+      <ul class="why-visual__list" id="why-title">
+        ${listItems}
+      </ul>
     </div>
     <div class="why-visual__mosaic" data-reveal>
       ${tiles}

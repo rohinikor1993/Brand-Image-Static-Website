@@ -86,13 +86,13 @@ module.exports = function about() {
 </section>`;
 
   /* ---------------------------------------------------------------- Core strengths */
-  const cycleTitle = splitTitle('<span class="ab-strengths__hl ab-strengths__hl--blue">Printing,</span> <span class="ab-strengths__hl ab-strengths__hl--orange">Branding,</span> <span class="ab-strengths__hl ab-strengths__hl--navy">Advertising</span> &amp; <span class="ab-strengths__hl ab-strengths__hl--deep-orange">Events</span>');
+  const cycleTitle = splitTitle('<span class="ab-strengths__hl ab-strengths__hl--blue">Printing,</span> <span class="ab-strengths__hl ab-strengths__hl--orange">Retail Branding,</span> <span class="ab-strengths__hl ab-strengths__hl--navy">Outdoor Advertising</span> &amp; <span class="ab-strengths__hl ab-strengths__hl--deep-orange">Events</span>');
   const strengths = `<section class="section section--soft ab-strengths" aria-labelledby="strengths-title" data-live>
   <div class="container">
     <div class="section-head section-head--center" data-reveal>
       <p class="eyebrow">Core Strengths</p>
       <h2 class="section-title" id="strengths-title"${cycleTitle.attrs}>${cycleTitle.html}</h2>
-      <p class="lead">${esc(a.paragraphs[0].split('. ')[0] + '.')}</p>
+      <p class="lead">${config.company.footerDesc}</p>
     </div>
     <div class="ab-strengths__grid">
       ${a.strengths.map((st, i) => `<article class="ab-power" data-reveal style="--reveal-delay:${i * 0.1}s;--k:${i}">

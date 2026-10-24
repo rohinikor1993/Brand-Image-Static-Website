@@ -1,4 +1,4 @@
-﻿{
+{
   "print-machine": {
     "path": "assets/img/work/printing-large-format-printer",
     "widths": [
@@ -76,6 +76,42 @@
     "alt": "Mahindra backdrop flex coming off a large-format printer",
     "focal": "50% 50%",
     "category": "printing"
+  },
+  "shop-vivo-exterior": {
+    "path": "assets/img/work/shop-vivo-exterior",
+    "widths": [480, 800, 1040],
+    "width": 1200,
+    "height": 1800,
+    "alt": "Vivo mobile shop exterior with full branding and arch gate",
+    "focal": "50% 40%",
+    "category": "shop-branding"
+  },
+  "shop-vivo-backlit": {
+    "path": "assets/img/work/shop-vivo-backlit",
+    "widths": [480, 800, 1040],
+    "width": 1040,
+    "height": 588,
+    "alt": "Vivo backlit board inside a mobile shop",
+    "focal": "50% 50%",
+    "category": "shop-branding"
+  },
+  "shop-vivo-wall": {
+    "path": "assets/img/work/shop-vivo-wall",
+    "widths": [480, 774],
+    "width": 774,
+    "height": 1032,
+    "alt": "Vivo V20 wall branding poster inside a shop",
+    "focal": "50% 40%",
+    "category": "shop-branding"
+  },
+  "shop-flex-board": {
+    "path": "assets/img/work/shop-flex-board",
+    "widths": [480, 850],
+    "width": 850,
+    "height": 637,
+    "alt": "Flex board shop branding above a medical store",
+    "focal": "50% 40%",
+    "category": "shop-branding"
   },
   "shop-arch-vivo": {
     "path": "assets/img/work/shop-branding-vivo-arch-gate",
@@ -182,7 +218,9 @@
   },
   "outdoor-hoarding-gujral-arcade": {
     "path": "assets/img/work/outdoor-hoarding-gujral-arcade",
-    "widths": [800],
+    "widths": [
+      800
+    ],
     "width": 1444,
     "height": 915,
     "alt": "Gujral Arcade hoarding billboard on a Nashik road",
@@ -191,7 +229,9 @@
   },
   "outdoor-pole-kiosk-display": {
     "path": "assets/img/work/outdoor-pole-kiosk-display",
-    "widths": [800],
+    "widths": [
+      800
+    ],
     "width": 1487,
     "height": 838,
     "alt": "Vivo advertising display boards at a bus stand",
@@ -200,7 +240,9 @@
   },
   "outdoor-bus-shelter": {
     "path": "assets/img/work/outdoor-bus-shelter",
-    "widths": [800],
+    "widths": [
+      800
+    ],
     "width": 985,
     "height": 554,
     "alt": "Bus shelter with Vaseline advertising displays",
@@ -208,17 +250,19 @@
     "category": "outdoor"
   },
   "outdoor-wall-wrap-hero": {
-    "path": "assets/img/work/outdoor-wall-wrap-hero",
-    "widths": [800],
-    "width": 2000,
-    "height": 1500,
-    "alt": "Hero motorcycle wall wrap advertising on a building",
+    "path": "assets/img/work/outdoor-wall-wrap-new",
+    "widths": [480, 800, 1040, 1280],
+    "width": 1280,
+    "height": 590,
+    "alt": "Outdoor wall advertising boards at a busy roadside location",
     "focal": "50% 50%",
     "category": "outdoor"
   },
   "outdoor-mobile-van-hcg": {
     "path": "assets/img/work/outdoor-mobile-van-hcg",
-    "widths": [800],
+    "widths": [
+      800
+    ],
     "width": 985,
     "height": 554,
     "alt": "HCG Manav mobile hoarding van",
@@ -263,7 +307,7 @@
     "height": 3120,
     "alt": "vivo display boards hanging above a busy bus stand platform",
     "focal": "50% 35%",
-    "category": "outdoor"
+    "category": null
   },
   "outdoor-highway-hoarding": {
     "path": "assets/img/work/outdoor-highway-hoarding",
@@ -278,6 +322,15 @@
     "focal": "50% 60%",
     "category": "outdoor"
   },
+  "transit-bus-auto": {
+    "path": "assets/img/work/transit-bus-auto",
+    "widths": [480, 800, 1040, 1280],
+    "width": 1578,
+    "height": 806,
+    "alt": "Bus branding and auto branding transit media advertising",
+    "focal": "50% 50%",
+    "category": null
+  },
   "transit-mahindra-van": {
     "path": "assets/img/work/transit-mahindra-mobile-van",
     "widths": [
@@ -288,6 +341,32 @@
     "width": 1280,
     "height": 720,
     "alt": "Mahindra EPC mobile van with advertising panels",
+    "focal": "50% 50%",
+    "category": "transit"
+  },
+  "transit-bus-campaign": {
+    "path": "assets/img/work/transit-bus-campaign",
+    "widths": [
+      480,
+      800,
+      951
+    ],
+    "width": 951,
+    "height": 709,
+    "alt": "Bus advertising with full side panel branding",
+    "focal": "50% 50%",
+    "category": "transit"
+  },
+  "transit-auto-campaign": {
+    "path": "assets/img/work/transit-auto-campaign",
+    "widths": [
+      480,
+      800,
+      1032
+    ],
+    "width": 1032,
+    "height": 774,
+    "alt": "Auto rickshaw with branded advertising wrap",
     "focal": "50% 50%",
     "category": "transit"
   },
@@ -360,7 +439,10 @@
   },
   "wall-work-1": {
     "path": "assets/img/work/wall-work-1",
-    "widths": [480, 800],
+    "widths": [
+      480,
+      800
+    ],
     "width": 800,
     "height": 600,
     "alt": "Digital wall painting advertising by Brand Image",
@@ -368,7 +450,11 @@
   },
   "wall-work-2": {
     "path": "assets/img/work/wall-work-2",
-    "widths": [480, 800, 1040],
+    "widths": [
+      480,
+      800,
+      1040
+    ],
     "width": 1040,
     "height": 780,
     "alt": "Wall painting advertisement by Brand Image Nashik",
@@ -376,7 +462,11 @@
   },
   "wall-work-3": {
     "path": "assets/img/work/wall-work-3",
-    "widths": [480, 800, 1040],
+    "widths": [
+      480,
+      800,
+      1040
+    ],
     "width": 1040,
     "height": 780,
     "alt": "Brand wall painting work by Brand Image",
@@ -384,7 +474,11 @@
   },
   "wall-work-4": {
     "path": "assets/img/work/wall-work-4",
-    "widths": [480, 800, 1040],
+    "widths": [
+      480,
+      800,
+      1040
+    ],
     "width": 1040,
     "height": 780,
     "alt": "Outdoor wall painting advertising in Nashik",
@@ -392,7 +486,11 @@
   },
   "wall-work-5": {
     "path": "assets/img/work/wall-work-5",
-    "widths": [480, 800, 1040],
+    "widths": [
+      480,
+      800,
+      1040
+    ],
     "width": 1040,
     "height": 780,
     "alt": "Wall painting campaign by Brand Image Media",
@@ -625,8 +723,7 @@
     "width": 1672,
     "height": 941,
     "alt": "Premium large-format printer producing a blue, orange and ivory advertising banner",
-    "focal": "50% 50%",
-    "category": "printing"
+    "focal": "50% 50%"
   },
   "hero-ai-shop-branding": {
     "path": "assets/img/hero-ai/hero-ai-shop-branding",
@@ -638,8 +735,7 @@
     "width": 1672,
     "height": 941,
     "alt": "Modern retail storefront with coordinated professional branding",
-    "focal": "50% 50%",
-    "category": "shop-branding"
+    "focal": "50% 50%"
   },
   "hero-ai-outdoor": {
     "path": "assets/img/hero-ai/hero-ai-outdoor",
@@ -651,8 +747,7 @@
     "width": 1672,
     "height": 941,
     "alt": "Professionally installed outdoor billboard in a modern city",
-    "focal": "50% 50%",
-    "category": "outdoor"
+    "focal": "50% 50%"
   },
   "hero-ai-transit": {
     "path": "assets/img/hero-ai/hero-ai-transit",
@@ -664,8 +759,7 @@
     "width": 1672,
     "height": 941,
     "alt": "Blue and orange branded commercial vehicle in an urban setting",
-    "focal": "50% 50%",
-    "category": "transit"
+    "focal": "50% 50%"
   },
   "hero-ai-wall-painting": {
     "path": "assets/img/hero-ai/hero-ai-wall-painting",
@@ -689,8 +783,7 @@
     "width": 1672,
     "height": 941,
     "alt": "Navy and orange corporate brand activation event stage",
-    "focal": "50% 50%",
-    "category": "events"
+    "focal": "50% 50%"
   },
   "hero-ai-promotional": {
     "path": "assets/img/hero-ai/hero-ai-promotional",
@@ -702,70 +795,65 @@
     "width": 1672,
     "height": 941,
     "alt": "Coordinated blue, orange and ivory branded promotional products",
-    "focal": "50% 50%",
-    "category": "promotional"
+    "focal": "50% 50%"
   },
   "slider-art-printing": {
     "path": "assets/img/slider-artwork/printing",
     "widths": [
       800,
       1280,
-      1672
+      1585
     ],
-    "width": 1672,
-    "height": 729,
+    "width": 1585,
+    "height": 691,
     "alt": "Brand Image printing services",
-    "focal": "50% 50%",
-    "category": "printing"
+    "focal": "50% 50%"
   },
   "slider-art-shop-branding": {
     "path": "assets/img/slider-artwork/shop-branding",
     "widths": [
       800,
       1280,
-      1672
+      1585
     ],
-    "width": 1672,
-    "height": 729,
+    "width": 1585,
+    "height": 691,
     "alt": "Brand Image shop branding services",
-    "focal": "50% 50%",
-    "category": "shop-branding"
+    "focal": "50% 50%"
   },
   "slider-art-outdoor": {
     "path": "assets/img/slider-artwork/outdoor",
     "widths": [
       800,
       1280,
-      1672
+      1585
     ],
-    "width": 1672,
-    "height": 729,
+    "width": 1585,
+    "height": 691,
     "alt": "Brand Image outdoor advertising services",
-    "focal": "50% 50%",
-    "category": "outdoor"
+    "focal": "50% 50%"
   },
   "slider-art-transit": {
     "path": "assets/img/slider-artwork/transit",
     "widths": [
       800,
       1280,
-      1672
+      1600
     ],
-    "width": 1672,
-    "height": 729,
+    "width": 1600,
+    "height": 902,
     "alt": "Brand Image transit media advertising",
-    "focal": "50% 50%",
-    "category": "transit"
+    "focal": "50% 50%"
   },
   "slider-art-wall-painting": {
     "path": "assets/img/slider-artwork/wall-painting",
     "widths": [
       800,
       1280,
-      1672
+      1585
     ],
-    "width": 1672,
-    "height": 729,
+    "width": 1585,
+    "height": 691,
     "alt": "Brand Image digital wall painting services",
     "focal": "50% 50%"
   },
@@ -774,13 +862,12 @@
     "widths": [
       800,
       1280,
-      1672
+      1585
     ],
-    "width": 1672,
-    "height": 729,
+    "width": 1585,
+    "height": 691,
     "alt": "Brand Image event and promotional services",
-    "focal": "50% 50%",
-    "category": "events"
+    "focal": "50% 50%"
   },
   "slider-art-promotional": {
     "path": "assets/img/slider-artwork/promotional",
@@ -790,10 +877,9 @@
       1672
     ],
     "width": 1672,
-    "height": 729,
+    "height": 941,
     "alt": "Brand Image promotional material services",
-    "focal": "50% 50%",
-    "category": "promotional"
+    "focal": "50% 50%"
   },
   "cta-collage": {
     "path": "assets/img/cta/brand-image-services-collage",
@@ -855,6 +941,139 @@
     "height": 941,
     "alt": "Brand Image project work",
     "focal": "50% 50%",
+    "category": null
+  },
+  "wall-painting-digital": {
+    "path": "assets/img/work/wall-painting-digital",
+    "widths": [
+      480,
+      800,
+      1280,
+      1600
+    ],
+    "width": 2000,
+    "height": 324,
+    "alt": "Digital Wall Painting Advertising — bus and auto branding collage",
+    "category": null
+  },
+  "wall-work-new": {
+    "path": "assets/img/work/wall-work-new",
+    "widths": [
+      480,
+      800,
+      1040,
+      1280
+    ],
+    "width": 1592,
+    "height": 807,
+    "alt": "Digital Wall Painting Advertising work by Brand Image Media",
+    "category": null
+  },
+  "dwp-work-1": {
+    "path": "assets/img/work/dwp-work-1",
+    "widths": [
+      480,
+      800
+    ],
+    "width": 1000,
+    "height": 750,
+    "alt": "Digital Wall Painting work by Brand Image Media Nashik",
+    "category": "wall-painting"
+  },
+  "dwp-work-2": {
+    "path": "assets/img/work/dwp-work-2",
+    "widths": [
+      480,
+      800,
+      1040
+    ],
+    "width": 1040,
+    "height": 780,
+    "alt": "Digital Wall Painting work by Brand Image Media Nashik",
+    "category": "wall-painting"
+  },
+  "dwp-work-3": {
+    "path": "assets/img/work/dwp-work-3",
+    "widths": [
+      480,
+      800,
+      1040,
+      1280
+    ],
+    "width": 1600,
+    "height": 1200,
+    "alt": "Digital Wall Painting work by Brand Image Media Nashik",
+    "category": "wall-painting"
+  },
+  "dwp-work-4": {
+    "path": "assets/img/work/dwp-work-4",
+    "widths": [
+      480,
+      800,
+      1040,
+      1280
+    ],
+    "width": 1600,
+    "height": 1200,
+    "alt": "Digital Wall Painting work by Brand Image Media Nashik",
+    "category": "wall-painting"
+  },
+  "dwp-work-5": {
+    "path": "assets/img/work/dwp-work-5",
+    "widths": [
+      480,
+      800,
+      1040,
+      1280
+    ],
+    "width": 1600,
+    "height": 1200,
+    "alt": "Digital Wall Painting work by Brand Image Media Nashik",
+    "category": "wall-painting"
+  },
+  "dwp-work-6": {
+    "path": "assets/img/work/dwp-work-6",
+    "widths": [480, 800, 1000],
+    "width": 1000,
+    "height": 750,
+    "alt": "Wall painting ad on building wall in Nashik Maharashtra",
+    "focal": "50% 40%",
+    "category": null
+  },
+  "dwp-work-7": {
+    "path": "assets/img/work/dwp-work-7",
+    "widths": [480, 800, 1040],
+    "width": 1040,
+    "height": 780,
+    "alt": "Multiple wall painting advertisements on compound wall in Dhule",
+    "focal": "50% 40%",
+    "category": null
+  },
+  "dwp-work-8": {
+    "path": "assets/img/work/dwp-work-8",
+    "widths": [480, 800, 1040, 1600],
+    "width": 1600,
+    "height": 1200,
+    "alt": "Wall painting advertisement close-up in Ojhar Maharashtra",
+    "focal": "50% 40%",
+    "category": null
+  },
+  "dwp-work-9": {
+    "path": "assets/img/work/dwp-work-9",
+    "widths": [480, 800, 1040, 1600],
+    "width": 1600,
+    "height": 1200,
+    "alt": "Long wall with multiple advertising paintings in Trimbak",
+    "focal": "50% 40%",
+    "category": null
+  },
+  "dwp-work-10": {
+    "path": "assets/img/work/dwp-work-10",
+    "widths": [480, 800, 1040, 1600],
+    "width": 1600,
+    "height": 1200,
+    "alt": "Hero motorcycle wall painting advertisement in Paithan",
+    "focal": "50% 40%",
     "category": null
   }
 }

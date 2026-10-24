@@ -792,17 +792,38 @@
 
 .why-visual__highlight { color: var(--why-orange); }
 
-.why-visual__intro {
-  max-width: 59ch;
-  margin-top: clamp(22px, 2vw, 30px);
+.why-visual__list {
+  list-style: none;
+  padding: 0;
+  margin: clamp(24px, 2.5vw, 36px) 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+  gap: 18px 40px;
+}
+
+.why-visual__list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
   color: #536371;
-  font-size: clamp(1rem, 1.15vw, 1.2rem);
+  font-size: clamp(1rem, 1.1vw, 1.15rem);
   line-height: 1.72;
 }
 
+.why-visual__list-icon {
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  margin-top: 3px;
+  padding: 4px;
+  background: var(--why-orange);
+  border-radius: 50%;
+  color: #fff;
+  box-sizing: border-box;
+}
+
 /* Right: three project photos in a mosaic, the team photo tall on the left, the showroom and the bus
-   stand boards stacked on the right. Computers: as tall as the text beside it (at least 400px), so the
-   column is filled from top to bottom; phones and tablets: 4 : 3.4. */
+   stand boards stacked on the right. */
 .why-visual__mosaic {
   display: grid;
   grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
@@ -831,7 +852,6 @@
   grid-row: 1 / span 2;
 }
 
-/* where each photo zooms towards (08-motion.css), so they drift in different directions */
 .why-visual__tile--team img { object-position: 55% 50%; transform-origin: 35% 60%; }
 .why-visual__tile--shop img { transform-origin: 70% 30%; }
 .why-visual__tile--outdoor img { transform-origin: 40% 80%; }
@@ -1253,8 +1273,9 @@
 }
 
 .footer-logo img {
-  width: auto;
-  height: 110px;
+  width: 100%;
+  max-width: 220px;
+  height: auto;
 }
 
 .footer-about p {
