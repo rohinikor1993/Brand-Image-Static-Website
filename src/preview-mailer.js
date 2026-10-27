@@ -46,7 +46,8 @@ function settings(projectDir) {
     port,
     secure: get('SMTP_SECURE', port === 465 ? 'ssl' : 'tls').toLowerCase(),
     user: get('SMTP_USER'),
-    pass: get('SMTP_PASS'),
+    // Google shows app passwords in groups of four ("abcd efgh ijkl mnop"); the spaces are not part of it
+    pass: /(^|\.)(gmail|google(mail)?)\.com$/i.test(get('SMTP_HOST')) ? get('SMTP_PASS').replace(/\s+/g, '') : get('SMTP_PASS'),
     from: get('MAIL_FROM', get('SMTP_USER')),
     fromName: get('MAIL_FROM_NAME', 'Brand Image Website'),
     to: get('MAIL_TO').split(',').map((s) => s.trim()).filter(Boolean),

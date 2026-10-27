@@ -367,6 +367,88 @@
     "focal": "50% 60%",
     "category": "outdoor"
   },
+  "outdoor-roadside-hoarding": {
+    "path": "assets/img/work/outdoor-roadside-hoarding",
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "width": 4608,
+    "height": 2076,
+    "alt": "Roadside hoarding beside a busy market road",
+    "focal": "50% 50%",
+    "category": "outdoor"
+  },
+  "outdoor-led-van-activity": {
+    "path": "assets/img/work/outdoor-led-van-activity",
+    "widths": [
+      480,
+      800,
+      1200
+    ],
+    "width": 1280,
+    "height": 960,
+    "alt": "LED screen van running a brand activity on the street",
+    "focal": "50% 50%",
+    "category": "outdoor"
+  },
+  "outdoor-tricycle-campaign": {
+    "path": "assets/img/work/outdoor-tricycle-campaign",
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "width": 5152,
+    "height": 3864,
+    "alt": "Branded advertising tricycles lined up along a city road",
+    "focal": "50% 50%",
+    "category": "outdoor"
+  },
+  "outdoor-vivo-building": {
+    "path": "assets/img/work/outdoor-vivo-building",
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "width": 6000,
+    "height": 4000,
+    "alt": "Vivo branding across a commercial building front",
+    "focal": "50% 50%",
+    "category": "outdoor"
+  },
+  "outdoor-tricycles-road": {
+    "path": "assets/img/work/transit-tricycles-on-road",
+    "widths": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "width": 5152,
+    "height": 3864,
+    "alt": "Branded advertising tricycles moving along a city road",
+    "focal": "50% 50%",
+    "category": "outdoor"
+  },
+  "outdoor-celekt-vans": {
+    "path": "assets/img/work/transit-celekt-branded-vans",
+    "widths": [
+      480,
+      800,
+      1032
+    ],
+    "width": 1032,
+    "height": 774,
+    "alt": "Convoy of Celekt branded mobile vans",
+    "focal": "50% 50%",
+    "category": "outdoor"
+  },
   "transit-bus-auto": {
     "path": "assets/img/work/transit-bus-auto",
     "widths": [

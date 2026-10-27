@@ -4,8 +4,14 @@
  *
  *   node src/build.js
  *
- * Renders every page from src/pages + src/components + src/content into ./site,
- * bundles the CSS, copies the JavaScript and writes sitemap.xml / robots.txt.
+ * Builds the whole website into ./site, starting from an empty folder every time:
+ *   1. ./site is emptied (it is build output only: never edit files in it by hand),
+ *   2. everything in ./public is copied in as it is: images and fonts (public/assets),
+ *      favicons, send-enquiry.php and the mailer library (public/lib),
+ *   3. every page is rendered from src/pages + src/components + src/content, the CSS is
+ *      bundled, the JavaScript copied, and sitemap.xml / robots.txt / site.webmanifest written.
+ * So ./site can be deleted at any time and recreated with: npm run build
+ * (.env is never copied: it stays in the project folder, or one folder above public_html online.)
  */
 const fs = require('fs');
 const path = require('path');
@@ -14,6 +20,7 @@ const esbuild = require('esbuild');
 
 const ROOT = path.resolve(__dirname, '..');
 const SITE = path.join(ROOT, 'site');
+const PUBLIC = path.join(ROOT, 'public');
 const config = require('./config');
 const layout = require('./components/layout');
 
@@ -36,6 +43,29 @@ function write(rel, content) {
   const file = path.join(SITE, rel);
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, content);
+}
+
+/* ---------------------------------------------------------------- static files */
+/** Empties ./site and copies ./public into it (files that never go online are skipped). */
+const NEVER_COPY = new Set(['.env', '.DS_Store', 'Thumbs.db', 'desktop.ini']);
+function copyPublic() {
+  if (!fs.existsSync(PUBLIC)) {
+    throw new Error(`The public folder is missing (${PUBLIC}): it holds the images, favicons and send-enquiry.php`);
+  }
+  fs.rmSync(SITE, { recursive: true, force: true });
+  let count = 0;
+  const copyDir = (from, to) => {
+    fs.mkdirSync(to, { recursive: true });
+    fs.readdirSync(from, { withFileTypes: true }).forEach((entry) => {
+      if (NEVER_COPY.has(entry.name) || entry.name.endsWith('.zip')) return;
+      const src = path.join(from, entry.name);
+      const dest = path.join(to, entry.name);
+      if (entry.isDirectory()) copyDir(src, dest);
+      else if (entry.isFile()) { fs.copyFileSync(src, dest); count += 1; }
+    });
+  };
+  copyDir(PUBLIC, SITE);
+  return count;
 }
 
 /* ---------------------------------------------------------------- CSS */
@@ -175,6 +205,7 @@ function alternateSections(html) {
 
 function main() {
   const t0 = Date.now();
+  const copied = copyPublic();
   const assets = { css: buildCss(), js: buildJs(), hero: buildHeroJs() };
   const pages = PAGES.flatMap((fn) => fn());
   const seen = new Set();
@@ -185,7 +216,7 @@ function main() {
   });
   buildSeoFiles(pages);
   const problems = checkOutput(pages);
-  console.log(`Built ${pages.length} pages in ${Date.now() - t0} ms → ${path.relative(process.cwd(), SITE) || SITE}`);
+  console.log(`Copied ${copied} files from public, built ${pages.length} pages in ${Date.now() - t0} ms → ${path.relative(process.cwd(), SITE) || SITE}`);
   if (problems.length) {
     console.log(`\n${problems.length} problem(s):\n - ${problems.join('\n - ')}`);
     process.exitCode = 1;

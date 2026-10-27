@@ -63,6 +63,23 @@ function hero(s) {
 }
 
 /* ---------------------------------------------------------------- 2. Overview */
+/* The box under the overview text: the service's features as a checklist, or, when the service has
+   intro.approach in services.json, a short "Our Approach" note (paragraphs and a closing tagline). */
+function featuresBox(s, f) {
+  const a = s.intro.approach;
+  if (a) {
+    return `<div class="svc-features svc-features--approach" data-reveal>
+        <h3 class="svc-features__title">${esc(a.title || 'Our Approach')}</h3>
+        ${(a.paragraphs || []).map((p) => `<p>${esc(p)}</p>`).join('\n        ')}
+        ${a.tagline ? `<p class="svc-features__tagline">${esc(a.tagline)}</p>` : ''}
+      </div>`;
+  }
+  return `<div class="svc-features" data-reveal>
+        <h3 class="svc-features__title">${esc(f.title)}</h3>
+        <ul>${f.list.map((x) => `<li>${icon('check-circle', { size: 18 })}<span>${esc(x)}</span></li>`).join('')}</ul>
+      </div>`;
+}
+
 function intro(s, file, mainKey, subKey) {
   const f = S.serviceFeatures(s);
   const shot = (key, cls, sizes, target) => (key
@@ -73,10 +90,7 @@ function intro(s, file, mainKey, subKey) {
     <div class="svc-intro__text">
       ${head({ eyebrow: 'Overview', title: esc(s.intro.heading), id: 'intro-title' })}
       <div class="svc-prose" data-reveal>${s.intro.paragraphs.map((p) => `<p>${unlinkSelf(p, file)}</p>`).join('')}</div>
-      <div class="svc-features" data-reveal>
-        <h3 class="svc-features__title">${esc(f.title)}</h3>
-        <ul>${f.list.map((x) => `<li>${icon('check-circle', { size: 18 })}<span>${esc(x)}</span></li>`).join('')}</ul>
-      </div>
+      ${featuresBox(s, f)}
     </div>
     <div class="svc-intro__media${subKey ? '' : ' svc-intro__media--single'}" data-reveal="img">
       ${shot(mainKey, 'svc-shot--main', '(min-width: 1850px) 580px, (min-width: 1550px) 32vw, (min-width: 1280px) 500px, (min-width: 1024px) 40vw, 92vw', 800)}

@@ -7992,6 +7992,25 @@ a:hover .svc-link .icon,
   margin-top: 10px;
 }
 
+/* "Our Approach" note in place of the checklist */
+.svc-features--approach p {
+  color: var(--sv-text);
+  font-size: .975rem;
+  line-height: 1.7;
+}
+
+.svc-features--approach p + p {
+  margin-top: 10px;
+}
+
+.svc-features--approach .svc-features__tagline {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(var(--sv-orange-rgb), .25);
+  color: var(--sv-navy);
+  font-weight: 700;
+}
+
 .svc-features ul {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
@@ -8231,6 +8250,21 @@ a:hover .svc-link .icon,
 
   .svc-tiles > :last-child:nth-child(odd) .svc-tile__media {
     aspect-ratio: 16 / 7;
+  }
+}
+
+/* photo cards that carry a description: one per row on phones, so the text is not squeezed */
+@media (max-width: 639px) {
+  .svc-tiles:has(.svc-tile__body p) {
+    grid-template-columns: 1fr;
+  }
+
+  .svc-tiles:has(.svc-tile__body p) > :last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+
+  .svc-tiles:has(.svc-tile__body p) .svc-tile__media {
+    aspect-ratio: 16 / 9;
   }
 }
 

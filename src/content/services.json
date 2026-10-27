@@ -358,8 +358,8 @@
    "cta": "Explore Transit Media"
   },
   "hero": {
-   "image": "transit-tricycles-lineup",
-   "inset": "transit-auto"
+   "image": "transit-bus-auto-branding",
+   "inset": "transit-auto-hdfc-side"
   },
   "intro": {
    "heading": "Transit Media Advertising",
@@ -451,10 +451,19 @@
   "intro": {
    "heading": "A New-Age Outdoor Advertising Solution",
    "paragraphs": [
-    "Digital Wall Painting Advertising is an innovative advertising solution that transforms ordinary walls into attractive brand communication spaces. Using advanced digital wall printing technology, high-quality graphics, brand logos, product visuals, and promotional messages can be printed directly onto suitable wall surfaces.",
-    "This technology offers a creative and visually impactful alternative to conventional wall painting, helping brands increase visibility and create memorable impressions among their target audiences."
+    "Digital Wall Painting Advertising is an innovative outdoor advertising solution that transforms ordinary walls into attractive brand communication spaces using digitally printed advertising media.",
+    "In this process, high-quality brand creatives, logos, product visuals, and promotional messages are digitally printed on suitable wall media. The printed media is then professionally pasted or installed on selected wall surfaces, creating a visually appealing and impactful outdoor advertisement.",
+    "This solution combines the flexibility of digital printing with the visibility of outdoor wall advertising, enabling brands to communicate their message effectively across urban, semi-urban, and rural markets."
    ],
-   "image": "dwp-work-1"
+   "image": "dwp-work-1",
+   "approach": {
+    "title": "Our Approach",
+    "paragraphs": [
+     "Brand Image Media Pvt. Ltd. provides customised Digital Wall Painting Advertising solutions, covering location identification, creative planning, digital media printing, wall installation, and campaign documentation.",
+     "Our goal is to transform available wall spaces into attractive advertising assets that strengthen brand visibility and create lasting impressions."
+    ],
+    "tagline": "Turn Ordinary Walls into Powerful Brand Experiences."
+   }
   },
   "features": [
    "Direct digital printing on suitable wall surfaces.",
@@ -472,33 +481,33 @@
     "items": [
      {
       "icon": "printer",
-      "title": "Direct Digital Printing",
-      "text": "Advanced digital printing technology that applies high-resolution graphics, brand logos and promotional messages directly onto suitable wall surfaces."
+      "title": "High-Quality Digital Printing",
+      "text": "Sharp graphics, vibrant colours, and detailed brand visuals."
      },
      {
       "icon": "image",
-      "title": "High-Quality Brand Visuals",
-      "text": "Vibrant colours and detailed brand visuals that create lasting impressions and communicate your brand identity with clarity and impact."
+      "title": "Professional Wall Installation",
+      "text": "Digitally printed media is pasted onto suitable wall surfaces for an attractive finish."
      },
      {
       "icon": "map-pin",
-      "title": "High-Visibility Locations",
-      "text": "Ideal for commercial buildings, retail outlets, market areas and any high-visibility location where your brand needs maximum exposure."
+      "title": "Customised Brand Creatives",
+      "text": "Designs tailored to brand guidelines, products, and campaign objectives."
      },
      {
       "icon": "layers",
-      "title": "Customised Solutions",
-      "text": "Branding solutions tailored to your campaign requirements — size, placement and design are adapted to your specific goals and target audience."
+      "title": "Strategic Location Selection",
+      "text": "Suitable for roadside walls, commercial areas, market locations, retail zones, and other high-visibility spaces, subject to permissions."
      },
      {
       "icon": "megaphone",
-      "title": "Outdoor Brand Awareness",
-      "text": "An innovative approach to local market promotion that turns ordinary walls into powerful advertising media and drives brand recognition."
+      "title": "Local Market Visibility",
+      "text": "Helps brands connect with audiences along daily travel routes and in local markets."
      },
      {
       "icon": "sparkles",
-      "title": "Our Approach",
-      "text": "Brand Image Media Pvt. Ltd. aims to provide customised Digital Wall Painting Advertising solutions that help brands utilise prominent wall spaces for effective communication and enhanced visibility."
+      "title": "Flexible Advertising Solutions",
+      "text": "Campaigns can be planned across multiple locations according to the brand's requirements."
      }
     ]
    }
