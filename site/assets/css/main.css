@@ -7918,7 +7918,7 @@ a:hover .svc-link .icon,
   background: var(--sv-navy);
   color: var(--sv-orange-2);
   box-shadow: 0 10px 20px -12px rgba(var(--sv-navy-rgb), .7);
-  transition: background-color .35s var(--ease), transform .45s var(--ease-out);
+  transition: background-color .35s var(--ease), color .35s var(--ease), transform .45s var(--ease-out);
 }
 
 .svc-icon .icon {
@@ -7986,6 +7986,10 @@ a:hover .svc-link .icon,
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
+}
+
+.svc-features__title + p {
+  margin-top: 10px;
 }
 
 .svc-features ul {
@@ -8166,8 +8170,10 @@ a:hover .svc-link .icon,
   border-top: 1px solid var(--sv-line);
 }
 
+/* on hover only the icon box changes: navy to blue, with a white icon (the card itself stays as it is) */
 .svc-cap:hover .svc-icon {
-  background: var(--sv-orange);
+  background: var(--sv-blue);
+  color: var(--white);
   transform: translateY(-2px);
 }
 
@@ -8273,6 +8279,34 @@ a:hover .svc-link .icon,
 
 .svc-tile:hover .svc-tile__media img {
   scale: 1.05;
+}
+
+/* a format without a photo: its icon on a soft panel, the same size as a photo */
+.svc-tile__media--icon {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--sv-cream) 0%, var(--sv-cream-soft, #fffaf0) 100%);
+}
+
+.svc-tile__ph {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 24px;
+  background: var(--sv-navy);
+  color: var(--sv-orange-2);
+  box-shadow: var(--sv-shadow);
+  transition: scale .8s var(--ease-out);
+}
+
+.svc-tile__ph svg {
+  width: 44px;
+  height: 44px;
+}
+
+.svc-tile:hover .svc-tile__ph {
+  scale: 1.06;
 }
 
 .svc-tile__body {
@@ -8424,6 +8458,13 @@ a:hover .svc-link .icon,
   list-style: none;
 }
 
+/* six (or nine) cards: even rows of three, so no card sits alone on the last row */
+@media (min-width: 768px) {
+  .svc-cards:has(> li:last-child:nth-child(3n)) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 .svc-card {
   padding: 26px 24px 28px;
   border: 1px solid var(--sv-line);
@@ -8439,7 +8480,8 @@ a:hover .svc-link .icon,
 }
 
 .svc-card:hover .svc-icon {
-  background: var(--sv-orange);
+  background: var(--sv-blue);
+  color: var(--white);
 }
 
 .svc-card h3 {
@@ -10224,16 +10266,4 @@ html:not(.js) .svc-flow__controls {
 @keyframes gal-sheen {
   0% { transform: translateX(-120%); }
   10%, 100% { transform: translateX(120%); }
-}
-.svc-tiles--4 {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
-}
-
-@media (max-width: 767px) {
-  .svc-tiles--4 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-  }
 }
