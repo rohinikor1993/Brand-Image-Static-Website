@@ -13,7 +13,8 @@ module.exports = function gallery() {
   // Only categories that have photos are shown
   const cats = site.galleryCategories.filter((c) => Object.values(IMAGES).some((im) => im.category === c.key));
   // Keep the category order of the services
-  const keys = cats.flatMap((c) => Object.keys(IMAGES).filter((k) => IMAGES[k].category === c.key));
+  // (a photo marked "gallery": false in images.json is used elsewhere on the site but not shown here)
+  const keys = cats.flatMap((c) => Object.keys(IMAGES).filter((k) => IMAGES[k].category === c.key && IMAGES[k].gallery !== false));
   const count = (key) => keys.filter((k) => IMAGES[k].category === key).length;
 
   const filters = [

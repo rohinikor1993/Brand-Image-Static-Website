@@ -122,18 +122,24 @@ const CARD_PHOTOS = {
   printing: ['print-smart-posters', 'print-instore-branding'],
   'shop-branding': ['shop-arch-vivo', 'shop-bosch-board'],
   outdoor: ['outdoor-mall-backlit', 'outdoor-highway-hoarding'],
-  transit: ['transit-led-van', 'transit-mahindra-van'],
+  transit: ['transit-bus-boroplus-cream', 'transit-auto-hdfc-side'],
   'wall-painting': ['wall-work-1', 'wall-work-2'],
   events: ['event-launch-stage', 'event-hall'],
   promotional: ['promo-standees', 'promo-vivo-bag'],
 };
 
+/* Home-page card cover photo, when it should differ from the service's own hero photo. */
+const CARD_MAIN = {
+  transit: 'transit-bus-auto-branding',
+};
+
 function cardPhotos(s) {
+  const main = IMAGES[CARD_MAIN[s.key]] ? CARD_MAIN[s.key] : s.hero.image;
   const picked = (CARD_PHOTOS[s.key] || []).filter((k) => IMAGES[k]);
-  if (picked.length) return [s.hero.image, ...picked];
+  if (picked.length) return [main, ...picked];
   const own = Object.keys(IMAGES).filter((k) => IMAGES[k].category === s.key && k !== s.hero.image);
   const wide = (k) => IMAGES[k].width / IMAGES[k].height >= 1.25 && IMAGES[k].width / IMAGES[k].height <= 1.6;
-  return [s.hero.image, ...own.filter(wide).slice(0, 2)];
+  return [main, ...own.filter(wide).slice(0, 2)];
 }
 
 function servicesSection() {

@@ -1006,7 +1006,7 @@
   }
   .hero.artwork-slider .hero-slide__media { height: 100%; }
   .hero.artwork-slider .hero-slide__stage { height: 100%; aspect-ratio: auto; }
-  .hero.artwork-slider .hero-slide__artwork { object-fit: contain; }
+  .hero.artwork-slider .hero-slide__artwork { object-fit: cover; }
 }
 
 /* Pause / Play, over the bottom-right corner of the photo */

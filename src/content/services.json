@@ -104,7 +104,7 @@
   "icon": "store",
   "seo": {
    "title": "Professional Shop Branding Services | Brand Image | Maharashtra",
-   "description": "Our comprehensive shop branding services. Our expert team specializes in backlit board, frontlit board, acrylic board, clip-on board, and ACP paneling."
+   "description": "Our comprehensive shop branding services. Our expert team specializes in backlit board, frontlit board, clip-on board, and ACP paneling."
   },
   "short": "Helping businesses develop their brand identity and visual representation.",
   "slide": {
@@ -125,16 +125,17 @@
   "features": [
    "Backlit Board",
    "Frontlit Board",
-   "Acrylic Board",
    "Clip-on Board",
    "Sunboard Branding",
    "Counter Branding",
    "Arch Gate",
-   "ACP Panelling"
+   "ACP Panelling",
+   "ACP Board"
   ],
   "subservices": {
    "heading": "Shop Branding Services",
-   "intro": "We also offer custom branding elements such as backlit boards, frontlit boards, acrylic boards, clipon boards, sunboard branding, counter branding, arch gates, and ACP panelling. These unique elements add a touch of sophistication and individuality to your shop's branding, setting you apart from the competition.",
+   "allTiles": true,
+   "intro": "We also offer custom branding elements such as backlit boards, frontlit boards, clipon boards, sunboard branding, counter branding, arch gates, and ACP panelling. These unique elements add a touch of sophistication and individuality to your shop's branding, setting you apart from the competition.",
    "style": "image",
    "items": [
     {
@@ -148,12 +149,9 @@
      "image": "shop-flex-board"
     },
     {
-     "name": "Acrylic Board",
-     "icon": "layers-2"
-    },
-    {
      "name": "Clip-on Board",
-     "icon": "paperclip"
+     "icon": "paperclip",
+     "image": "shop-clipon-board"
     },
     {
      "name": "Sunboard Branding",
@@ -168,11 +166,17 @@
     {
      "name": "Arch Gate",
      "icon": "door-open",
-     "image": "shop-vivo-exterior"
+     "image": "shop-arch-vivo"
     },
     {
      "name": "ACP Panelling",
-     "icon": "columns-3"
+     "icon": "columns-3",
+     "image": "shop-vivo-exterior"
+    },
+    {
+     "name": "ACP Board",
+     "icon": "rectangle-horizontal",
+     "image": "shop-acp-board"
     }
    ]
   },
@@ -362,7 +366,8 @@
    "paragraphs": [
     "Transit Media Advertising specializes in creating dynamic marketing campaigns that effectively target audiences while they are on the move. With a primary focus on out-of-home advertising, we offer a range of innovative solutions that maximize brand exposure on buses, trains, subways, airports, and other modes of public transportation. Our team of experts works closely with clients to design captivating advertisements that capture the attention of commuters and travelers, ensuring that your brand message is seen by a wide and diverse audience."
    ],
-   "image": "transit-bus-campaign"
+   "image": "transit-bus-campaign",
+   "subImage": "transit-auto-hdfc-side"
   },
   "features": [
    "Auto Branding",
@@ -419,13 +424,10 @@
    ]
   },
   "gallery": [
-   "transit-auto-campaign",
-   "transit-celekt-vans",
-   "transit-tricycles-lineup",
-   "transit-auto",
-   "transit-tricycles-road",
-   "transit-mahindra-van",
-   "transit-led-van"
+   "transit-auto-hdfc-back",
+   "transit-bus-boroplus-cream",
+   "transit-bus-boroplus-back",
+   "transit-bus-auto-branding"
   ]
  },
  {

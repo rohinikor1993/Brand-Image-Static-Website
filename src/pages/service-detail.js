@@ -111,12 +111,17 @@ function offerSection(s) {
         <div><p class="svc-cap__num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</p><h3>${esc(it.name)}</h3><p>${esc(it.text)}</p></div>
       </li>`).join('')}</ol>`;
   } else {
-    // Formats with a project photo come first as photo cards; the others as compact icon cards
-    const withPhoto = sub.items.filter((it) => it.image);
-    const without = sub.items.filter((it) => !it.image);
+    // Formats with a project photo come first as photo cards (in even rows); the others as compact icon cards
+    // "allTiles": every format as a card in one even grid (a format without a photo shows its icon)
+    const withPhoto = sub.allTiles ? sub.items : sub.items.filter((it) => it.image);
+    const without = sub.allTiles ? [] : sub.items.filter((it) => !it.image);
+    const cols = (n) => (n % 4 === 0 ? 4 : n % 3 === 0 ? 3 : Math.min(n, 5));
+    const media = (it) => (it.image
+      ? img(it.image, { sizes: '(min-width: 1850px) 360px, (min-width: 1024px) 300px, 50vw', target: 480, alt: '' })
+      : `<span class="svc-tile__ph" aria-hidden="true">${icon(it.icon, { size: 44 })}</span>`);
     const photos = withPhoto.length
-      ? `<ul class="svc-tiles svc-tiles--${Math.min(withPhoto.length, 5)}">${withPhoto.map((it, i) => `<li class="svc-tile" data-reveal style="--reveal-delay:${(i % 5) * 0.06}s">
-          <div class="svc-tile__media">${img(it.image, { sizes: '(min-width: 1850px) 360px, (min-width: 1024px) 300px, 50vw', target: 480, alt: '' })}</div>
+      ? `<ul class="svc-tiles svc-tiles--${cols(withPhoto.length)}">${withPhoto.map((it, i) => `<li class="svc-tile" data-reveal style="--reveal-delay:${(i % 5) * 0.06}s">
+          <div class="svc-tile__media${it.image ? '' : ' svc-tile__media--icon'}">${media(it)}</div>
           <div class="svc-tile__body"><h3><span class="svc-tile__icon" aria-hidden="true">${icon(it.icon, { size: 18 })}</span>${esc(it.name)}</h3>${it.text ? `<p>${esc(it.text)}</p>` : ''}</div>
         </li>`).join('')}</ul>`
       : '';
@@ -311,7 +316,8 @@ function servicePage(s) {
   const pool = s.gallery && s.gallery.length ? s.gallery : (s.mosaic || []);
   const mainKey = s.intro.image || INTRO_FALLBACK[s.key] || null;
   if (mainKey) used.add(mainKey);
-  const subKey = pool.find((k) => !used.has(k)) || null;
+  // intro.subImage (services.json) picks the small overview photo; otherwise the first unused gallery photo
+  const subKey = s.intro.subImage || pool.find((k) => !used.has(k)) || null;
   if (subKey) used.add(subKey);
 
   const parts = [hero(s), intro(s, file, mainKey, subKey)];

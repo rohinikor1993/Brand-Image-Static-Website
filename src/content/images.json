@@ -79,7 +79,11 @@
   },
   "shop-vivo-exterior": {
     "path": "assets/img/work/shop-vivo-exterior",
-    "widths": [480, 800, 1040],
+    "widths": [
+      480,
+      800,
+      1040
+    ],
     "width": 1200,
     "height": 1800,
     "alt": "Vivo mobile shop exterior with full branding and arch gate",
@@ -88,16 +92,49 @@
   },
   "shop-vivo-backlit": {
     "path": "assets/img/work/shop-vivo-backlit",
-    "widths": [480, 800, 1040],
+    "widths": [
+      480,
+      800,
+      1040
+    ],
     "width": 1040,
     "height": 588,
     "alt": "Vivo backlit board inside a mobile shop",
     "focal": "50% 50%",
     "category": "shop-branding"
   },
+  "shop-clipon-board": {
+    "path": "assets/img/work/shop-vivo-backlit",
+    "widths": [
+      480,
+      800,
+      1040
+    ],
+    "width": 1040,
+    "height": 588,
+    "alt": "Clip-on board with Vivo branding above a mobile shop counter",
+    "focal": "50% 50%",
+    "category": null
+  },
+  "shop-acp-board": {
+    "path": "assets/img/work/shop-acp-board",
+    "widths": [
+      480,
+      800,
+      1152
+    ],
+    "width": 1152,
+    "height": 864,
+    "alt": "Bosch ACP shop board above an appliance store",
+    "focal": "50% 40%",
+    "category": null
+  },
   "shop-vivo-wall": {
     "path": "assets/img/work/shop-vivo-wall",
-    "widths": [480, 774],
+    "widths": [
+      480,
+      774
+    ],
     "width": 774,
     "height": 1032,
     "alt": "Vivo V20 wall branding poster inside a shop",
@@ -106,7 +143,10 @@
   },
   "shop-flex-board": {
     "path": "assets/img/work/shop-flex-board",
-    "widths": [480, 850],
+    "widths": [
+      480,
+      850
+    ],
     "width": 850,
     "height": 637,
     "alt": "Flex board shop branding above a medical store",
@@ -251,7 +291,12 @@
   },
   "outdoor-wall-wrap-hero": {
     "path": "assets/img/work/outdoor-wall-wrap-new",
-    "widths": [480, 800, 1040, 1280],
+    "widths": [
+      480,
+      800,
+      1040,
+      1280
+    ],
     "width": 1280,
     "height": 590,
     "alt": "Outdoor wall advertising boards at a busy roadside location",
@@ -324,12 +369,32 @@
   },
   "transit-bus-auto": {
     "path": "assets/img/work/transit-bus-auto",
-    "widths": [480, 800, 1040, 1280],
+    "widths": [
+      480,
+      800,
+      1040,
+      1280
+    ],
     "width": 1578,
     "height": 806,
     "alt": "Bus branding and auto branding transit media advertising",
     "focal": "50% 50%",
     "category": null
+  },
+  "transit-bus-auto-branding": {
+    "path": "assets/img/work/transit-bus-auto-branding",
+    "widths": [
+      480,
+      800,
+      1280,
+      1536
+    ],
+    "width": 1536,
+    "height": 1024,
+    "alt": "Bus side panel and auto rickshaw back panel advertising",
+    "focal": "50% 50%",
+    "category": "transit",
+    "gallery": false
   },
   "transit-mahindra-van": {
     "path": "assets/img/work/transit-mahindra-mobile-van",
@@ -342,7 +407,8 @@
     "height": 720,
     "alt": "Mahindra EPC mobile van with advertising panels",
     "focal": "50% 50%",
-    "category": "transit"
+    "category": "transit",
+    "gallery": false
   },
   "transit-bus-campaign": {
     "path": "assets/img/work/transit-bus-campaign",
@@ -355,7 +421,8 @@
     "height": 709,
     "alt": "Bus advertising with full side panel branding",
     "focal": "50% 50%",
-    "category": "transit"
+    "category": "transit",
+    "gallery": false
   },
   "transit-auto-campaign": {
     "path": "assets/img/work/transit-auto-campaign",
@@ -368,7 +435,8 @@
     "height": 774,
     "alt": "Auto rickshaw with branded advertising wrap",
     "focal": "50% 50%",
-    "category": "transit"
+    "category": "transit",
+    "gallery": false
   },
   "transit-led-van": {
     "path": "assets/img/work/transit-led-screen-van",
@@ -381,7 +449,8 @@
     "height": 959,
     "alt": "LED screen van used for mobile advertising",
     "focal": "50% 45%",
-    "category": "transit"
+    "category": "transit",
+    "gallery": false
   },
   "transit-celekt-vans": {
     "path": "assets/img/work/transit-celekt-branded-vans",
@@ -394,7 +463,8 @@
     "height": 774,
     "alt": "Convoy of Celekt branded mobile vans",
     "focal": "50% 50%",
-    "category": "transit"
+    "category": "transit",
+    "gallery": false
   },
   "transit-tricycles-lineup": {
     "path": "assets/img/work/transit-branded-tricycles-lineup",
@@ -408,7 +478,8 @@
     "height": 3864,
     "alt": "Branded tricycles lined up for a Celekt campaign",
     "focal": "50% 45%",
-    "category": "transit"
+    "category": "transit",
+    "gallery": false
   },
   "transit-auto": {
     "path": "assets/img/work/transit-auto-rickshaw-branding",
@@ -421,7 +492,8 @@
     "height": 960,
     "alt": "Auto rickshaw with a bank advertising panel on the back",
     "focal": "50% 50%",
-    "category": "transit"
+    "category": "transit",
+    "gallery": false
   },
   "transit-tricycles-road": {
     "path": "assets/img/work/transit-tricycles-on-road",
@@ -434,6 +506,72 @@
     "width": 5152,
     "height": 3864,
     "alt": "Branded advertising tricycles moving along a city road",
+    "focal": "50% 50%",
+    "category": "transit",
+    "gallery": false
+  },
+  "transit-auto-hdfc-side": {
+    "path": "assets/img/work/transit-auto-hdfc-side",
+    "widths": [
+      480,
+      800,
+      1032
+    ],
+    "width": 1032,
+    "height": 774,
+    "alt": "Auto rickshaw with an HDFC Bank gold loan panel on the back",
+    "focal": "50% 50%",
+    "category": "transit"
+  },
+  "transit-auto-hdfc-back": {
+    "path": "assets/img/work/transit-auto-hdfc-back",
+    "widths": [
+      480,
+      800,
+      1280
+    ],
+    "width": 1280,
+    "height": 960,
+    "alt": "Rear view of an auto rickshaw branded with an HDFC Bank advertisement",
+    "focal": "50% 50%",
+    "category": "transit"
+  },
+  "transit-bus-boroplus-back": {
+    "path": "assets/img/work/transit-bus-boroplus-back",
+    "widths": [
+      480,
+      800,
+      983
+    ],
+    "width": 983,
+    "height": 698,
+    "alt": "Boroplus advertisement on the back of an ST bus",
+    "focal": "50% 50%",
+    "category": "transit"
+  },
+  "transit-bus-boroplus-lotion": {
+    "path": "assets/img/work/transit-bus-boroplus-lotion",
+    "widths": [
+      480,
+      800,
+      951
+    ],
+    "width": 951,
+    "height": 709,
+    "alt": "Boroplus moisturising lotion banner on the side of an ST bus",
+    "focal": "50% 50%",
+    "category": "transit"
+  },
+  "transit-bus-boroplus-cream": {
+    "path": "assets/img/work/transit-bus-boroplus-cream",
+    "widths": [
+      480,
+      800,
+      1040
+    ],
+    "width": 1040,
+    "height": 715,
+    "alt": "Boroplus antiseptic cream banner along the side of an ST bus",
     "focal": "50% 50%",
     "category": "transit"
   },
@@ -1033,7 +1171,11 @@
   },
   "dwp-work-6": {
     "path": "assets/img/work/dwp-work-6",
-    "widths": [480, 800, 1000],
+    "widths": [
+      480,
+      800,
+      1000
+    ],
     "width": 1000,
     "height": 750,
     "alt": "Wall painting ad on building wall in Nashik Maharashtra",
@@ -1042,7 +1184,11 @@
   },
   "dwp-work-7": {
     "path": "assets/img/work/dwp-work-7",
-    "widths": [480, 800, 1040],
+    "widths": [
+      480,
+      800,
+      1040
+    ],
     "width": 1040,
     "height": 780,
     "alt": "Multiple wall painting advertisements on compound wall in Dhule",
@@ -1051,7 +1197,12 @@
   },
   "dwp-work-8": {
     "path": "assets/img/work/dwp-work-8",
-    "widths": [480, 800, 1040, 1600],
+    "widths": [
+      480,
+      800,
+      1040,
+      1600
+    ],
     "width": 1600,
     "height": 1200,
     "alt": "Wall painting advertisement close-up in Ojhar Maharashtra",
@@ -1060,7 +1211,12 @@
   },
   "dwp-work-9": {
     "path": "assets/img/work/dwp-work-9",
-    "widths": [480, 800, 1040, 1600],
+    "widths": [
+      480,
+      800,
+      1040,
+      1600
+    ],
     "width": 1600,
     "height": 1200,
     "alt": "Long wall with multiple advertising paintings in Trimbak",
@@ -1069,7 +1225,12 @@
   },
   "dwp-work-10": {
     "path": "assets/img/work/dwp-work-10",
-    "widths": [480, 800, 1040, 1600],
+    "widths": [
+      480,
+      800,
+      1040,
+      1600
+    ],
     "width": 1600,
     "height": 1200,
     "alt": "Hero motorcycle wall painting advertisement in Paithan",
